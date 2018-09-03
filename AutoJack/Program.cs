@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using AutoJack.Controller;
+
 namespace AutoJack
 {
     static class Program
@@ -13,10 +15,12 @@ namespace AutoJack
         /// </summary>
         [STAThread]
         static void Main()
-        {
+      {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            EngineController engineController = new EngineController();
+            engineController.startApplication();
         }
     }
 }

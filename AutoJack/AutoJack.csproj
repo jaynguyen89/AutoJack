@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,14 +48,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Controller\EngineController.cs" />
+    <Compile Include="Controller\SelectController.cs" />
+    <Compile Include="Model\Engine.cs" />
+    <Compile Include="Model\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\EngineView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EngineView.Designer.cs">
+      <DependentUpon>EngineView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SelectView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SelectView.Designer.cs">
+      <DependentUpon>SelectView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -61,7 +74,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\EngineView.resx">
+      <DependentUpon>EngineView.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -71,9 +89,73 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="resources\saves\players.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="resources\files\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\AppLogo.jpg" />
+    <Content Include="resources\deck\AceClubs.png" />
+    <Content Include="resources\deck\AceDiamonds.png" />
+    <Content Include="resources\deck\AceHearts.png" />
+    <Content Include="resources\deck\AceSpades.png" />
+    <Content Include="resources\deck\cardback.jpg" />
+    <Content Include="resources\deck\deckshuffling.gif" />
+    <Content Include="resources\deck\draw.jpg" />
+    <Content Include="resources\deck\EightClubs.png" />
+    <Content Include="resources\deck\EightDiamonds.png" />
+    <Content Include="resources\deck\EightHearts.png" />
+    <Content Include="resources\deck\EightSpades.png" />
+    <Content Include="resources\deck\FiveClubs.png" />
+    <Content Include="resources\deck\FiveDiamonds.png" />
+    <Content Include="resources\deck\FiveHearts.png" />
+    <Content Include="resources\deck\FiveSpades.png" />
+    <Content Include="resources\deck\FourClubs.png" />
+    <Content Include="resources\deck\FourDiamonds.png" />
+    <Content Include="resources\deck\FourHearts.png" />
+    <Content Include="resources\deck\FourSpades.png" />
+    <Content Include="resources\deck\JackClubs.png" />
+    <Content Include="resources\deck\JackDiamonds.png" />
+    <Content Include="resources\deck\JackHearts.png" />
+    <Content Include="resources\deck\JackSpades.png" />
+    <Content Include="resources\deck\KingClubs.png" />
+    <Content Include="resources\deck\KingDiamonds.png" />
+    <Content Include="resources\deck\KingHearts.png" />
+    <Content Include="resources\deck\KingSpades.png" />
+    <Content Include="resources\deck\lose.gif" />
+    <Content Include="resources\deck\NineClubs.png" />
+    <Content Include="resources\deck\NineDiamonds.png" />
+    <Content Include="resources\deck\NineHearts.png" />
+    <Content Include="resources\deck\NineSpades.png" />
+    <Content Include="resources\deck\QueenClubs.png" />
+    <Content Include="resources\deck\QueenDiamonds.png" />
+    <Content Include="resources\deck\QueenHearts.png" />
+    <Content Include="resources\deck\QueenSpades.png" />
+    <Content Include="resources\deck\SevenClubs.png" />
+    <Content Include="resources\deck\SevenDiamonds.png" />
+    <Content Include="resources\deck\SevenHearts.png" />
+    <Content Include="resources\deck\SevenSpades.png" />
+    <Content Include="resources\deck\SixClubs.png" />
+    <Content Include="resources\deck\SixDiamonds.png" />
+    <Content Include="resources\deck\SixHearts.png" />
+    <Content Include="resources\deck\SixSpades.png" />
+    <Content Include="resources\deck\TenClubs.png" />
+    <Content Include="resources\deck\TenDiamonds.png" />
+    <Content Include="resources\deck\TenHearts.png" />
+    <Content Include="resources\deck\TenSpades.png" />
+    <Content Include="resources\deck\ThreeClubs.png" />
+    <Content Include="resources\deck\ThreeDiamonds.png" />
+    <Content Include="resources\deck\ThreeHearts.png" />
+    <Content Include="resources\deck\ThreeSpades.png" />
+    <Content Include="resources\deck\TwoClubs.png" />
+    <Content Include="resources\deck\TwoDiamonds.png" />
+    <Content Include="resources\deck\TwoHearts.png" />
+    <Content Include="resources\deck\TwoSpades.png" />
+    <Content Include="resources\deck\win.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

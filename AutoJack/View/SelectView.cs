@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AutoJack
+namespace AutoJack.View
 {
-    public partial class Form1 : Form
+    public partial class SelectView : Form
     {
-        public Form1()
+        public SelectView()
         {
             InitializeComponent();
         }

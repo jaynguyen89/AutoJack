@@ -1,0 +1,82 @@
+﻿[
+  {
+    "Id": "101",
+    "Name": "Doraemon",
+    "Balance": 11700,
+    "WinStreak": 127,
+    "Wins": 338,
+    "Loses": 23,
+    "Games": 457,
+    "Owe": 0
+  },
+  {
+    "Id": "102",
+    "Name": "Nobita",
+    "Balance": 0,
+    "WinStreak": 4,
+    "Wins": 12,
+    "Loses": 485,
+    "Games": 513,
+    "Owe": 18200
+  },
+  {
+    "Id": "103",
+    "Name": "Shizuka",
+    "Balance": 12650,
+    "WinStreak": 119,
+    "Wins": 341,
+    "Loses": 31,
+    "Games": 436,
+    "Owe": 0
+  },
+  {
+    "Id": "104",
+    "Name": "Suneo",
+    "Balance": 8950,
+    "WinStreak": 80,
+    "Wins": 282,
+    "Loses": 67,
+    "Games": 382,
+    "Owe": 0
+  },
+  {
+    "Id": "105",
+    "Name": "Takeshi",
+    "Balance": 2330,
+    "WinStreak": 49,
+    "Wins": 121,
+    "Loses": 93,
+    "Games": 237,
+    "Owe": 0
+  },
+  {
+    "Id": "106",
+    "Name": "Dekisugi",
+    "Balance": 42680,
+    "WinStreak": 408,
+    "Wins": 156,
+    "Loses": 1,
+    "Games": 181,
+    "Owe": 0
+  },
+  {
+    "Id": "107",
+    "Name": "Jaiko",
+    "Balance": 0,
+    "WinStreak": 15,
+    "Wins": 67,
+    "Loses": 47,
+    "Games": 122,
+    "Owe": 0
+  },
+  {
+    "Id": "108",
+    "Name": "Doraemi",
+    "Balance": 0,
+    "WinStreak": 0,
+    "Wins": 0,
+    "Loses": 0,
+    "Games": 0,
+    "Owe": 0
+  }
+]
