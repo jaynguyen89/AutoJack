@@ -19,8 +19,8 @@ namespace AutoJack
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            EngineController engineController = new EngineController();
-            engineController.startApplication();
+            EngineController EngineController = new EngineController();
+            EngineController.StartApplication();
         }
     }
 }

@@ -11,3 +11,5 @@ D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.EngineView.resources
 D:\MyProjects\AutoJack\AutoJack\bin\Debug\Newtonsoft.Json.dll
 D:\MyProjects\AutoJack\AutoJack\bin\Debug\Newtonsoft.Json.xml
 D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.csproj.CopyComplete
+D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.SelectView.resources
+D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.NewPlayerView.resources

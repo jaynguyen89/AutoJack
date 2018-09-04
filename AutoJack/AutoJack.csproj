@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\EngineController.cs" />
+    <Compile Include="Controller\GameController.cs" />
+    <Compile Include="Controller\NewPlayerController.cs" />
     <Compile Include="Controller\SelectController.cs" />
     <Compile Include="Model\Engine.cs" />
     <Compile Include="Model\Player.cs" />
@@ -59,6 +61,18 @@
     </Compile>
     <Compile Include="View\EngineView.Designer.cs">
       <DependentUpon>EngineView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\GameView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\GameView.Designer.cs">
+      <DependentUpon>GameView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewPlayerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\NewPlayerView.Designer.cs">
+      <DependentUpon>NewPlayerView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\SelectView.cs">
       <SubType>Form</SubType>
@@ -78,6 +92,12 @@
     </Compile>
     <EmbeddedResource Include="View\EngineView.resx">
       <DependentUpon>EngineView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\NewPlayerView.resx">
+      <DependentUpon>NewPlayerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SelectView.resx">
+      <DependentUpon>SelectView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

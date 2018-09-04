@@ -13,18 +13,21 @@ using AutoJack.Model;
 
 namespace AutoJack.View {
     public partial class EngineView : Form {
-        private EngineController EngineController = new EngineController();
 
         public EngineView() {
             InitializeComponent();
 
             SelectPlayer.Click += new EventHandler(SelectPlayerEvent);
+            ExitButton.Click += new EventHandler(QuitApp);
         }
 
         private void SelectPlayerEvent(object sender, System.EventArgs e) {
-            List<Player> Players = EngineController.getSavedPlayers();
-            
-            
+            EngineController EngineController = new EngineController();
+            EngineController.GetSavedPlayers();
+        }
+
+        private void QuitApp(object sender, System.EventArgs e) {
+            this.Close();
         }
     }
 }

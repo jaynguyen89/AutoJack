@@ -30,6 +30,7 @@
         {
             this.AppLogo = new System.Windows.Forms.PictureBox();
             this.SelectPlayer = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.AppLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,12 +47,21 @@
             // 
             // SelectPlayer
             // 
-            this.SelectPlayer.Location = new System.Drawing.Point(422, 443);
+            this.SelectPlayer.Location = new System.Drawing.Point(349, 445);
             this.SelectPlayer.Name = "SelectPlayer";
             this.SelectPlayer.Size = new System.Drawing.Size(100, 29);
             this.SelectPlayer.TabIndex = 1;
             this.SelectPlayer.Text = "Select Player";
             this.SelectPlayer.UseVisualStyleBackColor = true;
+            // 
+            // ExitButton
+            // 
+            this.ExitButton.Location = new System.Drawing.Point(491, 445);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(100, 29);
+            this.ExitButton.TabIndex = 2;
+            this.ExitButton.Text = "Exit App";
+            this.ExitButton.UseVisualStyleBackColor = true;
             // 
             // EngineView
             // 
@@ -59,6 +69,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(944, 501);
+            this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.SelectPlayer);
             this.Controls.Add(this.AppLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -74,5 +85,6 @@
 
         private System.Windows.Forms.PictureBox AppLogo;
         private System.Windows.Forms.Button SelectPlayer;
+        private System.Windows.Forms.Button ExitButton;
     }
 }

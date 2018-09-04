@@ -5,19 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using AutoJack.Model;
+using AutoJack.View;
 
 namespace AutoJack.Controller {
 
     class EngineController {
-        public Engine Engine = new Engine();
+        private EngineView EngineView = new EngineView();
 
-        public void startApplication() {
-            Application.Run(new View.EngineView());
+        public void StartApplication() {
+            Application.Run(EngineView);
         }
 
-        public List<Player> getSavedPlayers() {
-            return Engine.getSavedPlayers();
+        public void GetSavedPlayers() {
+            SelectController SelectController = new SelectController();
+            SelectController.AllowSelectPlayer();
         }
     }
 }
