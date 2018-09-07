@@ -15,6 +15,7 @@ namespace AutoJack.View {
 
     public partial class SelectView : Form {
         private Engine Engine = new Engine();
+        private List<Player> Players;
 
         public SelectView() {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace AutoJack.View {
             imgList.ImageSize = new Size(1, 30);
             PlayersList.SmallImageList = imgList;
 
-            List<Player> Players = Engine.GetSavedPlayers();
+            Players = Engine.GetSavedPlayers();
             foreach (Player Player in Players) {
                 ListViewItem ListItem = new ListViewItem(new string[] {
                     Player.Id,
@@ -32,8 +33,8 @@ namespace AutoJack.View {
                     Player.Winstreak.ToString(),
                     Player.WinCount.ToString(),
                     Player.LoseCount.ToString(),
-                    Player.GameCount.ToString(),
-                    Player.Owing.ToString()
+                    Player.Owing.ToString(),
+                    Player.LastPlay
                 });
 
                 PlayersList.Items.Add(ListItem);
@@ -46,16 +47,19 @@ namespace AutoJack.View {
 
         private void PlayerSelected(object sender, EventArgs e) {
             bool ShouldStartGame = true;
-
+            string SelectedId = "";
             try {
-                String SelectedId = PlayersList.SelectedItems[0].SubItems[0].Text;
+                SelectedId = PlayersList.SelectedItems[0].SubItems[0].Text;
             } catch (ArgumentOutOfRangeException E) {
                 ShouldStartGame = false;
             }
 
             this.Close();
             if (ShouldStartGame) {
-                GameController GameController = new GameController();
+                int.TryParse(SelectedId, out int id);
+                Player Player = Players.ElementAt(id - 100 - 1);
+
+                GameController GameController = new GameController(Player);
                 GameController.StartGame();
             }
             else {
@@ -68,8 +72,8 @@ namespace AutoJack.View {
 
         private void NewPlayer(object sender, EventArgs e) {
             this.Close();
-            NewPlayerController NewPController = new NewPlayerController();
-            NewPController.AllowCreatePlayer();
+            PlayerController PlayerController = new PlayerController();
+            PlayerController.AllowCreatePlayer();
         }
 
         private void CancelSelect(object sender, EventArgs e) {

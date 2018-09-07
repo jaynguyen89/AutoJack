@@ -48,9 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\DeckShuffle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="common\DeckShuffle.Designer.cs">
+      <DependentUpon>DeckShuffle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller\EngineController.cs" />
     <Compile Include="Controller\GameController.cs" />
-    <Compile Include="Controller\NewPlayerController.cs" />
+    <Compile Include="Controller\PlayerController.cs" />
     <Compile Include="Controller\SelectController.cs" />
     <Compile Include="Model\Engine.cs" />
     <Compile Include="Model\Player.cs" />
@@ -68,11 +74,11 @@
     <Compile Include="View\GameView.Designer.cs">
       <DependentUpon>GameView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\NewPlayerView.cs">
+    <Compile Include="View\PlayerView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\NewPlayerView.Designer.cs">
-      <DependentUpon>NewPlayerView.cs</DependentUpon>
+    <Compile Include="View\PlayerView.Designer.cs">
+      <DependentUpon>PlayerView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\SelectView.cs">
       <SubType>Form</SubType>
@@ -80,6 +86,9 @@
     <Compile Include="View\SelectView.Designer.cs">
       <DependentUpon>SelectView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="common\DeckShuffle.resx">
+      <DependentUpon>DeckShuffle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -93,8 +102,11 @@
     <EmbeddedResource Include="View\EngineView.resx">
       <DependentUpon>EngineView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\NewPlayerView.resx">
-      <DependentUpon>NewPlayerView.cs</DependentUpon>
+    <EmbeddedResource Include="View\GameView.resx">
+      <DependentUpon>GameView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PlayerView.resx">
+      <DependentUpon>PlayerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SelectView.resx">
       <DependentUpon>SelectView.cs</DependentUpon>

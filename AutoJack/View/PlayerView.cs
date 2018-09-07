@@ -13,10 +13,10 @@ using AutoJack.Controller;
 
 namespace AutoJack.View {
 
-    public partial class NewPlayerView : Form {
+    public partial class PlayerView : Form {
         private Engine Engine = new Engine();
 
-        public NewPlayerView() {
+        public PlayerView() {
             InitializeComponent();
 
             OkButton.Click += new EventHandler(CreateNewPlayer);
@@ -41,7 +41,7 @@ namespace AutoJack.View {
                 Engine.WritePlayersJSON(Players);
 
                 this.Close();
-                GameController GameController = new GameController();
+                GameController GameController = new GameController(NewPlayer);
                 GameController.StartGame();
             }
         }

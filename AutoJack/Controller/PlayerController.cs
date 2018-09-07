@@ -8,11 +8,11 @@ using AutoJack.View;
 
 namespace AutoJack.Controller {
 
-    class NewPlayerController {
-        NewPlayerView NewPView = new NewPlayerView();
+    class PlayerController {
+        PlayerView PlayerView = new PlayerView();
 
         public void AllowCreatePlayer() {
-            NewPView.Show();
+            PlayerView.Show();
         }
     }
 }

@@ -1,82 +1,106 @@
-[  
-   {  
-      "Id":"101",
-      "Name":"Doraemon",
-      "Balance":11700,
-      "Winstreak":127,
-      "WinCount":0,
-      "LoseCount":0,
-      "GameCount":0,
-      "Owing":0
-   },
-   {  
-      "Id":"102",
-      "Name":"Nobita",
-      "Balance":0,
-      "Winstreak":4,
-      "WinCount":0,
-      "LoseCount":0,
-      "GameCount":0,
-      "Owing":0
-   },
-   {  
-      "Id":"103",
-      "Name":"Shizuka",
-      "Balance":12650,
-      "Winstreak":119,
-      "WinCount":0,
-      "LoseCount":0,
-      "GameCount":0,
-      "Owing":0
-   },
-   {  
-      "Id":"104",
-      "Name":"Suneo",
-      "Balance":8950,
-      "Winstreak":80,
-      "WinCount":0,
-      "LoseCount":0,
-      "GameCount":0,
-      "Owing":0
-   },
-   {  
-      "Id":"105",
-      "Name":"Takeshi",
-      "Balance":2330,
-      "Winstreak":49,
-      "WinCount":0,
-      "LoseCount":0,
-      "GameCount":0,
-      "Owing":0
-   },
+[
+  {
+    "Id": "101",
+    "Name": "Doraemon",
+    "Balance": 11700,
+    "Winstreak": 127,
+    "WinCount": 205,
+    "LoseCount": 37,
+    "Owing": 0,
+    "AverageBet": 625,
+    "MaxBet": 1200,
+    "MinBet": 50,
+    "LastPlay": "22/07/2018 08:12:34"
+  },
+  {
+    "Id": "102",
+    "Name": "Nobita",
+    "Balance": 0,
+    "Winstreak": 1,
+    "WinCount": 2,
+    "LoseCount": 3570,
+    "Owing": 33500,
+    "AverageBet": 19,
+    "MaxBet": 50,
+    "MinBet": 1,
+    "LastPlay": "13/08/2018 16:44:47"
+  },
+  {
+    "Id": "103",
+    "Name": "Shizuka",
+    "Balance": 12650,
+    "Winstreak": 119,
+    "WinCount": 301,
+    "LoseCount": 51,
+    "Owing": 0,
+    "AverageBet": 125,
+    "MaxBet": 200,
+    "MinBet": 100,
+    "LastPlay": "02/09/2018 11:32:57"
+  },
+  {
+    "Id": "104",
+    "Name": "Suneo",
+    "Balance": 8950,
+    "Winstreak": 80,
+    "WinCount": 184,
+    "LoseCount": 43,
+    "Owing": 0,
+    "AverageBet": 270,
+    "MaxBet": 600,
+    "MinBet": 50,
+    "LastPlay": "21/08/2018 03:12:09"
+  },
+  {
+    "Id": "105",
+    "Name": "Takeshi",
+    "Balance": 2330,
+    "Winstreak": 49,
+    "WinCount": 129,
+    "LoseCount": 36,
+    "Owing": 0,
+    "AverageBet": 165,
+    "MaxBet": 190,
+    "MinBet": 150,
+    "LastPlay": "29/07/2018 13:22:55"
+  },
   {
     "Id": "106",
     "Name": "Dekisugi",
     "Balance": 42680,
     "Winstreak": 408,
+    "WinCount": 410,
+    "LoseCount": 2,
+    "Owing": 0,
+    "AverageBet": 120,
+    "MaxBet": 170,
+    "MinBet": 50,
+    "LastPlay": "05/07/2018 21:37:25"
+  },
+  {
+    "Id": "107",
+    "Name": "Jaiko",
+    "Balance": 890,
+    "Winstreak": 15,
+    "WinCount": 56,
+    "LoseCount": 14,
+    "Owing": 0,
+    "AverageBet": 115,
+    "MaxBet": 145,
+    "MinBet": 25,
+    "LastPlay": "18/08/2018 18:43:12"
+  },
+  {
+    "Id": "108",
+    "Name": "Doraemi",
+    "Balance": 0,
+    "Winstreak": 0,
     "WinCount": 0,
     "LoseCount": 0,
-    "GameCount": 0,
-    "Owing": 0
-  },
-   {  
-      "Id":"107",
-      "Name":"Jaiko",
-      "Balance":0,
-      "Winstreak":15,
-      "WinCount":0,
-      "LoseCount":0,
-      "GameCount":0,
-      "Owing":0
-   },
-   {  
-      "Id":"108",
-      "Name":"Doraemi",
-      "Balance":0,
-      "Winstreak":0,
-      "WinCount":0,
-      "LoseCount":0,
-      "GameCount":0,
-      "Owing":0
-   }
+    "Owing": 0,
+    "AverageBet": 0,
+    "MaxBet": 0,
+    "MinBet": 0,
+    "LastPlay": "01/09/2018 17:29:50"
+  }
 ]
