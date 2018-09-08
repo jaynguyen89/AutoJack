@@ -14,4 +14,5 @@ D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.csproj.CopyComplete
 D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.SelectView.resources
 D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.common.DeckShuffle.resources
 D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.GameView.resources
-D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.PlayerView.resources
+D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.NewPlayerView.resources
+D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.PlayerDetailsView.resources

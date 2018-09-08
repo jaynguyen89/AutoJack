@@ -29,6 +29,28 @@ namespace AutoJack.Model {
             }
         }
 
+        public Player GetPlayerById(int Id) {
+            List<Player> Players = GetSavedPlayers();
+
+            foreach (Player player in Players)
+                if (player.Id == Id.ToString())
+                    return player;
+
+            return null;
+        }
+
+        public void Update(Player Player) {
+            List<Player> Players = GetSavedPlayers();
+
+            for (var i = 0; i < Players.Count; i++)
+                if (Players[i].Id == Player.Id) {
+                    Players[i] = Player;
+                    break;
+                }
+
+            WritePlayersJSON(Players);
+        }
+
         private string GetJsonPath() {
             string path = String.Empty;
 

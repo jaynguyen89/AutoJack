@@ -43,31 +43,23 @@ namespace AutoJack.View {
             OkButton.Click += new EventHandler(PlayerSelected);
             NewPButton.Click += new EventHandler(NewPlayer);
             BackButton.Click += new EventHandler(CancelSelect);
+            PlayerDetails.Click += new EventHandler(ShowPlayerDetails);
+            DeletePlayer.Click += new EventHandler(DoDeletePlayer);
         }
 
         private void PlayerSelected(object sender, EventArgs e) {
-            bool ShouldStartGame = true;
-            string SelectedId = "";
-            try {
-                SelectedId = PlayersList.SelectedItems[0].SubItems[0].Text;
-            } catch (ArgumentOutOfRangeException E) {
-                ShouldStartGame = false;
-            }
+            int SelectedId = GetSelectedPlayer();
+            this.Visible = false;
 
-            this.Close();
-            if (ShouldStartGame) {
-                int.TryParse(SelectedId, out int id);
-                Player Player = Players.ElementAt(id - 100 - 1);
+            if (SelectedId > 0) {
+                Player Player = Players.ElementAt(SelectedId - 100 - 1);
 
+                this.Close();
                 GameController GameController = new GameController(Player);
                 GameController.StartGame();
             }
-            else {
-                MessageBox.Show("No player was selected.");
-
-                SelectController SelectController = new SelectController();
-                SelectController.AllowSelectPlayer();
-            }
+            else
+                this.Visible = true;
         }
 
         private void NewPlayer(object sender, EventArgs e) {
@@ -78,6 +70,43 @@ namespace AutoJack.View {
 
         private void CancelSelect(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void ShowPlayerDetails(object sender, EventArgs e) {
+            int SelectedId = GetSelectedPlayer();
+            this.Visible = false;
+
+            if (SelectedId > 0) {
+                this.Close();
+
+                PlayerController PlayerController = new PlayerController();
+                PlayerController.DisplayPlayerDetails(SelectedId);
+            }
+            else
+                this.Visible = true;
+        }
+
+        private void DoDeletePlayer(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private int GetSelectedPlayer() {
+            string SelectedId = String.Empty;
+            bool success = true;
+
+            try {
+                SelectedId = PlayersList.SelectedItems[0].SubItems[0].Text;
+            } catch (ArgumentOutOfRangeException E) {
+                success = false;
+            }
+
+            if (success) {
+                int.TryParse(SelectedId, out int id);
+                return id;
+            }
+
+            MessageBox.Show("No player was selected.");
+            return -1;
         }
     }
 }

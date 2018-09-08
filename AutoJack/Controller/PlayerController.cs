@@ -5,14 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AutoJack.View;
+using AutoJack.Model;
 
 namespace AutoJack.Controller {
 
     class PlayerController {
-        PlayerView PlayerView = new PlayerView();
 
         public void AllowCreatePlayer() {
-            PlayerView.Show();
+            NewPlayerView NewPlayerView = new NewPlayerView();
+            NewPlayerView.Show();
+        }
+
+        public void DisplayPlayerDetails(int Id) {
+            Engine Engine = new Engine();
+            Player Player = Engine.GetPlayerById(Id);
+
+            PlayerDetailsView PlayerDetailsView = new PlayerDetailsView(Player);
+            PlayerDetailsView.Show();
         }
     }
 }

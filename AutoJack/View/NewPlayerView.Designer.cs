@@ -1,6 +1,6 @@
 ﻿namespace AutoJack.View
 {
-    partial class PlayerView
+    partial class NewPlayerView
     {
         /// <summary>
         /// Required designer variable.

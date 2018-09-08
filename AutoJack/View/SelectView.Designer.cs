@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.PlayersList = new System.Windows.Forms.ListView();
-            this.ListLabel = new System.Windows.Forms.Label();
-            this.OkButton = new System.Windows.Forms.Button();
-            this.NewPButton = new System.Windows.Forms.Button();
-            this.BackButton = new System.Windows.Forms.Button();
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Balance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,6 +37,12 @@
             this.LoseCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Owing = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LastPlay = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ListLabel = new System.Windows.Forms.Label();
+            this.OkButton = new System.Windows.Forms.Button();
+            this.NewPButton = new System.Windows.Forms.Button();
+            this.BackButton = new System.Windows.Forms.Button();
+            this.PlayerDetails = new System.Windows.Forms.Button();
+            this.DeletePlayer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayersList
@@ -65,6 +67,44 @@
             this.PlayersList.UseCompatibleStateImageBehavior = false;
             this.PlayersList.View = System.Windows.Forms.View.Details;
             // 
+            // Id
+            // 
+            this.Id.Text = "ID";
+            this.Id.Width = 35;
+            // 
+            // PName
+            // 
+            this.PName.Text = "Name";
+            this.PName.Width = 100;
+            // 
+            // Balance
+            // 
+            this.Balance.Text = "Balance";
+            // 
+            // WinStreak
+            // 
+            this.WinStreak.Text = "Max Streak";
+            this.WinStreak.Width = 66;
+            // 
+            // WinCount
+            // 
+            this.WinCount.Text = "Wins";
+            this.WinCount.Width = 50;
+            // 
+            // LoseCount
+            // 
+            this.LoseCount.Text = "Loses";
+            this.LoseCount.Width = 50;
+            // 
+            // Owing
+            // 
+            this.Owing.Text = "Owing";
+            // 
+            // LastPlay
+            // 
+            this.LastPlay.Text = "Last Play";
+            this.LastPlay.Width = 118;
+            // 
             // ListLabel
             // 
             this.ListLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -85,7 +125,7 @@
             // 
             // NewPButton
             // 
-            this.NewPButton.Location = new System.Drawing.Point(93, 264);
+            this.NewPButton.Location = new System.Drawing.Point(174, 264);
             this.NewPButton.Name = "NewPButton";
             this.NewPButton.Size = new System.Drawing.Size(75, 23);
             this.NewPButton.TabIndex = 3;
@@ -102,43 +142,24 @@
             this.BackButton.Text = "Cancel";
             this.BackButton.UseVisualStyleBackColor = false;
             // 
-            // Id
+            // PlayerDetails
             // 
-            this.Id.Text = "ID";
-            this.Id.Width = 40;
+            this.PlayerDetails.Location = new System.Drawing.Point(93, 264);
+            this.PlayerDetails.Name = "PlayerDetails";
+            this.PlayerDetails.Size = new System.Drawing.Size(75, 23);
+            this.PlayerDetails.TabIndex = 5;
+            this.PlayerDetails.Text = "Details";
+            this.PlayerDetails.UseVisualStyleBackColor = true;
             // 
-            // PName
+            // DeletePlayer
             // 
-            this.PName.Text = "Name";
-            this.PName.Width = 105;
-            // 
-            // Balance
-            // 
-            this.Balance.Text = "Balance";
-            // 
-            // WinStreak
-            // 
-            this.WinStreak.Text = "Streak";
-            this.WinStreak.Width = 50;
-            // 
-            // WinCount
-            // 
-            this.WinCount.Text = "Wins";
-            this.WinCount.Width = 50;
-            // 
-            // LoseCount
-            // 
-            this.LoseCount.Text = "Loses";
-            this.LoseCount.Width = 50;
-            // 
-            // Owing
-            // 
-            this.Owing.Text = "Owing";
-            // 
-            // LastPlay
-            // 
-            this.LastPlay.Text = "Last Play";
-            this.LastPlay.Width = 124;
+            this.DeletePlayer.BackColor = System.Drawing.Color.Orange;
+            this.DeletePlayer.Location = new System.Drawing.Point(416, 264);
+            this.DeletePlayer.Name = "DeletePlayer";
+            this.DeletePlayer.Size = new System.Drawing.Size(75, 23);
+            this.DeletePlayer.TabIndex = 6;
+            this.DeletePlayer.Text = "Delete";
+            this.DeletePlayer.UseVisualStyleBackColor = false;
             // 
             // SelectView
             // 
@@ -146,6 +167,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(584, 299);
+            this.Controls.Add(this.DeletePlayer);
+            this.Controls.Add(this.PlayerDetails);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.NewPButton);
             this.Controls.Add(this.OkButton);
@@ -172,5 +195,7 @@
         private System.Windows.Forms.ColumnHeader LoseCount;
         private System.Windows.Forms.ColumnHeader Owing;
         private System.Windows.Forms.ColumnHeader LastPlay;
+        private System.Windows.Forms.Button PlayerDetails;
+        private System.Windows.Forms.Button DeletePlayer;
     }
 }

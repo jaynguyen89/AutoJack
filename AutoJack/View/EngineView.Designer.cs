@@ -28,11 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.AppLogo = new System.Windows.Forms.PictureBox();
-            this.SelectPlayer = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
+            this.SelectPlayer = new System.Windows.Forms.Button();
+            this.AppLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.AppLogo)).BeginInit();
             this.SuspendLayout();
+            // 
+            // ExitButton
+            // 
+            this.ExitButton.Location = new System.Drawing.Point(491, 445);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(100, 29);
+            this.ExitButton.TabIndex = 2;
+            this.ExitButton.Text = "Exit App";
+            this.ExitButton.UseVisualStyleBackColor = true;
+            // 
+            // SelectPlayer
+            // 
+            this.SelectPlayer.Location = new System.Drawing.Point(349, 445);
+            this.SelectPlayer.Name = "SelectPlayer";
+            this.SelectPlayer.Size = new System.Drawing.Size(100, 29);
+            this.SelectPlayer.TabIndex = 1;
+            this.SelectPlayer.Text = "Select Player";
+            this.SelectPlayer.UseVisualStyleBackColor = true;
             // 
             // AppLogo
             // 
@@ -44,24 +62,6 @@
             this.AppLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.AppLogo.TabIndex = 0;
             this.AppLogo.TabStop = false;
-            // 
-            // SelectPlayer
-            // 
-            this.SelectPlayer.Location = new System.Drawing.Point(349, 445);
-            this.SelectPlayer.Name = "SelectPlayer";
-            this.SelectPlayer.Size = new System.Drawing.Size(100, 29);
-            this.SelectPlayer.TabIndex = 1;
-            this.SelectPlayer.Text = "Select Player";
-            this.SelectPlayer.UseVisualStyleBackColor = true;
-            // 
-            // ExitButton
-            // 
-            this.ExitButton.Location = new System.Drawing.Point(491, 445);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(100, 29);
-            this.ExitButton.TabIndex = 2;
-            this.ExitButton.Text = "Exit App";
-            this.ExitButton.UseVisualStyleBackColor = true;
             // 
             // EngineView
             // 
@@ -83,8 +83,9 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox AppLogo;
-        private System.Windows.Forms.Button SelectPlayer;
         private System.Windows.Forms.Button ExitButton;
+        private System.Windows.Forms.Button SelectPlayer;
+        private System.Windows.Forms.PictureBox AppLogo;
+        private System.Windows.Forms.Panel BeginPanel;
     }
 }

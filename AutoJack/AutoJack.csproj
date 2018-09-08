@@ -74,11 +74,17 @@
     <Compile Include="View\GameView.Designer.cs">
       <DependentUpon>GameView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PlayerView.cs">
+    <Compile Include="View\NewPlayerView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PlayerView.Designer.cs">
-      <DependentUpon>PlayerView.cs</DependentUpon>
+    <Compile Include="View\NewPlayerView.Designer.cs">
+      <DependentUpon>NewPlayerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PlayerDetailsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PlayerDetailsView.Designer.cs">
+      <DependentUpon>PlayerDetailsView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\SelectView.cs">
       <SubType>Form</SubType>
@@ -105,8 +111,11 @@
     <EmbeddedResource Include="View\GameView.resx">
       <DependentUpon>GameView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PlayerView.resx">
-      <DependentUpon>PlayerView.cs</DependentUpon>
+    <EmbeddedResource Include="View\NewPlayerView.resx">
+      <DependentUpon>NewPlayerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PlayerDetailsView.resx">
+      <DependentUpon>PlayerDetailsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SelectView.resx">
       <DependentUpon>SelectView.cs</DependentUpon>

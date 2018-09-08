@@ -13,10 +13,10 @@ using AutoJack.Controller;
 
 namespace AutoJack.View {
 
-    public partial class PlayerView : Form {
+    public partial class NewPlayerView : Form {
         private Engine Engine = new Engine();
 
-        public PlayerView() {
+        public NewPlayerView() {
             InitializeComponent();
 
             OkButton.Click += new EventHandler(CreateNewPlayer);
