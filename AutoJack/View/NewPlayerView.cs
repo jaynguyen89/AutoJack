@@ -41,7 +41,7 @@ namespace AutoJack.View {
                 Engine.WritePlayersJSON(Players);
 
                 this.Close();
-                GameController GameController = new GameController();
+                GameController GameController = new GameController(NewPlayer);
                 GameController.StartGame();
             }
         }

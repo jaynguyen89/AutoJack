@@ -15,6 +15,7 @@ namespace AutoJack.View {
 
     public partial class SelectView : Form {
         private Engine Engine = new Engine();
+        private List<Player> Players;
 
         public SelectView() {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace AutoJack.View {
             imgList.ImageSize = new Size(1, 30);
             PlayersList.SmallImageList = imgList;
 
-            List<Player> Players = Engine.GetSavedPlayers();
+            Players = Engine.GetSavedPlayers();
             foreach (Player Player in Players) {
                 ListViewItem ListItem = new ListViewItem(new string[] {
                     Player.Id,
@@ -32,8 +33,8 @@ namespace AutoJack.View {
                     Player.Winstreak.ToString(),
                     Player.WinCount.ToString(),
                     Player.LoseCount.ToString(),
-                    Player.GameCount.ToString(),
-                    Player.Owing.ToString()
+                    Player.Owing.ToString(),
+                    Player.LastPlay
                 });
 
                 PlayersList.Items.Add(ListItem);
@@ -42,38 +43,70 @@ namespace AutoJack.View {
             OkButton.Click += new EventHandler(PlayerSelected);
             NewPButton.Click += new EventHandler(NewPlayer);
             BackButton.Click += new EventHandler(CancelSelect);
+            PlayerDetails.Click += new EventHandler(ShowPlayerDetails);
+            DeletePlayer.Click += new EventHandler(DoDeletePlayer);
         }
 
         private void PlayerSelected(object sender, EventArgs e) {
-            bool ShouldStartGame = true;
+            int SelectedId = GetSelectedPlayer();
+            this.Visible = false;
 
-            try {
-                String SelectedId = PlayersList.SelectedItems[0].SubItems[0].Text;
-            } catch (ArgumentOutOfRangeException E) {
-                ShouldStartGame = false;
-            }
+            if (SelectedId > 0) {
+                Player Player = Players.ElementAt(SelectedId - 100 - 1);
 
-            this.Close();
-            if (ShouldStartGame) {
-                GameController GameController = new GameController();
+                this.Close();
+                GameController GameController = new GameController(Player);
                 GameController.StartGame();
             }
-            else {
-                MessageBox.Show("No player was selected.");
-
-                SelectController SelectController = new SelectController();
-                SelectController.AllowSelectPlayer();
-            }
+            else
+                this.Visible = true;
         }
 
         private void NewPlayer(object sender, EventArgs e) {
             this.Close();
-            NewPlayerController NewPController = new NewPlayerController();
-            NewPController.AllowCreatePlayer();
+            PlayerController PlayerController = new PlayerController();
+            PlayerController.AllowCreatePlayer();
         }
 
         private void CancelSelect(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void ShowPlayerDetails(object sender, EventArgs e) {
+            int SelectedId = GetSelectedPlayer();
+            this.Visible = false;
+
+            if (SelectedId > 0) {
+                this.Close();
+
+                PlayerController PlayerController = new PlayerController();
+                PlayerController.DisplayPlayerDetails(SelectedId);
+            }
+            else
+                this.Visible = true;
+        }
+
+        private void DoDeletePlayer(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private int GetSelectedPlayer() {
+            string SelectedId = String.Empty;
+            bool success = true;
+
+            try {
+                SelectedId = PlayersList.SelectedItems[0].SubItems[0].Text;
+            } catch (ArgumentOutOfRangeException E) {
+                success = false;
+            }
+
+            if (success) {
+                int.TryParse(SelectedId, out int id);
+                return id;
+            }
+
+            MessageBox.Show("No player was selected.");
+            return -1;
         }
     }
 }

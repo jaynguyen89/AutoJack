@@ -8,15 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using AutoJack.Model;
+namespace AutoJack.common {
 
-namespace AutoJack.View {
+    public partial class DeckShuffle : Form {
 
-    public partial class GameView : Form {
-        public Player Player { get; set; }
-
-        public GameView() {
+        public DeckShuffle() {
             InitializeComponent();
+
+            OkButton.Click += new EventHandler(CloseWindow);
+        }
+
+        private void CloseWindow(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }

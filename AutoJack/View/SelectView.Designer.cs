@@ -33,14 +33,16 @@
             this.PName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Balance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.WinStreak = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Wins = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Loses = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Games = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.WinCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LoseCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Owing = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LastPlay = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ListLabel = new System.Windows.Forms.Label();
             this.OkButton = new System.Windows.Forms.Button();
             this.NewPButton = new System.Windows.Forms.Button();
             this.BackButton = new System.Windows.Forms.Button();
+            this.PlayerDetails = new System.Windows.Forms.Button();
+            this.DeletePlayer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayersList
@@ -50,60 +52,58 @@
             this.PName,
             this.Balance,
             this.WinStreak,
-            this.Wins,
-            this.Loses,
-            this.Games,
-            this.Owing});
+            this.WinCount,
+            this.LoseCount,
+            this.Owing,
+            this.LastPlay});
             this.PlayersList.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PlayersList.FullRowSelect = true;
             this.PlayersList.GridLines = true;
             this.PlayersList.Location = new System.Drawing.Point(12, 35);
             this.PlayersList.MultiSelect = false;
             this.PlayersList.Name = "PlayersList";
-            this.PlayersList.Size = new System.Drawing.Size(560, 222);
+            this.PlayersList.Size = new System.Drawing.Size(560, 223);
             this.PlayersList.TabIndex = 0;
             this.PlayersList.UseCompatibleStateImageBehavior = false;
             this.PlayersList.View = System.Windows.Forms.View.Details;
             // 
             // Id
             // 
-            this.Id.DisplayIndex = 7;
             this.Id.Text = "ID";
+            this.Id.Width = 35;
             // 
             // PName
             // 
-            this.PName.DisplayIndex = 0;
             this.PName.Text = "Name";
+            this.PName.Width = 100;
             // 
             // Balance
             // 
-            this.Balance.DisplayIndex = 1;
             this.Balance.Text = "Balance";
             // 
             // WinStreak
             // 
-            this.WinStreak.DisplayIndex = 2;
-            this.WinStreak.Text = "Winstreak";
+            this.WinStreak.Text = "Max Streak";
+            this.WinStreak.Width = 66;
             // 
-            // Wins
+            // WinCount
             // 
-            this.Wins.DisplayIndex = 3;
-            this.Wins.Text = "Wins";
+            this.WinCount.Text = "Wins";
+            this.WinCount.Width = 50;
             // 
-            // Loses
+            // LoseCount
             // 
-            this.Loses.DisplayIndex = 4;
-            this.Loses.Text = "Loses";
-            // 
-            // Games
-            // 
-            this.Games.DisplayIndex = 5;
-            this.Games.Text = "Games";
+            this.LoseCount.Text = "Loses";
+            this.LoseCount.Width = 50;
             // 
             // Owing
             // 
-            this.Owing.DisplayIndex = 6;
             this.Owing.Text = "Owing";
+            // 
+            // LastPlay
+            // 
+            this.LastPlay.Text = "Last Play";
+            this.LastPlay.Width = 118;
             // 
             // ListLabel
             // 
@@ -116,7 +116,7 @@
             // 
             // OkButton
             // 
-            this.OkButton.Location = new System.Drawing.Point(12, 263);
+            this.OkButton.Location = new System.Drawing.Point(12, 264);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(75, 23);
             this.OkButton.TabIndex = 2;
@@ -125,7 +125,7 @@
             // 
             // NewPButton
             // 
-            this.NewPButton.Location = new System.Drawing.Point(93, 263);
+            this.NewPButton.Location = new System.Drawing.Point(174, 264);
             this.NewPButton.Name = "NewPButton";
             this.NewPButton.Size = new System.Drawing.Size(75, 23);
             this.NewPButton.TabIndex = 3;
@@ -135,19 +135,40 @@
             // BackButton
             // 
             this.BackButton.BackColor = System.Drawing.Color.OrangeRed;
-            this.BackButton.Location = new System.Drawing.Point(497, 263);
+            this.BackButton.Location = new System.Drawing.Point(497, 264);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(75, 23);
             this.BackButton.TabIndex = 4;
             this.BackButton.Text = "Cancel";
             this.BackButton.UseVisualStyleBackColor = false;
             // 
+            // PlayerDetails
+            // 
+            this.PlayerDetails.Location = new System.Drawing.Point(93, 264);
+            this.PlayerDetails.Name = "PlayerDetails";
+            this.PlayerDetails.Size = new System.Drawing.Size(75, 23);
+            this.PlayerDetails.TabIndex = 5;
+            this.PlayerDetails.Text = "Details";
+            this.PlayerDetails.UseVisualStyleBackColor = true;
+            // 
+            // DeletePlayer
+            // 
+            this.DeletePlayer.BackColor = System.Drawing.Color.Orange;
+            this.DeletePlayer.Location = new System.Drawing.Point(416, 264);
+            this.DeletePlayer.Name = "DeletePlayer";
+            this.DeletePlayer.Size = new System.Drawing.Size(75, 23);
+            this.DeletePlayer.TabIndex = 6;
+            this.DeletePlayer.Text = "Delete";
+            this.DeletePlayer.UseVisualStyleBackColor = false;
+            // 
             // SelectView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(584, 298);
+            this.ClientSize = new System.Drawing.Size(584, 299);
+            this.Controls.Add(this.DeletePlayer);
+            this.Controls.Add(this.PlayerDetails);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.NewPButton);
             this.Controls.Add(this.OkButton);
@@ -163,16 +184,18 @@
 
         private System.Windows.Forms.ListView PlayersList;
         private System.Windows.Forms.Label ListLabel;
+        private System.Windows.Forms.Button OkButton;
+        private System.Windows.Forms.Button NewPButton;
+        private System.Windows.Forms.Button BackButton;
         private System.Windows.Forms.ColumnHeader Id;
         private System.Windows.Forms.ColumnHeader PName;
         private System.Windows.Forms.ColumnHeader Balance;
         private System.Windows.Forms.ColumnHeader WinStreak;
-        private System.Windows.Forms.ColumnHeader Wins;
-        private System.Windows.Forms.ColumnHeader Loses;
-        private System.Windows.Forms.ColumnHeader Games;
+        private System.Windows.Forms.ColumnHeader WinCount;
+        private System.Windows.Forms.ColumnHeader LoseCount;
         private System.Windows.Forms.ColumnHeader Owing;
-        private System.Windows.Forms.Button OkButton;
-        private System.Windows.Forms.Button NewPButton;
-        private System.Windows.Forms.Button BackButton;
+        private System.Windows.Forms.ColumnHeader LastPlay;
+        private System.Windows.Forms.Button PlayerDetails;
+        private System.Windows.Forms.Button DeletePlayer;
     }
 }
