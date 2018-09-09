@@ -69,12 +69,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(944, 501);
+            this.ControlBox = false;
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.SelectPlayer);
             this.Controls.Add(this.AppLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "EngineView";
-            this.Text = "EngineView";
+            this.Text = "AutoJack: Home";
             ((System.ComponentModel.ISupportInitialize)(this.AppLogo)).EndInit();
             this.ResumeLayout(false);
 
