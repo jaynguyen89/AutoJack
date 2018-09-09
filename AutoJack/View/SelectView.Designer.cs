@@ -134,12 +134,12 @@
             // 
             // BackButton
             // 
-            this.BackButton.BackColor = System.Drawing.Color.OrangeRed;
+            this.BackButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackButton.Location = new System.Drawing.Point(497, 264);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(75, 23);
             this.BackButton.TabIndex = 4;
-            this.BackButton.Text = "Cancel";
+            this.BackButton.Text = "Close";
             this.BackButton.UseVisualStyleBackColor = false;
             // 
             // PlayerDetails
@@ -153,7 +153,7 @@
             // 
             // DeletePlayer
             // 
-            this.DeletePlayer.BackColor = System.Drawing.Color.Orange;
+            this.DeletePlayer.BackColor = System.Drawing.Color.OrangeRed;
             this.DeletePlayer.Location = new System.Drawing.Point(416, 264);
             this.DeletePlayer.Name = "DeletePlayer";
             this.DeletePlayer.Size = new System.Drawing.Size(75, 23);
@@ -167,6 +167,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(584, 299);
+            this.ControlBox = false;
             this.Controls.Add(this.DeletePlayer);
             this.Controls.Add(this.PlayerDetails);
             this.Controls.Add(this.BackButton);
@@ -175,7 +176,7 @@
             this.Controls.Add(this.ListLabel);
             this.Controls.Add(this.PlayersList);
             this.Name = "SelectView";
-            this.Text = "SelectView";
+            this.Text = "AutoJack: Select Player";
             this.ResumeLayout(false);
 
         }

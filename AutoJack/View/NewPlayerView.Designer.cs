@@ -63,7 +63,7 @@
             // 
             // BackButton
             // 
-            this.BackButton.BackColor = System.Drawing.Color.OrangeRed;
+            this.BackButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackButton.Location = new System.Drawing.Point(217, 74);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(75, 23);
@@ -76,12 +76,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 107);
+            this.ControlBox = false;
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.NameInput);
             this.Controls.Add(this.NewPLabel);
             this.Name = "NewPlayerView";
-            this.Text = "NewPlayerView";
+            this.Text = "AutoJack";
             this.ResumeLayout(false);
             this.PerformLayout();
 

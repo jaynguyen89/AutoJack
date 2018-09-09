@@ -12,8 +12,9 @@ namespace AutoJack.Model {
     class Engine {
 
         public List<Player> GetSavedPlayers() {
+            GetJsonPath();
             List<Player> Players = new List<Player>();
-            using (StreamReader s = new StreamReader(@"D:\MyProjects\AutoJack\AutoJack\resources\saves\players.json")) {
+            using (StreamReader s = new StreamReader(GetJsonPath())) {
                 string json = s.ReadToEnd();
                 Players = JsonConvert.DeserializeObject<List<Player>>(json);
             }
@@ -22,7 +23,7 @@ namespace AutoJack.Model {
         }
 
         public void WritePlayersJSON(List<Player> Players) {
-            using (StreamWriter s = new StreamWriter(@"D:\MyProjects\AutoJack\AutoJack\resources\saves\players.json")) {
+            using (StreamWriter s = new StreamWriter(GetJsonPath())) {
                 JsonSerializer Serializer = new JsonSerializer();
 
                 Serializer.Serialize(s, Players);
@@ -51,10 +52,27 @@ namespace AutoJack.Model {
             WritePlayersJSON(Players);
         }
 
-        private string GetJsonPath() {
-            string path = String.Empty;
+        public void Delete(Player Player) {
+            List<Player> Players = GetSavedPlayers();
 
-            return path;
+            for (var i = 0; i < Players.Count; i++)
+                if (Players[i].Id == Player.Id) {
+                    Players.RemoveAt(i);
+                    break;
+                }
+
+            WritePlayersJSON(Players);
+        }
+
+        private string GetJsonPath() {
+            string CurrentPath = Directory.GetCurrentDirectory();
+
+            string[] tokens = CurrentPath.Split('\\');
+            string AppFolder = String.Empty;
+            for (int i = 0; i < tokens.Length - 2; i++)
+                AppFolder += tokens[i] + @"\";
+
+            return AppFolder + @"resources\saves\players.json";
         }
     }
 }

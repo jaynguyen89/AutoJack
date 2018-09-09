@@ -389,6 +389,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(307, 485);
+            this.ControlBox = false;
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.NextEarnInput);
             this.Controls.Add(this.CurStreakInput);
@@ -425,7 +426,7 @@
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.DetailsLabel);
             this.Name = "PlayerDetailsView";
-            this.Text = "PlayerDetailsView";
+            this.Text = "AutoJack";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -87,7 +87,18 @@ namespace AutoJack.View {
         }
 
         private void DoDeletePlayer(object sender, EventArgs e) {
-            this.Close();
+            int SelectedId = GetSelectedPlayer();
+
+            if (SelectedId > 0) {
+                this.Close();
+
+                Engine Engine = new Engine();
+                Player Player = Engine.GetPlayerById(SelectedId);
+
+                Engine.Delete(Player);
+                SelectController SelectController = new SelectController();
+                SelectController.AllowSelectPlayer();
+            }
         }
 
         private int GetSelectedPlayer() {
