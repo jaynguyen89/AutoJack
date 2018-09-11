@@ -168,6 +168,7 @@
             // 
             // AutoBetButton
             // 
+            this.AutoBetButton.Enabled = false;
             this.AutoBetButton.Location = new System.Drawing.Point(111, 256);
             this.AutoBetButton.Name = "AutoBetButton";
             this.AutoBetButton.Size = new System.Drawing.Size(75, 23);
@@ -177,6 +178,7 @@
             // 
             // BetButton
             // 
+            this.BetButton.Enabled = false;
             this.BetButton.Location = new System.Drawing.Point(11, 256);
             this.BetButton.Name = "BetButton";
             this.BetButton.Size = new System.Drawing.Size(75, 23);

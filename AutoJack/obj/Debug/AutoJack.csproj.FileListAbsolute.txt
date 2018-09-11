@@ -16,3 +16,4 @@ D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.common.DeckShuffle.resources
 D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.GameView.resources
 D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.NewUserView.resources
 D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.UserDetailsView.resources
+D:\MyProjects\AutoJack\AutoJack\obj\Debug\AutoJack.View.BetView.resources

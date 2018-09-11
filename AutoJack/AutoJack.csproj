@@ -54,6 +54,7 @@
     <Compile Include="common\DeckShuffle.Designer.cs">
       <DependentUpon>DeckShuffle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controller\BetController.cs" />
     <Compile Include="Controller\EngineController.cs" />
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Controller\PlayerController.cs" />
@@ -69,6 +70,12 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\BetView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BetView.Designer.cs">
+      <DependentUpon>BetView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\EngineView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +119,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\BetView.resx">
+      <DependentUpon>BetView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\EngineView.resx">
       <DependentUpon>EngineView.cs</DependentUpon>
     </EmbeddedResource>

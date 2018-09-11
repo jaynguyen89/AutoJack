@@ -6,6 +6,8 @@ namespace AutoJack.Interface {
     interface IHelper {
         List<Card> PrepareDeck();
 
-        void ShuffleDeck(List<Card> Deck);
+        List<Card> ShuffleDeck(List<Card> Deck);
+
+        void DealCards(Game Game);
     }
 }

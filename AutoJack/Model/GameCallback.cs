@@ -24,7 +24,24 @@ namespace AutoJack.Model {
             return Deck;
         }
 
-        public void ShuffleDeck(List<Card> Deck) {
+        public List<Card> ShuffleDeck(List<Card> Deck) {
+            Random rand = new Random();
+
+            int tail = Deck.Count - 1;
+            Card temp = null;
+            int randIndex = -1;
+
+            while (tail != 0) {
+                randIndex = rand.Next(0, tail--);
+                temp = Deck.ElementAt(tail + 1);
+                Deck[tail + 1] = Deck.ElementAt(randIndex);
+                Deck[randIndex] = temp;
+            }
+
+            return Deck;
+        }
+
+        public void DealCards(Game Game) {
             throw new NotImplementedException();
         }
     }
