@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.ExitButton = new System.Windows.Forms.Button();
-            this.SelectPlayer = new System.Windows.Forms.Button();
+            this.SelectUser = new System.Windows.Forms.Button();
             this.AppLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.AppLogo)).BeginInit();
             this.SuspendLayout();
@@ -43,14 +43,14 @@
             this.ExitButton.Text = "Exit App";
             this.ExitButton.UseVisualStyleBackColor = true;
             // 
-            // SelectPlayer
+            // SelectUser
             // 
-            this.SelectPlayer.Location = new System.Drawing.Point(349, 445);
-            this.SelectPlayer.Name = "SelectPlayer";
-            this.SelectPlayer.Size = new System.Drawing.Size(100, 29);
-            this.SelectPlayer.TabIndex = 1;
-            this.SelectPlayer.Text = "Select Player";
-            this.SelectPlayer.UseVisualStyleBackColor = true;
+            this.SelectUser.Location = new System.Drawing.Point(349, 445);
+            this.SelectUser.Name = "SelectUser";
+            this.SelectUser.Size = new System.Drawing.Size(100, 29);
+            this.SelectUser.TabIndex = 1;
+            this.SelectUser.Text = "Select Player";
+            this.SelectUser.UseVisualStyleBackColor = true;
             // 
             // AppLogo
             // 
@@ -71,7 +71,7 @@
             this.ClientSize = new System.Drawing.Size(944, 501);
             this.ControlBox = false;
             this.Controls.Add(this.ExitButton);
-            this.Controls.Add(this.SelectPlayer);
+            this.Controls.Add(this.SelectUser);
             this.Controls.Add(this.AppLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "EngineView";
@@ -85,7 +85,7 @@
         #endregion
 
         private System.Windows.Forms.Button ExitButton;
-        private System.Windows.Forms.Button SelectPlayer;
+        private System.Windows.Forms.Button SelectUser;
         private System.Windows.Forms.PictureBox AppLogo;
         private System.Windows.Forms.Panel BeginPanel;
     }

@@ -16,9 +16,9 @@ namespace AutoJack.Controller {
             Application.Run(EngineView);
         }
 
-        public void GetSavedPlayers() {
+        public void GetSavedUsers() {
             SelectController SelectController = new SelectController();
-            SelectController.AllowSelectPlayer();
+            SelectController.AllowSelectUser();
         }
     }
 }

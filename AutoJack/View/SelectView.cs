@@ -15,98 +15,103 @@ namespace AutoJack.View {
 
     public partial class SelectView : Form {
         private Engine Engine = new Engine();
-        private List<Player> Players;
+        private List<User> Users;
 
         public SelectView() {
             InitializeComponent();
 
             ImageList imgList = new ImageList();
             imgList.ImageSize = new Size(1, 30);
-            PlayersList.SmallImageList = imgList;
+            UsersList.SmallImageList = imgList;
 
-            Players = Engine.GetSavedPlayers();
-            foreach (Player Player in Players) {
+            Users = Engine.GetSavedUsers();
+            foreach (User User in Users) {
                 ListViewItem ListItem = new ListViewItem(new string[] {
-                    Player.Id,
-                    Player.Name,
-                    Player.Balance.ToString(),
-                    Player.Winstreak.ToString(),
-                    Player.WinCount.ToString(),
-                    Player.LoseCount.ToString(),
-                    Player.Owing.ToString(),
-                    Player.LastPlay
+                    User.Id,
+                    User.Name,
+                    User.Balance.ToString(),
+                    User.Winstreak.ToString(),
+                    User.WinCount.ToString(),
+                    User.LoseCount.ToString(),
+                    User.Owing.ToString(),
+                    User.LastPlay
                 });
 
-                PlayersList.Items.Add(ListItem);
+                UsersList.Items.Add(ListItem);
             }
 
-            OkButton.Click += new EventHandler(PlayerSelected);
-            NewPButton.Click += new EventHandler(NewPlayer);
+            OkButton.Click += new EventHandler(UserSelected);
+            NewPButton.Click += new EventHandler(NewUser);
             BackButton.Click += new EventHandler(CancelSelect);
-            PlayerDetails.Click += new EventHandler(ShowPlayerDetails);
-            DeletePlayer.Click += new EventHandler(DoDeletePlayer);
+            UserDetails.Click += new EventHandler(ShowUserDetails);
+            DeleteUser.Click += new EventHandler(DoDeleteUser);
         }
 
-        private void PlayerSelected(object sender, EventArgs e) {
-            int SelectedId = GetSelectedPlayer();
+        private void UserSelected(object sender, EventArgs e) {
+            int SelectedId = GetSelectedUser();
             this.Visible = false;
 
             if (SelectedId > 0) {
-                Player Player = Players.ElementAt(SelectedId - 100 - 1);
+                User User = Users.ElementAt(SelectedId - 100 - 1);
 
                 this.Close();
-                GameController GameController = new GameController(Player);
+                GameController GameController = new GameController(User);
                 GameController.StartGame();
             }
             else
                 this.Visible = true;
         }
 
-        private void NewPlayer(object sender, EventArgs e) {
+        private void NewUser(object sender, EventArgs e) {
             this.Close();
-            PlayerController PlayerController = new PlayerController();
-            PlayerController.AllowCreatePlayer();
+            UserController UserController = new UserController();
+            UserController.AllowCreateUser();
         }
 
         private void CancelSelect(object sender, EventArgs e) {
             this.Close();
         }
 
-        private void ShowPlayerDetails(object sender, EventArgs e) {
-            int SelectedId = GetSelectedPlayer();
+        private void ShowUserDetails(object sender, EventArgs e) {
+            int SelectedId = GetSelectedUser();
             this.Visible = false;
 
             if (SelectedId > 0) {
                 this.Close();
 
-                PlayerController PlayerController = new PlayerController();
-                PlayerController.DisplayPlayerDetails(SelectedId);
+                UserController UserController = new UserController();
+                UserController.DisplayUserDetails(SelectedId);
             }
             else
                 this.Visible = true;
         }
 
-        private void DoDeletePlayer(object sender, EventArgs e) {
-            int SelectedId = GetSelectedPlayer();
+        private void DoDeleteUser(object sender, EventArgs e) {
+            DialogResult result = MessageBox.Show("This player will be deleted permanently. Continue?", "Delete",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
-            if (SelectedId > 0) {
-                this.Close();
+            if (result.Equals(DialogResult.OK)) {
+                int SelectedId = GetSelectedUser();
 
-                Engine Engine = new Engine();
-                Player Player = Engine.GetPlayerById(SelectedId);
+                if (SelectedId > 0) {
+                    this.Close();
 
-                Engine.Delete(Player);
-                SelectController SelectController = new SelectController();
-                SelectController.AllowSelectPlayer();
+                    Engine Engine = new Engine();
+                    User User = Engine.GetUserById(SelectedId);
+
+                    Engine.Delete(User);
+                    SelectController SelectController = new SelectController();
+                    SelectController.AllowSelectUser();
+                }
             }
         }
 
-        private int GetSelectedPlayer() {
+        private int GetSelectedUser() {
             string SelectedId = String.Empty;
             bool success = true;
 
             try {
-                SelectedId = PlayersList.SelectedItems[0].SubItems[0].Text;
+                SelectedId = UsersList.SelectedItems[0].SubItems[0].Text;
             } catch (ArgumentOutOfRangeException E) {
                 success = false;
             }
@@ -116,7 +121,7 @@ namespace AutoJack.View {
                 return id;
             }
 
-            MessageBox.Show("No player was selected.");
+            MessageBox.Show("No User was selected.");
             return -1;
         }
     }

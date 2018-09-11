@@ -33,33 +33,34 @@
             this.Seconds = new System.Windows.Forms.Label();
             this.TimeLabel = new System.Windows.Forms.Label();
             this.DateLabel = new System.Windows.Forms.Label();
-            this.PlayerBetPanel = new System.Windows.Forms.Panel();
+            this.UserBetPanel = new System.Windows.Forms.Panel();
             this.AutoBetButton = new System.Windows.Forms.Button();
             this.BetButton = new System.Windows.Forms.Button();
             this.PlayerWager = new System.Windows.Forms.Label();
-            this.PlayerWagerLabel = new System.Windows.Forms.Label();
-            this.PlayerBetLabel = new System.Windows.Forms.Label();
+            this.UserWagerLabel = new System.Windows.Forms.Label();
+            this.UserBetLabel = new System.Windows.Forms.Label();
             this.PlayerBet = new System.Windows.Forms.Label();
             this.PlayerName = new System.Windows.Forms.Label();
             this.RightPanel = new System.Windows.Forms.Panel();
             this.GameControlPanel = new System.Windows.Forms.Panel();
+            this.QuitButton = new System.Windows.Forms.Button();
             this.SurrenderButton = new System.Windows.Forms.Button();
             this.StartButton = new System.Windows.Forms.Button();
-            this.PlayerStatPanel = new System.Windows.Forms.Panel();
+            this.UserStatPanel = new System.Windows.Forms.Panel();
             this.ControlPanel = new System.Windows.Forms.Panel();
             this.DoubleButton = new System.Windows.Forms.Button();
             this.HitButton = new System.Windows.Forms.Button();
             this.StandButton = new System.Windows.Forms.Button();
             this.SplitButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.PlayerStreak = new System.Windows.Forms.Label();
             this.StreakLabel = new System.Windows.Forms.Label();
             this.BalanceLabel = new System.Windows.Forms.Label();
             this.PlayerBalance = new System.Windows.Forms.Label();
             this.DeckPanel = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.CardCountLabel = new System.Windows.Forms.Label();
+            this.CardBack = new System.Windows.Forms.PictureBox();
+            this.CardCount = new System.Windows.Forms.Label();
             this.MiddlePanel = new System.Windows.Forms.Panel();
-            this.PlayerSumPanel = new System.Windows.Forms.Panel();
+            this.UserSumPanel = new System.Windows.Forms.Panel();
             this.PlayerHand2Sum = new System.Windows.Forms.Label();
             this.PlayerHand2Count = new System.Windows.Forms.Label();
             this.PlayerHand1Sum = new System.Windows.Forms.Label();
@@ -80,19 +81,18 @@
             this.HouseHand1Sum = new System.Windows.Forms.Label();
             this.HouseHands = new System.Windows.Forms.Label();
             this.HouseHandPanel = new System.Windows.Forms.Panel();
-            this.PlayerHandPanel = new System.Windows.Forms.Panel();
-            this.QuitButton = new System.Windows.Forms.Button();
+            this.UserHandPanel = new System.Windows.Forms.Panel();
             this.LeftPanel.SuspendLayout();
             this.TimingPanel.SuspendLayout();
-            this.PlayerBetPanel.SuspendLayout();
+            this.UserBetPanel.SuspendLayout();
             this.RightPanel.SuspendLayout();
             this.GameControlPanel.SuspendLayout();
-            this.PlayerStatPanel.SuspendLayout();
+            this.UserStatPanel.SuspendLayout();
             this.ControlPanel.SuspendLayout();
             this.DeckPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CardBack)).BeginInit();
             this.MiddlePanel.SuspendLayout();
-            this.PlayerSumPanel.SuspendLayout();
+            this.UserSumPanel.SuspendLayout();
             this.HouseBetPanel.SuspendLayout();
             this.HouseSumPanel.SuspendLayout();
             this.SuspendLayout();
@@ -101,7 +101,7 @@
             // 
             this.LeftPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LeftPanel.Controls.Add(this.TimingPanel);
-            this.LeftPanel.Controls.Add(this.PlayerBetPanel);
+            this.LeftPanel.Controls.Add(this.UserBetPanel);
             this.LeftPanel.Location = new System.Drawing.Point(12, 12);
             this.LeftPanel.Name = "LeftPanel";
             this.LeftPanel.Size = new System.Drawing.Size(200, 680);
@@ -138,31 +138,33 @@
             this.TimeLabel.Size = new System.Drawing.Size(46, 31);
             this.TimeLabel.TabIndex = 1;
             this.TimeLabel.Text = "60";
+            this.TimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // DateLabel
             // 
-            this.DateLabel.AutoSize = true;
+            this.DateLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.DateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DateLabel.Location = new System.Drawing.Point(35, 0);
+            this.DateLabel.Location = new System.Drawing.Point(0, 0);
             this.DateLabel.Name = "DateLabel";
-            this.DateLabel.Size = new System.Drawing.Size(130, 25);
+            this.DateLabel.Size = new System.Drawing.Size(198, 25);
             this.DateLabel.TabIndex = 0;
             this.DateLabel.Text = "08/09/2018";
+            this.DateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // PlayerBetPanel
+            // UserBetPanel
             // 
-            this.PlayerBetPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PlayerBetPanel.Controls.Add(this.AutoBetButton);
-            this.PlayerBetPanel.Controls.Add(this.BetButton);
-            this.PlayerBetPanel.Controls.Add(this.PlayerWager);
-            this.PlayerBetPanel.Controls.Add(this.PlayerWagerLabel);
-            this.PlayerBetPanel.Controls.Add(this.PlayerBetLabel);
-            this.PlayerBetPanel.Controls.Add(this.PlayerBet);
-            this.PlayerBetPanel.Controls.Add(this.PlayerName);
-            this.PlayerBetPanel.Location = new System.Drawing.Point(-1, 379);
-            this.PlayerBetPanel.Name = "PlayerBetPanel";
-            this.PlayerBetPanel.Size = new System.Drawing.Size(200, 300);
-            this.PlayerBetPanel.TabIndex = 0;
+            this.UserBetPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UserBetPanel.Controls.Add(this.AutoBetButton);
+            this.UserBetPanel.Controls.Add(this.BetButton);
+            this.UserBetPanel.Controls.Add(this.PlayerWager);
+            this.UserBetPanel.Controls.Add(this.UserWagerLabel);
+            this.UserBetPanel.Controls.Add(this.UserBetLabel);
+            this.UserBetPanel.Controls.Add(this.PlayerBet);
+            this.UserBetPanel.Controls.Add(this.PlayerName);
+            this.UserBetPanel.Location = new System.Drawing.Point(-1, 379);
+            this.UserBetPanel.Name = "UserBetPanel";
+            this.UserBetPanel.Size = new System.Drawing.Size(200, 300);
+            this.UserBetPanel.TabIndex = 0;
             // 
             // AutoBetButton
             // 
@@ -184,61 +186,63 @@
             // 
             // PlayerWager
             // 
-            this.PlayerWager.AutoSize = true;
             this.PlayerWager.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PlayerWager.ForeColor = System.Drawing.Color.DarkRed;
-            this.PlayerWager.Location = new System.Drawing.Point(79, 183);
+            this.PlayerWager.Location = new System.Drawing.Point(-1, 183);
             this.PlayerWager.Name = "PlayerWager";
-            this.PlayerWager.Size = new System.Drawing.Size(40, 42);
+            this.PlayerWager.Size = new System.Drawing.Size(199, 42);
             this.PlayerWager.TabIndex = 4;
             this.PlayerWager.Text = "0";
+            this.PlayerWager.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // PlayerWagerLabel
+            // UserWagerLabel
             // 
-            this.PlayerWagerLabel.AutoSize = true;
-            this.PlayerWagerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PlayerWagerLabel.Location = new System.Drawing.Point(72, 170);
-            this.PlayerWagerLabel.Name = "PlayerWagerLabel";
-            this.PlayerWagerLabel.Size = new System.Drawing.Size(53, 13);
-            this.PlayerWagerLabel.TabIndex = 3;
-            this.PlayerWagerLabel.Text = "WAGER";
+            this.UserWagerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserWagerLabel.Location = new System.Drawing.Point(-1, 170);
+            this.UserWagerLabel.Name = "UserWagerLabel";
+            this.UserWagerLabel.Size = new System.Drawing.Size(200, 13);
+            this.UserWagerLabel.TabIndex = 3;
+            this.UserWagerLabel.Text = "WAGER";
+            this.UserWagerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // PlayerBetLabel
+            // UserBetLabel
             // 
-            this.PlayerBetLabel.AutoSize = true;
-            this.PlayerBetLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PlayerBetLabel.Location = new System.Drawing.Point(81, 69);
-            this.PlayerBetLabel.Name = "PlayerBetLabel";
-            this.PlayerBetLabel.Size = new System.Drawing.Size(31, 13);
-            this.PlayerBetLabel.TabIndex = 2;
-            this.PlayerBetLabel.Text = "BET";
+            this.UserBetLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserBetLabel.Location = new System.Drawing.Point(-1, 69);
+            this.UserBetLabel.Name = "UserBetLabel";
+            this.UserBetLabel.Size = new System.Drawing.Size(200, 13);
+            this.UserBetLabel.TabIndex = 2;
+            this.UserBetLabel.Text = "BET";
+            this.UserBetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PlayerBet
             // 
-            this.PlayerBet.AutoSize = true;
             this.PlayerBet.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PlayerBet.ForeColor = System.Drawing.Color.DarkRed;
-            this.PlayerBet.Location = new System.Drawing.Point(65, 82);
+            this.PlayerBet.Location = new System.Drawing.Point(-1, 82);
             this.PlayerBet.Name = "PlayerBet";
-            this.PlayerBet.Size = new System.Drawing.Size(69, 73);
+            this.PlayerBet.Size = new System.Drawing.Size(200, 73);
             this.PlayerBet.TabIndex = 1;
             this.PlayerBet.Text = "0";
+            this.PlayerBet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PlayerName
             // 
-            this.PlayerName.AutoSize = true;
+            this.PlayerName.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PlayerName.Location = new System.Drawing.Point(12, 9);
+            this.PlayerName.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.PlayerName.Location = new System.Drawing.Point(0, 0);
             this.PlayerName.Name = "PlayerName";
-            this.PlayerName.Size = new System.Drawing.Size(174, 25);
+            this.PlayerName.Size = new System.Drawing.Size(198, 25);
             this.PlayerName.TabIndex = 0;
             this.PlayerName.Text = "PLAYER NAME";
+            this.PlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RightPanel
             // 
             this.RightPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RightPanel.Controls.Add(this.GameControlPanel);
-            this.RightPanel.Controls.Add(this.PlayerStatPanel);
+            this.RightPanel.Controls.Add(this.UserStatPanel);
             this.RightPanel.Controls.Add(this.DeckPanel);
             this.RightPanel.Location = new System.Drawing.Point(1092, 12);
             this.RightPanel.Name = "RightPanel";
@@ -255,6 +259,16 @@
             this.GameControlPanel.Name = "GameControlPanel";
             this.GameControlPanel.Size = new System.Drawing.Size(200, 74);
             this.GameControlPanel.TabIndex = 2;
+            // 
+            // QuitButton
+            // 
+            this.QuitButton.BackColor = System.Drawing.Color.OrangeRed;
+            this.QuitButton.Location = new System.Drawing.Point(120, 46);
+            this.QuitButton.Name = "QuitButton";
+            this.QuitButton.Size = new System.Drawing.Size(75, 23);
+            this.QuitButton.TabIndex = 2;
+            this.QuitButton.Text = "Quit";
+            this.QuitButton.UseVisualStyleBackColor = false;
             // 
             // SurrenderButton
             // 
@@ -278,18 +292,18 @@
             this.StartButton.Text = "START GAME";
             this.StartButton.UseVisualStyleBackColor = false;
             // 
-            // PlayerStatPanel
+            // UserStatPanel
             // 
-            this.PlayerStatPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PlayerStatPanel.Controls.Add(this.ControlPanel);
-            this.PlayerStatPanel.Controls.Add(this.label1);
-            this.PlayerStatPanel.Controls.Add(this.StreakLabel);
-            this.PlayerStatPanel.Controls.Add(this.BalanceLabel);
-            this.PlayerStatPanel.Controls.Add(this.PlayerBalance);
-            this.PlayerStatPanel.Location = new System.Drawing.Point(-1, 338);
-            this.PlayerStatPanel.Name = "PlayerStatPanel";
-            this.PlayerStatPanel.Size = new System.Drawing.Size(200, 264);
-            this.PlayerStatPanel.TabIndex = 1;
+            this.UserStatPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UserStatPanel.Controls.Add(this.ControlPanel);
+            this.UserStatPanel.Controls.Add(this.PlayerStreak);
+            this.UserStatPanel.Controls.Add(this.StreakLabel);
+            this.UserStatPanel.Controls.Add(this.BalanceLabel);
+            this.UserStatPanel.Controls.Add(this.PlayerBalance);
+            this.UserStatPanel.Location = new System.Drawing.Point(-1, 338);
+            this.UserStatPanel.Name = "UserStatPanel";
+            this.UserStatPanel.Size = new System.Drawing.Size(200, 264);
+            this.UserStatPanel.TabIndex = 1;
             // 
             // ControlPanel
             // 
@@ -305,6 +319,7 @@
             // 
             // DoubleButton
             // 
+            this.DoubleButton.Enabled = false;
             this.DoubleButton.Location = new System.Drawing.Point(13, 61);
             this.DoubleButton.Name = "DoubleButton";
             this.DoubleButton.Size = new System.Drawing.Size(75, 23);
@@ -314,6 +329,7 @@
             // 
             // HitButton
             // 
+            this.HitButton.Enabled = false;
             this.HitButton.Location = new System.Drawing.Point(107, 13);
             this.HitButton.Name = "HitButton";
             this.HitButton.Size = new System.Drawing.Size(75, 23);
@@ -323,6 +339,7 @@
             // 
             // StandButton
             // 
+            this.StandButton.Enabled = false;
             this.StandButton.Location = new System.Drawing.Point(13, 13);
             this.StandButton.Name = "StandButton";
             this.StandButton.Size = new System.Drawing.Size(75, 23);
@@ -332,6 +349,7 @@
             // 
             // SplitButton
             // 
+            this.SplitButton.Enabled = false;
             this.SplitButton.Location = new System.Drawing.Point(107, 61);
             this.SplitButton.Name = "SplitButton";
             this.SplitButton.Size = new System.Drawing.Size(75, 23);
@@ -339,100 +357,102 @@
             this.SplitButton.Text = "Split";
             this.SplitButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // PlayerStreak
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkRed;
-            this.label1.Location = new System.Drawing.Point(90, 111);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 42);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "0";
+            this.PlayerStreak.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PlayerStreak.ForeColor = System.Drawing.Color.DarkRed;
+            this.PlayerStreak.Location = new System.Drawing.Point(-1, 111);
+            this.PlayerStreak.Name = "PlayerStreak";
+            this.PlayerStreak.Size = new System.Drawing.Size(200, 42);
+            this.PlayerStreak.TabIndex = 6;
+            this.PlayerStreak.Text = "0";
+            this.PlayerStreak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // StreakLabel
             // 
-            this.StreakLabel.AutoSize = true;
             this.StreakLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StreakLabel.Location = new System.Drawing.Point(63, 98);
+            this.StreakLabel.Location = new System.Drawing.Point(-1, 98);
             this.StreakLabel.Name = "StreakLabel";
-            this.StreakLabel.Size = new System.Drawing.Size(89, 13);
+            this.StreakLabel.Size = new System.Drawing.Size(200, 13);
             this.StreakLabel.TabIndex = 5;
             this.StreakLabel.Text = "Current Streak";
+            this.StreakLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BalanceLabel
             // 
-            this.BalanceLabel.AutoSize = true;
             this.BalanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BalanceLabel.Location = new System.Drawing.Point(75, 17);
+            this.BalanceLabel.Location = new System.Drawing.Point(-1, 17);
             this.BalanceLabel.Name = "BalanceLabel";
-            this.BalanceLabel.Size = new System.Drawing.Size(63, 13);
+            this.BalanceLabel.Size = new System.Drawing.Size(200, 13);
             this.BalanceLabel.TabIndex = 4;
             this.BalanceLabel.Text = "BALANCE";
+            this.BalanceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PlayerBalance
             // 
-            this.PlayerBalance.AutoSize = true;
             this.PlayerBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PlayerBalance.ForeColor = System.Drawing.Color.DarkRed;
-            this.PlayerBalance.Location = new System.Drawing.Point(83, 26);
+            this.PlayerBalance.Location = new System.Drawing.Point(-1, 26);
             this.PlayerBalance.Name = "PlayerBalance";
-            this.PlayerBalance.Size = new System.Drawing.Size(52, 55);
+            this.PlayerBalance.Size = new System.Drawing.Size(200, 55);
             this.PlayerBalance.TabIndex = 3;
             this.PlayerBalance.Text = "0";
+            this.PlayerBalance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DeckPanel
             // 
             this.DeckPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.DeckPanel.Controls.Add(this.pictureBox1);
-            this.DeckPanel.Controls.Add(this.CardCountLabel);
+            this.DeckPanel.Controls.Add(this.CardBack);
+            this.DeckPanel.Controls.Add(this.CardCount);
             this.DeckPanel.Location = new System.Drawing.Point(-1, -1);
             this.DeckPanel.Name = "DeckPanel";
             this.DeckPanel.Size = new System.Drawing.Size(200, 340);
             this.DeckPanel.TabIndex = 0;
             // 
-            // pictureBox1
+            // CardBack
             // 
-            this.pictureBox1.Image = global::AutoJack.Properties.Resources.cardback;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 38);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 300);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.CardBack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardBack.Image = global::AutoJack.Properties.Resources.cardback;
+            this.CardBack.Location = new System.Drawing.Point(0, 31);
+            this.CardBack.Name = "CardBack";
+            this.CardBack.Size = new System.Drawing.Size(198, 307);
+            this.CardBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.CardBack.TabIndex = 1;
+            this.CardBack.TabStop = false;
             // 
-            // CardCountLabel
+            // CardCount
             // 
-            this.CardCountLabel.AutoSize = true;
-            this.CardCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CardCountLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.CardCountLabel.Location = new System.Drawing.Point(84, 2);
-            this.CardCountLabel.Name = "CardCountLabel";
-            this.CardCountLabel.Size = new System.Drawing.Size(46, 31);
-            this.CardCountLabel.TabIndex = 0;
-            this.CardCountLabel.Text = "52";
+            this.CardCount.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CardCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CardCount.ForeColor = System.Drawing.Color.DarkRed;
+            this.CardCount.Location = new System.Drawing.Point(0, 0);
+            this.CardCount.Name = "CardCount";
+            this.CardCount.Size = new System.Drawing.Size(198, 31);
+            this.CardCount.TabIndex = 0;
+            this.CardCount.Text = "52";
+            this.CardCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MiddlePanel
             // 
             this.MiddlePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MiddlePanel.Controls.Add(this.PlayerSumPanel);
+            this.MiddlePanel.Controls.Add(this.UserSumPanel);
             this.MiddlePanel.Location = new System.Drawing.Point(218, 12);
             this.MiddlePanel.Name = "MiddlePanel";
             this.MiddlePanel.Size = new System.Drawing.Size(868, 680);
             this.MiddlePanel.TabIndex = 2;
             // 
-            // PlayerSumPanel
+            // UserSumPanel
             // 
-            this.PlayerSumPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PlayerSumPanel.Controls.Add(this.PlayerHand2Sum);
-            this.PlayerSumPanel.Controls.Add(this.PlayerHand2Count);
-            this.PlayerSumPanel.Controls.Add(this.PlayerHand1Sum);
-            this.PlayerSumPanel.Controls.Add(this.PlayerHand1Count);
-            this.PlayerSumPanel.Controls.Add(this.PlayerHands);
-            this.PlayerSumPanel.Location = new System.Drawing.Point(-1, 649);
-            this.PlayerSumPanel.Name = "PlayerSumPanel";
-            this.PlayerSumPanel.Size = new System.Drawing.Size(868, 30);
-            this.PlayerSumPanel.TabIndex = 0;
+            this.UserSumPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UserSumPanel.Controls.Add(this.PlayerHand2Sum);
+            this.UserSumPanel.Controls.Add(this.PlayerHand2Count);
+            this.UserSumPanel.Controls.Add(this.PlayerHand1Sum);
+            this.UserSumPanel.Controls.Add(this.PlayerHand1Count);
+            this.UserSumPanel.Controls.Add(this.PlayerHands);
+            this.UserSumPanel.Location = new System.Drawing.Point(-1, 649);
+            this.UserSumPanel.Name = "UserSumPanel";
+            this.UserSumPanel.Size = new System.Drawing.Size(868, 30);
+            this.UserSumPanel.TabIndex = 0;
             // 
             // PlayerHand2Sum
             // 
@@ -501,77 +521,79 @@
             // 
             // HouseWager
             // 
-            this.HouseWager.AutoSize = true;
             this.HouseWager.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HouseWager.ForeColor = System.Drawing.Color.DarkRed;
-            this.HouseWager.Location = new System.Drawing.Point(78, 237);
+            this.HouseWager.Location = new System.Drawing.Point(-1, 237);
             this.HouseWager.Name = "HouseWager";
-            this.HouseWager.Size = new System.Drawing.Size(40, 42);
+            this.HouseWager.Size = new System.Drawing.Size(200, 42);
             this.HouseWager.TabIndex = 8;
             this.HouseWager.Text = "0";
+            this.HouseWager.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // HouseWagerLabel
             // 
-            this.HouseWagerLabel.AutoSize = true;
             this.HouseWagerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HouseWagerLabel.Location = new System.Drawing.Point(72, 224);
+            this.HouseWagerLabel.Location = new System.Drawing.Point(-1, 224);
             this.HouseWagerLabel.Name = "HouseWagerLabel";
-            this.HouseWagerLabel.Size = new System.Drawing.Size(53, 13);
+            this.HouseWagerLabel.Size = new System.Drawing.Size(200, 13);
             this.HouseWagerLabel.TabIndex = 7;
             this.HouseWagerLabel.Text = "WAGER";
+            this.HouseWagerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // HouseBetLabel
             // 
-            this.HouseBetLabel.AutoSize = true;
             this.HouseBetLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HouseBetLabel.Location = new System.Drawing.Point(81, 123);
+            this.HouseBetLabel.Location = new System.Drawing.Point(-1, 123);
             this.HouseBetLabel.Name = "HouseBetLabel";
-            this.HouseBetLabel.Size = new System.Drawing.Size(31, 13);
+            this.HouseBetLabel.Size = new System.Drawing.Size(200, 13);
             this.HouseBetLabel.TabIndex = 6;
             this.HouseBetLabel.Text = "BET";
+            this.HouseBetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // HouseBet
             // 
-            this.HouseBet.AutoSize = true;
             this.HouseBet.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HouseBet.ForeColor = System.Drawing.Color.DarkRed;
-            this.HouseBet.Location = new System.Drawing.Point(64, 136);
+            this.HouseBet.Location = new System.Drawing.Point(-1, 136);
             this.HouseBet.Name = "HouseBet";
-            this.HouseBet.Size = new System.Drawing.Size(69, 73);
+            this.HouseBet.Size = new System.Drawing.Size(200, 73);
             this.HouseBet.TabIndex = 5;
             this.HouseBet.Text = "0";
+            this.HouseBet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Rule2Label
             // 
-            this.Rule2Label.AutoSize = true;
             this.Rule2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Rule2Label.ForeColor = System.Drawing.Color.DarkRed;
-            this.Rule2Label.Location = new System.Drawing.Point(11, 75);
+            this.Rule2Label.Location = new System.Drawing.Point(-1, 75);
             this.Rule2Label.Name = "Rule2Label";
-            this.Rule2Label.Size = new System.Drawing.Size(179, 20);
+            this.Rule2Label.Size = new System.Drawing.Size(200, 20);
             this.Rule2Label.TabIndex = 2;
             this.Rule2Label.Text = "Insurance: Pay 2 to 1";
+            this.Rule2Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Rule1Label
             // 
-            this.Rule1Label.AutoSize = true;
             this.Rule1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Rule1Label.ForeColor = System.Drawing.Color.DarkRed;
-            this.Rule1Label.Location = new System.Drawing.Point(7, 48);
+            this.Rule1Label.Location = new System.Drawing.Point(-1, 48);
             this.Rule1Label.Name = "Rule1Label";
-            this.Rule1Label.Size = new System.Drawing.Size(185, 20);
+            this.Rule1Label.Size = new System.Drawing.Size(200, 20);
             this.Rule1Label.TabIndex = 1;
             this.Rule1Label.Text = "Black Jack: Pay 3 to 2";
+            this.Rule1Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // HouseLabel
             // 
-            this.HouseLabel.AutoSize = true;
+            this.HouseLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.HouseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HouseLabel.Location = new System.Drawing.Point(25, 4);
+            this.HouseLabel.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.HouseLabel.Location = new System.Drawing.Point(0, 0);
             this.HouseLabel.Name = "HouseLabel";
-            this.HouseLabel.Size = new System.Drawing.Size(143, 25);
+            this.HouseLabel.Size = new System.Drawing.Size(198, 25);
             this.HouseLabel.TabIndex = 0;
             this.HouseLabel.Text = "THE HOUSE";
+            this.HouseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // HouseSumPanel
             // 
@@ -644,23 +666,13 @@
             this.HouseHandPanel.Size = new System.Drawing.Size(868, 307);
             this.HouseHandPanel.TabIndex = 1;
             // 
-            // PlayerHandPanel
+            // UserHandPanel
             // 
-            this.PlayerHandPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PlayerHandPanel.Location = new System.Drawing.Point(218, 351);
-            this.PlayerHandPanel.Name = "PlayerHandPanel";
-            this.PlayerHandPanel.Size = new System.Drawing.Size(868, 307);
-            this.PlayerHandPanel.TabIndex = 1;
-            // 
-            // QuitButton
-            // 
-            this.QuitButton.BackColor = System.Drawing.Color.OrangeRed;
-            this.QuitButton.Location = new System.Drawing.Point(120, 46);
-            this.QuitButton.Name = "QuitButton";
-            this.QuitButton.Size = new System.Drawing.Size(75, 23);
-            this.QuitButton.TabIndex = 2;
-            this.QuitButton.Text = "Quit";
-            this.QuitButton.UseVisualStyleBackColor = false;
+            this.UserHandPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UserHandPanel.Location = new System.Drawing.Point(218, 351);
+            this.UserHandPanel.Name = "UserHandPanel";
+            this.UserHandPanel.Size = new System.Drawing.Size(868, 307);
+            this.UserHandPanel.TabIndex = 1;
             // 
             // GameView
             // 
@@ -669,33 +681,30 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1304, 704);
             this.ControlBox = false;
-            this.Controls.Add(this.PlayerHandPanel);
+            this.Controls.Add(this.UserHandPanel);
             this.Controls.Add(this.HouseHandPanel);
             this.Controls.Add(this.HouseSumPanel);
             this.Controls.Add(this.HouseBetPanel);
             this.Controls.Add(this.MiddlePanel);
             this.Controls.Add(this.RightPanel);
             this.Controls.Add(this.LeftPanel);
+            this.KeyPreview = true;
             this.Name = "GameView";
             this.Text = "AutoJack: Game Play";
             this.LeftPanel.ResumeLayout(false);
             this.TimingPanel.ResumeLayout(false);
             this.TimingPanel.PerformLayout();
-            this.PlayerBetPanel.ResumeLayout(false);
-            this.PlayerBetPanel.PerformLayout();
+            this.UserBetPanel.ResumeLayout(false);
             this.RightPanel.ResumeLayout(false);
             this.GameControlPanel.ResumeLayout(false);
-            this.PlayerStatPanel.ResumeLayout(false);
-            this.PlayerStatPanel.PerformLayout();
+            this.UserStatPanel.ResumeLayout(false);
             this.ControlPanel.ResumeLayout(false);
             this.DeckPanel.ResumeLayout(false);
-            this.DeckPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CardBack)).EndInit();
             this.MiddlePanel.ResumeLayout(false);
-            this.PlayerSumPanel.ResumeLayout(false);
-            this.PlayerSumPanel.PerformLayout();
+            this.UserSumPanel.ResumeLayout(false);
+            this.UserSumPanel.PerformLayout();
             this.HouseBetPanel.ResumeLayout(false);
-            this.HouseBetPanel.PerformLayout();
             this.HouseSumPanel.ResumeLayout(false);
             this.HouseSumPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -708,17 +717,17 @@
         private System.Windows.Forms.Panel RightPanel;
         private System.Windows.Forms.Panel MiddlePanel;
         private System.Windows.Forms.Panel TimingPanel;
-        private System.Windows.Forms.Panel PlayerBetPanel;
+        private System.Windows.Forms.Panel UserBetPanel;
         private System.Windows.Forms.Panel GameControlPanel;
-        private System.Windows.Forms.Panel PlayerStatPanel;
+        private System.Windows.Forms.Panel UserStatPanel;
         private System.Windows.Forms.Panel DeckPanel;
-        private System.Windows.Forms.Panel PlayerSumPanel;
+        private System.Windows.Forms.Panel UserSumPanel;
         private System.Windows.Forms.Panel HouseBetPanel;
         private System.Windows.Forms.Panel HouseSumPanel;
         private System.Windows.Forms.Panel HouseHandPanel;
-        private System.Windows.Forms.Panel PlayerHandPanel;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label CardCountLabel;
+        private System.Windows.Forms.Panel UserHandPanel;
+        private System.Windows.Forms.PictureBox CardBack;
+        private System.Windows.Forms.Label CardCount;
         private System.Windows.Forms.Label HouseHand2Sum;
         private System.Windows.Forms.Label HouseHand1Sum;
         private System.Windows.Forms.Label HouseHands;
@@ -727,8 +736,8 @@
         private System.Windows.Forms.Label DateLabel;
         private System.Windows.Forms.Label PlayerName;
         private System.Windows.Forms.Label PlayerWager;
-        private System.Windows.Forms.Label PlayerWagerLabel;
-        private System.Windows.Forms.Label PlayerBetLabel;
+        private System.Windows.Forms.Label UserWagerLabel;
+        private System.Windows.Forms.Label UserBetLabel;
         private System.Windows.Forms.Label PlayerBet;
         private System.Windows.Forms.Button SurrenderButton;
         private System.Windows.Forms.Button StartButton;
@@ -748,7 +757,7 @@
         private System.Windows.Forms.Label HouseWagerLabel;
         private System.Windows.Forms.Label HouseBetLabel;
         private System.Windows.Forms.Label HouseBet;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label PlayerStreak;
         private System.Windows.Forms.Label StreakLabel;
         private System.Windows.Forms.Label BalanceLabel;
         private System.Windows.Forms.Label PlayerBalance;

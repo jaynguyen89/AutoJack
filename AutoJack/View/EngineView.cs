@@ -17,13 +17,13 @@ namespace AutoJack.View {
         public EngineView() {
             InitializeComponent();
 
-            SelectPlayer.Click += new EventHandler(SelectPlayerEvent);
+            SelectUser.Click += new EventHandler(SelectUserEvent);
             ExitButton.Click += new EventHandler(QuitApp);
         }
 
-        private void SelectPlayerEvent(object sender, System.EventArgs e) {
+        private void SelectUserEvent(object sender, System.EventArgs e) {
             EngineController EngineController = new EngineController();
-            EngineController.GetSavedPlayers();
+            EngineController.GetSavedUsers();
         }
 
         private void QuitApp(object sender, System.EventArgs e) {

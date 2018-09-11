@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PlayersList = new System.Windows.Forms.ListView();
+            this.UsersList = new System.Windows.Forms.ListView();
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Balance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,13 +41,13 @@
             this.OkButton = new System.Windows.Forms.Button();
             this.NewPButton = new System.Windows.Forms.Button();
             this.BackButton = new System.Windows.Forms.Button();
-            this.PlayerDetails = new System.Windows.Forms.Button();
-            this.DeletePlayer = new System.Windows.Forms.Button();
+            this.UserDetails = new System.Windows.Forms.Button();
+            this.DeleteUser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // PlayersList
+            // UsersList
             // 
-            this.PlayersList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.UsersList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Id,
             this.PName,
             this.Balance,
@@ -56,16 +56,16 @@
             this.LoseCount,
             this.Owing,
             this.LastPlay});
-            this.PlayersList.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PlayersList.FullRowSelect = true;
-            this.PlayersList.GridLines = true;
-            this.PlayersList.Location = new System.Drawing.Point(12, 35);
-            this.PlayersList.MultiSelect = false;
-            this.PlayersList.Name = "PlayersList";
-            this.PlayersList.Size = new System.Drawing.Size(560, 223);
-            this.PlayersList.TabIndex = 0;
-            this.PlayersList.UseCompatibleStateImageBehavior = false;
-            this.PlayersList.View = System.Windows.Forms.View.Details;
+            this.UsersList.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.UsersList.FullRowSelect = true;
+            this.UsersList.GridLines = true;
+            this.UsersList.Location = new System.Drawing.Point(12, 35);
+            this.UsersList.MultiSelect = false;
+            this.UsersList.Name = "UsersList";
+            this.UsersList.Size = new System.Drawing.Size(560, 223);
+            this.UsersList.TabIndex = 0;
+            this.UsersList.UseCompatibleStateImageBehavior = false;
+            this.UsersList.View = System.Windows.Forms.View.Details;
             // 
             // Id
             // 
@@ -107,12 +107,14 @@
             // 
             // ListLabel
             // 
+            this.ListLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ListLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ListLabel.Location = new System.Drawing.Point(229, 9);
+            this.ListLabel.Location = new System.Drawing.Point(0, 0);
             this.ListLabel.Name = "ListLabel";
-            this.ListLabel.Size = new System.Drawing.Size(129, 23);
+            this.ListLabel.Size = new System.Drawing.Size(584, 23);
             this.ListLabel.TabIndex = 1;
             this.ListLabel.Text = "Select Player";
+            this.ListLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // OkButton
             // 
@@ -129,7 +131,7 @@
             this.NewPButton.Name = "NewPButton";
             this.NewPButton.Size = new System.Drawing.Size(75, 23);
             this.NewPButton.TabIndex = 3;
-            this.NewPButton.Text = "New Player";
+            this.NewPButton.Text = "New User";
             this.NewPButton.UseVisualStyleBackColor = true;
             // 
             // BackButton
@@ -142,24 +144,24 @@
             this.BackButton.Text = "Close";
             this.BackButton.UseVisualStyleBackColor = false;
             // 
-            // PlayerDetails
+            // UserDetails
             // 
-            this.PlayerDetails.Location = new System.Drawing.Point(93, 264);
-            this.PlayerDetails.Name = "PlayerDetails";
-            this.PlayerDetails.Size = new System.Drawing.Size(75, 23);
-            this.PlayerDetails.TabIndex = 5;
-            this.PlayerDetails.Text = "Details";
-            this.PlayerDetails.UseVisualStyleBackColor = true;
+            this.UserDetails.Location = new System.Drawing.Point(93, 264);
+            this.UserDetails.Name = "UserDetails";
+            this.UserDetails.Size = new System.Drawing.Size(75, 23);
+            this.UserDetails.TabIndex = 5;
+            this.UserDetails.Text = "Details";
+            this.UserDetails.UseVisualStyleBackColor = true;
             // 
-            // DeletePlayer
+            // DeleteUser
             // 
-            this.DeletePlayer.BackColor = System.Drawing.Color.OrangeRed;
-            this.DeletePlayer.Location = new System.Drawing.Point(416, 264);
-            this.DeletePlayer.Name = "DeletePlayer";
-            this.DeletePlayer.Size = new System.Drawing.Size(75, 23);
-            this.DeletePlayer.TabIndex = 6;
-            this.DeletePlayer.Text = "Delete";
-            this.DeletePlayer.UseVisualStyleBackColor = false;
+            this.DeleteUser.BackColor = System.Drawing.Color.OrangeRed;
+            this.DeleteUser.Location = new System.Drawing.Point(416, 264);
+            this.DeleteUser.Name = "DeleteUser";
+            this.DeleteUser.Size = new System.Drawing.Size(75, 23);
+            this.DeleteUser.TabIndex = 6;
+            this.DeleteUser.Text = "Delete";
+            this.DeleteUser.UseVisualStyleBackColor = false;
             // 
             // SelectView
             // 
@@ -168,13 +170,13 @@
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(584, 299);
             this.ControlBox = false;
-            this.Controls.Add(this.DeletePlayer);
-            this.Controls.Add(this.PlayerDetails);
+            this.Controls.Add(this.DeleteUser);
+            this.Controls.Add(this.UserDetails);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.NewPButton);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.ListLabel);
-            this.Controls.Add(this.PlayersList);
+            this.Controls.Add(this.UsersList);
             this.Name = "SelectView";
             this.Text = "AutoJack: Select Player";
             this.ResumeLayout(false);
@@ -183,7 +185,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView PlayersList;
+        private System.Windows.Forms.ListView UsersList;
         private System.Windows.Forms.Label ListLabel;
         private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Button NewPButton;
@@ -196,7 +198,7 @@
         private System.Windows.Forms.ColumnHeader LoseCount;
         private System.Windows.Forms.ColumnHeader Owing;
         private System.Windows.Forms.ColumnHeader LastPlay;
-        private System.Windows.Forms.Button PlayerDetails;
-        private System.Windows.Forms.Button DeletePlayer;
+        private System.Windows.Forms.Button UserDetails;
+        private System.Windows.Forms.Button DeleteUser;
     }
 }

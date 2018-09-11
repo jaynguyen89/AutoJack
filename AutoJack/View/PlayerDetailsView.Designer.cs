@@ -1,6 +1,6 @@
 ﻿namespace AutoJack.View
 {
-    partial class PlayerDetailsView
+    partial class UserDetailsView
     {
         /// <summary>
         /// Required designer variable.
@@ -67,13 +67,14 @@
             // 
             // DetailsLabel
             // 
-            this.DetailsLabel.AutoSize = true;
+            this.DetailsLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.DetailsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DetailsLabel.Location = new System.Drawing.Point(11, 9);
+            this.DetailsLabel.Location = new System.Drawing.Point(0, 0);
             this.DetailsLabel.Name = "DetailsLabel";
-            this.DetailsLabel.Size = new System.Drawing.Size(128, 20);
+            this.DetailsLabel.Size = new System.Drawing.Size(307, 20);
             this.DetailsLabel.TabIndex = 0;
             this.DetailsLabel.Text = "Player Details";
+            this.DetailsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NameLabel
             // 
@@ -384,7 +385,7 @@
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = true;
             // 
-            // PlayerDetailsView
+            // UserDetailsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -425,7 +426,7 @@
             this.Controls.Add(this.NameInput);
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.DetailsLabel);
-            this.Name = "PlayerDetailsView";
+            this.Name = "UserDetailsView";
             this.Text = "AutoJack";
             this.ResumeLayout(false);
             this.PerformLayout();

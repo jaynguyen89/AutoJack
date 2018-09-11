@@ -1,6 +1,6 @@
 ﻿namespace AutoJack.View
 {
-    partial class NewPlayerView
+    partial class NewUserView
     {
         /// <summary>
         /// Required designer variable.
@@ -36,17 +36,18 @@
             // 
             // NewPLabel
             // 
-            this.NewPLabel.AutoSize = true;
+            this.NewPLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.NewPLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NewPLabel.Location = new System.Drawing.Point(92, 9);
+            this.NewPLabel.Location = new System.Drawing.Point(0, 0);
             this.NewPLabel.Name = "NewPLabel";
-            this.NewPLabel.Size = new System.Drawing.Size(112, 22);
+            this.NewPLabel.Size = new System.Drawing.Size(304, 22);
             this.NewPLabel.TabIndex = 0;
             this.NewPLabel.Text = "New Player";
+            this.NewPLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NameInput
             // 
-            this.NameInput.Location = new System.Drawing.Point(12, 48);
+            this.NameInput.Location = new System.Drawing.Point(12, 34);
             this.NameInput.Name = "NameInput";
             this.NameInput.Size = new System.Drawing.Size(280, 20);
             this.NameInput.TabIndex = 1;
@@ -54,7 +55,7 @@
             // 
             // OkButton
             // 
-            this.OkButton.Location = new System.Drawing.Point(12, 74);
+            this.OkButton.Location = new System.Drawing.Point(12, 60);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(75, 23);
             this.OkButton.TabIndex = 2;
@@ -64,24 +65,24 @@
             // BackButton
             // 
             this.BackButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.BackButton.Location = new System.Drawing.Point(217, 74);
+            this.BackButton.Location = new System.Drawing.Point(217, 60);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(75, 23);
             this.BackButton.TabIndex = 3;
             this.BackButton.Text = "Back";
             this.BackButton.UseVisualStyleBackColor = false;
             // 
-            // NewPlayerView
+            // NewUserView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 107);
+            this.ClientSize = new System.Drawing.Size(304, 93);
             this.ControlBox = false;
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.NameInput);
             this.Controls.Add(this.NewPLabel);
-            this.Name = "NewPlayerView";
+            this.Name = "NewUserView";
             this.Text = "AutoJack";
             this.ResumeLayout(false);
             this.PerformLayout();

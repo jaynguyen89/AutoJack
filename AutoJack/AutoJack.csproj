@@ -58,9 +58,15 @@
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Controller\PlayerController.cs" />
     <Compile Include="Controller\SelectController.cs" />
+    <Compile Include="Interface\ICard.cs" />
+    <Compile Include="Interface\IHelper.cs" />
+    <Compile Include="Model\Card.cs" />
     <Compile Include="Model\Engine.cs" />
     <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\GameCallback.cs" />
+    <Compile Include="Model\Machine.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\EngineView.cs">
@@ -131,7 +137,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="resources\saves\players.json" />
+    <None Include="resources\saves\users.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

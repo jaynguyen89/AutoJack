@@ -13,43 +13,51 @@ using AutoJack.Controller;
 
 namespace AutoJack.View {
 
-    public partial class NewPlayerView : Form {
+    public partial class NewUserView : Form {
         private Engine Engine = new Engine();
 
-        public NewPlayerView() {
+        public NewUserView() {
             InitializeComponent();
 
-            OkButton.Click += new EventHandler(CreateNewPlayer);
+            OkButton.Click += new EventHandler(CreateNewUser);
             BackButton.Click += new EventHandler(CancelCreate);
+            NameInput.KeyPress += new KeyPressEventHandler(EnterKeyPressed);
         }
 
-        private void CreateNewPlayer(object sender, EventArgs e) {
-            String PlayerName = NameInput.Text;
+        private void CreateNewUser(object sender, EventArgs e) {
+            String UserName = NameInput.Text;
 
-            if ("Your Name...".Contains(PlayerName))
+            if ("Your Name...".Contains(UserName))
                 MessageBox.Show("Please enter your name to continue.");
             else {
-                List<Player> Players = Engine.GetSavedPlayers();
-                int.TryParse(Players.ElementAt(Players.Count - 1).Id, out int id);
+                List<User> Users = Engine.GetSavedUsers();
+                int.TryParse(Users.ElementAt(Users.Count - 1).Id, out int id);
 
-                Player NewPlayer = new Player(
+                User NewUser = new User(
                         (id + 1).ToString(),
-                        PlayerName
+                        UserName
                     );
 
-                Players.Add(NewPlayer);
-                Engine.WritePlayersJSON(Players);
+                Users.Add(NewUser);
+                Engine.WriteUsersJSON(Users);
 
                 this.Close();
-                GameController GameController = new GameController(NewPlayer);
+                GameController GameController = new GameController(NewUser);
                 GameController.StartGame();
+            }
+        }
+
+        private void EnterKeyPressed(object sender, KeyPressEventArgs e) {
+            if (e.KeyChar == (char)Keys.Enter) {
+                e.Handled = true;
+                OkButton.PerformClick();
             }
         }
 
         private void CancelCreate(object sender, EventArgs e) {
             this.Close();
             SelectController SelectController = new SelectController();
-            SelectController.AllowSelectPlayer();
+            SelectController.AllowSelectUser();
         }
     }
 }

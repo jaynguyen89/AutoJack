@@ -13,7 +13,7 @@ namespace AutoJack.Controller {
     class SelectController {
         SelectView SelectView = new SelectView();
 
-        public void AllowSelectPlayer() {
+        public void AllowSelectUser() {
             SelectView.Show();
         }
     }

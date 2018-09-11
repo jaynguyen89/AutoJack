@@ -5,27 +5,48 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AutoJack.Model {
+    public class Player : User {
+        public int Bet { get; set; }
+        public int Insurance { get; set; }
+        internal List<Card> Hand1 { get; set; }
+        internal List<Card> Hand2 { get; set; }
 
-    public class Player {
+        public Player() { }
 
-        public Player(string id, string PlayerName) {
-            this.Id = id;
-            Name = PlayerName;
-            Balance = Winstreak = WinCount = LoseCount = Owing = 0;
+        public Player(
+                string id,
+                string UserName,
+                int Balance,
+                int WinStreak,
+                int WinCount,
+                int LoseCount,
+                int Games,
+                int Owing,
+                double AvgBet,
+                int MaxBet,
+                int MinBet,
+                string LastPlay,
+                int CurrentStreak
+            ) :
+            base(
+                    id, UserName, Balance,
+                    WinStreak, WinCount,
+                    LoseCount, Games, Owing,
+                    AvgBet, MaxBet, MinBet,
+                    LastPlay, CurrentStreak
+                ) {
+                    Bet = 0;
+                    Insurance = 0;
+                    Hand1 = new List<Card>();
+                    Hand2 = new List<Card>();
         }
 
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public int Balance { get; set; }
-        public int Winstreak { get; set; }
-        public int WinCount { get; set; }
-        public int LoseCount { get; set; }
-        public int Games { get; set; }
-        public int Owing { get; set; }
-        public double AverageBet { get; set; }
-        public int MaxBet { get; set; }
-        public int MinBet { get; set; }
-        public string LastPlay { get; set; }
-        public int CurrentStreak { get; set; }
+        internal void AddHand1(Card Card) {
+            Hand1.Add(Card);
+        }
+
+        internal void AddHand2(Card Card) {
+            Hand2.Add(Card);
+        }
     }
 }

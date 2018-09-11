@@ -9,19 +9,19 @@ using AutoJack.Model;
 
 namespace AutoJack.Controller {
 
-    class PlayerController {
+    class UserController {
 
-        public void AllowCreatePlayer() {
-            NewPlayerView NewPlayerView = new NewPlayerView();
-            NewPlayerView.Show();
+        public void AllowCreateUser() {
+            NewUserView NewUserView = new NewUserView();
+            NewUserView.Show();
         }
 
-        public void DisplayPlayerDetails(int Id) {
+        public void DisplayUserDetails(int Id) {
             Engine Engine = new Engine();
-            Player Player = Engine.GetPlayerById(Id);
+            User User = Engine.GetUserById(Id);
 
-            PlayerDetailsView PlayerDetailsView = new PlayerDetailsView(Player);
-            PlayerDetailsView.Show();
+            UserDetailsView UserDetailsView = new UserDetailsView(User);
+            UserDetailsView.Show();
         }
     }
 }

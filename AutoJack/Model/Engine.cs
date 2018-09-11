@@ -11,57 +11,57 @@ namespace AutoJack.Model {
 
     class Engine {
 
-        public List<Player> GetSavedPlayers() {
+        public List<User> GetSavedUsers() {
             GetJsonPath();
-            List<Player> Players = new List<Player>();
+            List<User> Users = new List<User>();
             using (StreamReader s = new StreamReader(GetJsonPath())) {
                 string json = s.ReadToEnd();
-                Players = JsonConvert.DeserializeObject<List<Player>>(json);
+                Users = JsonConvert.DeserializeObject<List<User>>(json);
             }
 
-            return Players;
+            return Users;
         }
 
-        public void WritePlayersJSON(List<Player> Players) {
+        public void WriteUsersJSON(List<User> Users) {
             using (StreamWriter s = new StreamWriter(GetJsonPath())) {
                 JsonSerializer Serializer = new JsonSerializer();
 
-                Serializer.Serialize(s, Players);
+                Serializer.Serialize(s, Users);
             }
         }
 
-        public Player GetPlayerById(int Id) {
-            List<Player> Players = GetSavedPlayers();
+        public User GetUserById(int Id) {
+            List<User> Users = GetSavedUsers();
 
-            foreach (Player player in Players)
-                if (player.Id == Id.ToString())
-                    return player;
+            foreach (User User in Users)
+                if (User.Id == Id.ToString())
+                    return User;
 
             return null;
         }
 
-        public void Update(Player Player) {
-            List<Player> Players = GetSavedPlayers();
+        public void Update(User User) {
+            List<User> Users = GetSavedUsers();
 
-            for (var i = 0; i < Players.Count; i++)
-                if (Players[i].Id == Player.Id) {
-                    Players[i] = Player;
+            for (var i = 0; i < Users.Count; i++)
+                if (Users[i].Id == User.Id) {
+                    Users[i] = User;
                     break;
                 }
 
-            WritePlayersJSON(Players);
+            WriteUsersJSON(Users);
         }
 
-        public void Delete(Player Player) {
-            List<Player> Players = GetSavedPlayers();
+        public void Delete(User User) {
+            List<User> Users = GetSavedUsers();
 
-            for (var i = 0; i < Players.Count; i++)
-                if (Players[i].Id == Player.Id) {
-                    Players.RemoveAt(i);
+            for (var i = 0; i < Users.Count; i++)
+                if (Users[i].Id == User.Id) {
+                    Users.RemoveAt(i);
                     break;
                 }
 
-            WritePlayersJSON(Players);
+            WriteUsersJSON(Users);
         }
 
         private string GetJsonPath() {
@@ -72,7 +72,7 @@ namespace AutoJack.Model {
             for (int i = 0; i < tokens.Length - 2; i++)
                 AppFolder += tokens[i] + @"\";
 
-            return AppFolder + @"resources\saves\players.json";
+            return AppFolder + @"resources\saves\users.json";
         }
     }
 }
