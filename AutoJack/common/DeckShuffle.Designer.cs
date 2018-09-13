@@ -75,6 +75,7 @@
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.pictureBox1);
             this.Name = "DeckShuffle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Deck Shuffle";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

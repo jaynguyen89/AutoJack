@@ -87,6 +87,5 @@
         private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Button SelectUser;
         private System.Windows.Forms.PictureBox AppLogo;
-        private System.Windows.Forms.Panel BeginPanel;
     }
 }

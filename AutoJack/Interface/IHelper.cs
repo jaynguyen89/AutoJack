@@ -14,7 +14,7 @@ namespace AutoJack.Interface {
 
         void PassPlayerTurn(GameController GameController);
 
-        void AllowDraw1Card(GameController GameController);
+        void AllowDraw1Card(string Hand, GameController GameController);
 
         void DoubleBetThenTurnOver(GameController GameController);
 

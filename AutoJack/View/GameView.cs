@@ -16,10 +16,21 @@ namespace AutoJack.View {
 
     public partial class GameView : Form {
         public GameController GameController;
+        System.Timers.Timer Timer;
+        int hour, minute, second;
 
         public GameView(GameController GameController) {
             this.GameController = GameController;
             InitializeComponent();
+
+            DateLabel.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+            SetTimeValues(DateTime.Now.ToString("HH mm ss"));
+
+            Timer = new System.Timers.Timer { Interval = 1000 };
+            Timer.Elapsed += TimeWrapEvent;
+
+            Timer.Start();
 
             StartButton.Click += new EventHandler(BeginGameEvent);
             QuitButton.Click += new EventHandler(QuitGameEvent);
@@ -35,12 +46,42 @@ namespace AutoJack.View {
             SurrenderButton.Click += new EventHandler(PlayerGiveUpEvent);
         }
 
+        private void SetTimeValues(string Time) {
+            string[] tokens = Time.Split(' ');
+
+            int.TryParse(tokens[0], out hour);
+            int.TryParse(tokens[1], out minute);
+            int.TryParse(tokens[2], out second);
+        }
+
+        private void TimeWrapEvent(object sender, System.Timers.ElapsedEventArgs e) {
+            Invoke(new Action(() => {
+                if (++second == 60) {
+                    second = 0;
+                    minute++;
+                }
+
+                if (minute == 60) {
+                    minute = 0;
+                    hour += 1;
+                }
+
+                TimeLabel.Text = (hour < 10 ? "0" : "") + hour.ToString() + (minute < 10 ? ":0" : ":") +
+                                 minute.ToString() + (second < 10 ? ":0" : ":") + second.ToString();
+            }));
+        }
+
         public void SetLabels(Game Game) {
-            DateLabel.Text = DateTime.Now.ToString("dd/MM/yyyy");
             TurnLabel.Text = (Game.TurnWho == String.Empty ? "Waiting" : Game.TurnWho);
 
             PlayerName.Text = Game.Player.Name.ToUpper();
             PlayerBet.Text = Game.Player.Bet.ToString();
+
+            while (PlayerBet.Width < TextRenderer.MeasureText(PlayerBet.Text,
+                   new Font(PlayerBet.Font.FontFamily, PlayerBet.Font.Size, PlayerBet.Font.Style)).Width) {
+                PlayerBet.Font = new Font(PlayerBet.Font.FontFamily, PlayerBet.Font.Size - 0.5f, PlayerBet.Font.Style);
+            }
+
             PlayerWager.Text = Game.Player.Insurance.ToString();
             PlayerBalance.Text = Game.Player.Balance == 0 ? "-" + Game.Player.Owing.ToString() : Game.Player.Balance.ToString();
             PlayerStreak.Text = Game.Player.CurrentStreak.ToString();
@@ -53,6 +94,12 @@ namespace AutoJack.View {
             PlayerHand2Sum.Text = "Hand2 Sum: " + Game.GetHandSumFor(Game.Player.Hand2).ToString();
 
             HouseBet.Text = Game.Machine.Bet.ToString();
+
+            while (HouseBet.Width < TextRenderer.MeasureText(HouseBet.Text,
+                   new Font(HouseBet.Font.FontFamily, HouseBet.Font.Size, HouseBet.Font.Style)).Width) {
+                HouseBet.Font = new Font(HouseBet.Font.FontFamily, HouseBet.Font.Size - 0.5f, HouseBet.Font.Style);
+            }
+
             HouseWager.Text = Game.Machine.Insurance.ToString();
             CardCount.Text = Game.ShouldWarn ? Game.Deck.Count.ToString() : "SEALED";
             HouseHands.Text = "Hands: " + (Game.ShouldWarn ? 
@@ -106,10 +153,9 @@ namespace AutoJack.View {
 
                 StandButton.Enabled = (shouldEnableStandBtnHand1 || shouldEnableStandBtnHand2);
                 TurnButton.Enabled = (shouldEnableTurnBtnHand1 || shouldEnableTurnBtnHand2);
-
-
-                SplitButton.Enabled = (Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand1)) &&
-                    Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand2)));
+                
+                SplitButton.Enabled = false;//(Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand1)) &&
+                    //Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand2)));
             }
         }
 
@@ -159,54 +205,110 @@ namespace AutoJack.View {
                 PictureBox CardPhoto = new PictureBox();
 
                 if (Who == "Player") {
-                    Panel HandCard = new Panel();
-
-                    HandCard.SuspendLayout();
+                    Panel HandCard = new Panel();HandCard.SuspendLayout();
                     PlayerHandCards.Controls.Add(HandCard);
 
-                    HandCard.Location = new Point(3, 3);
-                    HandCard.Size = new Size(200, 299);
-                    HandCard.TabIndex = 0;
-                    HandCard.ResumeLayout();
-
-                    PictureBox CardSet = new PictureBox();
-                    ((ISupportInitialize)CardSet).BeginInit();
-                    CardSet.Image = Card.Set ? Properties.Resources.cardback : Properties.Resources.joker;
-
-                    CardSet.Location = new Point(87, 3);
-                    CardSet.Size = new Size(25, 35);
-                    CardSet.SizeMode = PictureBoxSizeMode.StretchImage;
-                    CardSet.TabIndex = 1;
-                    CardSet.TabStop = false;
-                    ((ISupportInitialize)CardSet).EndInit();
-                    
-                    ((ISupportInitialize)CardPhoto).BeginInit();
-                    CardPhoto.Image = Image.FromFile(Utility.GetBasePath() +
-                        @"resources\deck\" + Card.Pip.ToString() + Card.Suit.ToString() + ".png");
-
-                    CardPhoto.Location = new Point(13, 42);
-                    CardPhoto.Size = new Size(173, 257);
-                    CardPhoto.TabIndex = 0;
-                    CardPhoto.TabStop = false;
-                    ((ISupportInitialize)CardPhoto).EndInit();
-
-                    HandCard.Controls.Add(CardSet);
-                    HandCard.Controls.Add(CardPhoto);
+                    RenderCardToPanelForPlayer(Card, CardPhoto, HandCard);
                 }
                 else {
-                    ((ISupportInitialize)CardPhoto).BeginInit();
-                    CardPhoto.Image = !Card.Set ? Image.FromFile(Utility.GetBasePath() +
-                        @"resources\deck\" + Card.Pip.ToString() + Card.Suit.ToString() + ".png") : Properties.Resources.cardback;
-
-                    CardPhoto.Location = new Point(13, 42);
-                    CardPhoto.Size = new Size(173, 257);
-                    CardPhoto.TabIndex = 0;
-                    CardPhoto.TabStop = false;
-                    ((ISupportInitialize)CardPhoto).EndInit();
-
+                    RenderCardToPanelForHouse(Card, CardPhoto);
                     HouseHandCards.Controls.Add(CardPhoto);
                 }
             }
+        }
+
+        internal void RenderDoubleHandsFor(string Who, Game Game) {
+            FlowLayoutPanel Hand1Panel = new FlowLayoutPanel();
+            FlowLayoutPanel Hand2Panel = new FlowLayoutPanel();
+
+            Hand1Panel.Location = new Point(3, 3);
+            Hand1Panel.Size = new Size(427, 299);
+            Hand1Panel.TabIndex = 0;
+
+            Hand2Panel.Location = new Point(436, 3);
+            Hand2Panel.Size = new Size(427, 299);
+            Hand2Panel.TabIndex = 1;
+
+            PictureBox CardPhoto = new PictureBox();
+
+            if (Who == "Player") {
+                PlayerHandCards.Controls.Clear();
+
+                PlayerHandCards.Controls.Add(Hand1Panel);
+                PlayerHandCards.Controls.Add(Hand2Panel);
+                
+                Panel HandCard = new Panel();
+
+                foreach (Card Card in Game.Player.Hand1) {
+                    Hand1Panel.Controls.Add(HandCard);
+                    RenderCardToPanelForPlayer(Card, CardPhoto, HandCard);
+                }
+
+                foreach (Card Card in Game.Player.Hand2) {
+                    Hand2Panel.Controls.Add(HandCard);
+                    RenderCardToPanelForPlayer(Card, CardPhoto, HandCard);
+                }
+            }
+            else {
+                HouseHandCards.Controls.Clear();
+
+                HouseHandCards.Controls.Add(Hand1Panel);
+                HouseHandCards.Controls.Add(Hand2Panel);
+
+                foreach (Card Card in Game.Machine.Hand1) {
+                    RenderCardToPanelForHouse(Card, CardPhoto);
+                    Hand1Panel.Controls.Add(CardPhoto);
+                }
+
+                foreach (Card Card in Game.Machine.Hand2) {
+                    RenderCardToPanelForHouse(Card, CardPhoto);
+                    Hand2Panel.Controls.Add(CardPhoto);
+                }
+            }
+        }
+
+        private void RenderCardToPanelForPlayer(Card Card, PictureBox CardPhoto, Panel HandCard) {
+            HandCard.SuspendLayout();
+            HandCard.Location = new Point(3, 3);
+            HandCard.Size = new Size(200, 299);
+            HandCard.TabIndex = 0;
+            HandCard.ResumeLayout();
+
+            PictureBox CardSet = new PictureBox();
+            ((ISupportInitialize)CardSet).BeginInit();
+            CardSet.Image = Card.Set ? Properties.Resources.cardback : Properties.Resources.joker;
+
+            CardSet.Location = new Point(87, 3);
+            CardSet.Size = new Size(25, 35);
+            CardSet.SizeMode = PictureBoxSizeMode.StretchImage;
+            CardSet.TabIndex = 1;
+            CardSet.TabStop = false;
+            ((ISupportInitialize)CardSet).EndInit();
+
+            ((ISupportInitialize)CardPhoto).BeginInit();
+            CardPhoto.Image = Image.FromFile(Utility.GetBasePath() +
+                @"resources\deck\" + Card.Pip.ToString() + Card.Suit.ToString() + ".png");
+
+            CardPhoto.Location = new Point(13, 42);
+            CardPhoto.Size = new Size(173, 257);
+            CardPhoto.TabIndex = 0;
+            CardPhoto.TabStop = false;
+            ((ISupportInitialize)CardPhoto).EndInit();
+
+            HandCard.Controls.Add(CardSet);
+            HandCard.Controls.Add(CardPhoto);
+        }
+
+        private void RenderCardToPanelForHouse(Card Card, PictureBox CardPhoto) {
+            ((ISupportInitialize)CardPhoto).BeginInit();
+            CardPhoto.Image = !Card.Set ? Image.FromFile(Utility.GetBasePath() +
+                @"resources\deck\" + Card.Pip.ToString() + Card.Suit.ToString() + ".png") : Properties.Resources.cardback;
+
+            CardPhoto.Location = new Point(13, 42);
+            CardPhoto.Size = new Size(173, 257);
+            CardPhoto.TabIndex = 0;
+            CardPhoto.TabStop = false;
+            ((ISupportInitialize)CardPhoto).EndInit();
         }
 
         private async void AutoBetEventAsync(object sender, EventArgs e) {
@@ -218,27 +320,27 @@ namespace AutoJack.View {
         }
 
         private void PlayerStandEvent(object sender, EventArgs e) {
-            GameController.ControlGameLoop(nameof(StandButton));
+            GameController.ControlButtonsClick(nameof(StandButton));
         }
 
         private void PlayerHitEvent(object sender, EventArgs e) {
-            GameController.ControlGameLoop(nameof(HitButton));
+            GameController.ControlButtonsClick(nameof(HitButton));
         }
 
         private void PlayerDoubleEvent(object sender, EventArgs e) {
-            GameController.ControlGameLoop(nameof(DoubleButton));
+            GameController.ControlButtonsClick(nameof(DoubleButton));
         }
 
         private void PlayerSplitEvent(object sender, EventArgs e) {
-            GameController.ControlGameLoop(nameof(SplitButton));
+            GameController.ControlButtonsClick(nameof(SplitButton));
         }
 
         private void PlayerTurnOverEvent(object sender, EventArgs e) {
-            GameController.ControlGameLoop(nameof(TurnButton));
+            GameController.ControlButtonsClick(nameof(TurnButton));
         }
 
         private void PlayerGiveUpEvent(object sender, EventArgs e) {
-            GameController.ControlGameLoop(nameof(SurrenderButton));
+            GameController.ControlButtonsClick(nameof(SurrenderButton));
         }
 
         private void QuitGameEvent(object sender, EventArgs e) {
@@ -246,11 +348,15 @@ namespace AutoJack.View {
                 DialogResult result = MessageBox.Show("A game is currently active. Continue?", "Quit Game",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
-                if (result.Equals(DialogResult.OK))
+                if (result.Equals(DialogResult.OK)) {
+                    Timer.Stop();
                     this.Close();
+                }
             }
-            else
+            else {
+                Timer.Stop();
                 this.Close();
+            }
         }
 
         private void KeyCombinationQuit(object sender, KeyEventArgs e) {

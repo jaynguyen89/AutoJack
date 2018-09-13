@@ -83,6 +83,7 @@
             this.Controls.Add(this.NameInput);
             this.Controls.Add(this.NewPLabel);
             this.Name = "NewUserView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AutoJack";
             this.ResumeLayout(false);
             this.PerformLayout();

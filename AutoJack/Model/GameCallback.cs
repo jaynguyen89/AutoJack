@@ -75,11 +75,14 @@ namespace AutoJack.Model {
         }
 
         public void PassPlayerTurn(GameController GameController) {
+            GameController.Game.TurnWho = nameof(GameController.Game.Machine);
+            GameController.GameView.SetLabels(GameController.Game);
 
+            SimulateMachineRoundAsync(GameController);
         }
 
-        public void AllowDraw1Card(GameController GameController) {
-
+        public void AllowDraw1Card(string Hand, GameController GameController) {
+            Draw1CardFor(nameof(GameController.Game.Player), Hand, true, GameController);
         }
 
         public void DoubleBetThenTurnOver(GameController GameController) {
@@ -100,6 +103,82 @@ namespace AutoJack.Model {
 
         public string CheckForWinner(Game Game) {
             return String.Empty;
+        }
+
+        private async void SimulateMachineRoundAsync(GameController GameController) {
+            if (GameController.Game.Machine.Hand2.Count == 0) {
+                bool canSplit = GameController.Game.CheckIdenticalHand(nameof(GameController.Game.Machine),
+                                nameof(GameController.Game.Machine.Hand1));
+
+                if (canSplit) {
+                    Card SplittedCard = GameController.Game.Machine.Hand1.ElementAt(1);
+
+                    GameController.Game.Machine.Hand1.RemoveAt(1);
+                    GameController.Game.Machine.Hand2.Add(SplittedCard);
+                    GameController.GameView.RenderDoubleHandsFor(nameof(GameController.Game.Machine), GameController.Game);
+
+                    await Task.Delay(1500);
+
+                    Draw1CardFor(nameof(GameController.Game.Machine), nameof(GameController.Game.Machine.Hand1), false, GameController);
+                    GameController.GameView.RenderDoubleHandsFor(nameof(GameController.Game.Machine), GameController.Game);
+
+                    await Task.Delay(1500);
+
+                    Draw1CardFor(nameof(GameController.Game.Machine), nameof(GameController.Game.Machine.Hand2), true, GameController);
+                    GameController.GameView.RenderDoubleHandsFor(nameof(GameController.Game.Machine), GameController.Game);
+
+                    await Task.Delay(1500);
+                }
+                else
+                    SimulateMachine1HandAsync(GameController, nameof(GameController.Game.Machine.Hand1), false);
+            }
+
+            if (GameController.Game.Machine.Hand2.Count != 0) {
+                SimulateMachine1HandAsync(GameController, nameof(GameController.Game.Machine.Hand1), true);
+                SimulateMachine1HandAsync(GameController, nameof(GameController.Game.Machine.Hand2), true);
+            }
+        }
+
+        //RenderContext: false -- 1 hand, true -- 2 hands
+        private async void SimulateMachine1HandAsync(GameController GameController, string Hand, bool RenderContext) {
+            if (Hand == "Hand1") {
+                while (GameController.Game.GetHandSumFor(GameController.Game.Machine.Hand1) < 11) {
+                    Draw1CardFor(nameof(GameController.Game.Machine), nameof(GameController.Game.Machine.Hand1), true, GameController);
+
+                    if (RenderContext)
+                        GameController.GameView.RenderDoubleHandsFor(nameof(GameController.Game.Machine), GameController.Game);
+                    else
+                        GameController.GameView.RenderSingleHandFor(nameof(GameController.Game.Machine), GameController.Game.Machine.Hand1);
+
+                    GameController.GameView.SetLabels(GameController.Game);
+
+                    await Task.Delay(1500);
+                }
+
+                if (GameController.Game.GetHandSumFor(GameController.Game.Machine.Hand1) >= 11 &&
+                    GameController.Game.GetHandSumFor(GameController.Game.Machine.Hand1) < 16)
+            }
+            else {
+
+            }
+        }
+
+        private void Draw1CardFor(string Who, string Hand, bool Set, GameController GameController) {
+            Card DrawnCard = GameController.Game.Deck.ElementAt(0);
+            GameController.Game.Deck.RemoveAt(0);
+
+            if (Who == "Player") {
+                if (Hand == "Hand1")
+                    GameController.Game.Player.Hand1.Add(DrawnCard);
+                else
+                    GameController.Game.Player.Hand2.Add(DrawnCard);
+            }
+            else {
+                if (Hand == "Hand1")
+                    GameController.Game.Machine.Hand1.Add(DrawnCard);
+                else
+                    GameController.Game.Machine.Hand2.Add(DrawnCard);
+            }
         }
     }
 }

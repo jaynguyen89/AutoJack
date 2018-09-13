@@ -19,5 +19,12 @@ namespace AutoJack.common {
 
             return AppFolder;
         }
+
+        public static double RandDoubleInRange(double lower, double upper) {
+            Random rand = new Random();
+            double randValue = rand.NextDouble() * (upper - lower) + lower;
+
+            return randValue;
+        }
     }
 }

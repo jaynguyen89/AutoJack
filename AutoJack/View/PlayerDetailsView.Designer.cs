@@ -427,6 +427,7 @@
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.DetailsLabel);
             this.Name = "UserDetailsView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AutoJack";
             this.ResumeLayout(false);
             this.PerformLayout();

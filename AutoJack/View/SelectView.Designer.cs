@@ -178,6 +178,7 @@
             this.Controls.Add(this.ListLabel);
             this.Controls.Add(this.UsersList);
             this.Name = "SelectView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AutoJack: Select Player";
             this.ResumeLayout(false);
 

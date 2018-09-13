@@ -63,7 +63,6 @@ namespace AutoJack.Controller {
                 Bet = rand.Next(100, 1001);
 
             Game.Player.Bet = Bet;
-            SetMachineBet();
             await ContinueGameAsync(true);
         }
 
@@ -73,10 +72,12 @@ namespace AutoJack.Controller {
             if (context) {
                 GameView.DisableBetButtons();
                 SetMachineBet();
-                GameView.SetLabels(Game);
 
                 GameView.EnableSurrender();
                 await Callback.DealCardsSingleHand(this);
+
+                Game.TurnWho = nameof(Game.Player);
+                GameView.SetLabels(Game);
 
                 GameView.EnableHitAndDoubleButtons();
                 GameView.ToogleGameButtonsState(Game);
@@ -86,50 +87,45 @@ namespace AutoJack.Controller {
         }
 
         private void SetMachineBet() {
-            Random rand = new Random();
-            double difference = rand.NextDouble() * 0.3 - 0.15;
+            double difference = Utility.RandDoubleInRange(-0.15, 0.15);
 
             int Bet = (int)(Game.Player.Bet * (1 + difference));
             Game.Machine.Bet = Bet;
         }
 
-        public void ControlGameLoop(string ClickedButton) {
-            bool HasWinner = false;
-
-            while (!HasWinner) {
-                switch (ClickedButton) {
-                    case "StandButton":
-                        Callback.PassPlayerTurn(this);
-                        break;
-                    case "HitButton":
-                        Callback.AllowDraw1Card(this);
-                        break;
-                    case "DoubleButton":
-                        Callback.DoubleBetThenTurnOver(this);
-                        break;
-                    case "SplitButton":
-                        Callback.SplitPlayerHandThenDraw(this);
-                        break;
-                    case "TurnButton":
-                        Callback.TurnUpPlayerHands(this);
-                        break;
-                    default:
-                        Callback.PlayerLooseImmediately(this);
-                        Game.Winner = nameof(Game.Machine);
-                        break;
-                }
-
-                if (ClickedButton != "SurrenderButton")
-                    Game.Winner = Callback.CheckForWinner(this.Game);
-
-                HasWinner = (Game.Winner == String.Empty ? false : true);
+        public void ControlButtonsClick(string ClickedButton) {
+            switch (ClickedButton) {
+                case "StandButton":
+                    Callback.PassPlayerTurn(this);
+                    break;
+                case "HitButton":
+                    //Ask for which hand to add card
+                    Callback.AllowDraw1Card("Hand1", this);
+                    break;
+                case "DoubleButton":
+                    Callback.DoubleBetThenTurnOver(this);
+                    break;
+                case "SplitButton":
+                    Callback.SplitPlayerHandThenDraw(this);
+                    break;
+                case "TurnButton":
+                    Callback.TurnUpPlayerHands(this);
+                    break;
+                default:
+                    Callback.PlayerLooseImmediately(this);
+                    Game.Winner = nameof(Game.Machine);
+                    break;
             }
 
-            WinnerGreetingThenGameEnds();
+            if (ClickedButton != "SurrenderButton")
+                Game.Winner = Callback.CheckForWinner(this.Game);
+
+            if (Game.Winner != String.Empty)
+                WinnerGreetingThenGameEnds();
         }
 
         private void WinnerGreetingThenGameEnds() {
-
+            
         }
     }
 }
