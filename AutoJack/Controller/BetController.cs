@@ -21,8 +21,8 @@ namespace AutoJack.Controller {
             BetView.Show();
         }
 
-        public void NotifyGameController(bool context) {
-            GameController.ContinueGame(context);
+        public async void NotifyGameControllerAsync(bool context) {
+            await GameController.ContinueGameAsync(context);
         }
     }
 }

@@ -57,7 +57,6 @@
             this.BalanceLabel = new System.Windows.Forms.Label();
             this.PlayerBalance = new System.Windows.Forms.Label();
             this.DeckPanel = new System.Windows.Forms.Panel();
-            this.CardBack = new System.Windows.Forms.PictureBox();
             this.CardCount = new System.Windows.Forms.Label();
             this.MiddlePanel = new System.Windows.Forms.Panel();
             this.UserSumPanel = new System.Windows.Forms.Panel();
@@ -80,8 +79,12 @@
             this.HouseHand2Sum = new System.Windows.Forms.Label();
             this.HouseHand1Sum = new System.Windows.Forms.Label();
             this.HouseHands = new System.Windows.Forms.Label();
-            this.HouseHandPanel = new System.Windows.Forms.Panel();
-            this.UserHandPanel = new System.Windows.Forms.Panel();
+            this.HouseHandCards = new System.Windows.Forms.FlowLayoutPanel();
+            this.PlayerHandCards = new System.Windows.Forms.FlowLayoutPanel();
+            this.CardBack = new System.Windows.Forms.PictureBox();
+            this.TurnButton = new System.Windows.Forms.Button();
+            this.TurnLabelLabel = new System.Windows.Forms.Label();
+            this.TurnLabel = new System.Windows.Forms.Label();
             this.LeftPanel.SuspendLayout();
             this.TimingPanel.SuspendLayout();
             this.UserBetPanel.SuspendLayout();
@@ -90,11 +93,11 @@
             this.UserStatPanel.SuspendLayout();
             this.ControlPanel.SuspendLayout();
             this.DeckPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CardBack)).BeginInit();
             this.MiddlePanel.SuspendLayout();
             this.UserSumPanel.SuspendLayout();
             this.HouseBetPanel.SuspendLayout();
             this.HouseSumPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CardBack)).BeginInit();
             this.SuspendLayout();
             // 
             // LeftPanel
@@ -110,9 +113,11 @@
             // TimingPanel
             // 
             this.TimingPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TimingPanel.Controls.Add(this.Seconds);
-            this.TimingPanel.Controls.Add(this.TimeLabel);
             this.TimingPanel.Controls.Add(this.DateLabel);
+            this.TimingPanel.Controls.Add(this.TimeLabel);
+            this.TimingPanel.Controls.Add(this.TurnLabel);
+            this.TimingPanel.Controls.Add(this.TurnLabelLabel);
+            this.TimingPanel.Controls.Add(this.Seconds);
             this.TimingPanel.Location = new System.Drawing.Point(-1, 302);
             this.TimingPanel.Name = "TimingPanel";
             this.TimingPanel.Size = new System.Drawing.Size(200, 74);
@@ -122,7 +127,7 @@
             // 
             this.Seconds.AutoSize = true;
             this.Seconds.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Seconds.Location = new System.Drawing.Point(101, 41);
+            this.Seconds.Location = new System.Drawing.Point(101, 45);
             this.Seconds.Name = "Seconds";
             this.Seconds.Size = new System.Drawing.Size(24, 25);
             this.Seconds.TabIndex = 2;
@@ -133,7 +138,7 @@
             this.TimeLabel.AutoSize = true;
             this.TimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimeLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.TimeLabel.Location = new System.Drawing.Point(60, 35);
+            this.TimeLabel.Location = new System.Drawing.Point(60, 39);
             this.TimeLabel.Name = "TimeLabel";
             this.TimeLabel.Size = new System.Drawing.Size(46, 31);
             this.TimeLabel.TabIndex = 1;
@@ -143,13 +148,13 @@
             // DateLabel
             // 
             this.DateLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.DateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DateLabel.Location = new System.Drawing.Point(0, 0);
             this.DateLabel.Name = "DateLabel";
-            this.DateLabel.Size = new System.Drawing.Size(198, 25);
+            this.DateLabel.Size = new System.Drawing.Size(198, 16);
             this.DateLabel.TabIndex = 0;
             this.DateLabel.Text = "08/09/2018";
-            this.DateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.DateLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // UserBetPanel
             // 
@@ -310,6 +315,7 @@
             // ControlPanel
             // 
             this.ControlPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ControlPanel.Controls.Add(this.TurnButton);
             this.ControlPanel.Controls.Add(this.DoubleButton);
             this.ControlPanel.Controls.Add(this.HitButton);
             this.ControlPanel.Controls.Add(this.StandButton);
@@ -322,7 +328,7 @@
             // DoubleButton
             // 
             this.DoubleButton.Enabled = false;
-            this.DoubleButton.Location = new System.Drawing.Point(13, 61);
+            this.DoubleButton.Location = new System.Drawing.Point(13, 42);
             this.DoubleButton.Name = "DoubleButton";
             this.DoubleButton.Size = new System.Drawing.Size(75, 23);
             this.DoubleButton.TabIndex = 3;
@@ -332,7 +338,7 @@
             // HitButton
             // 
             this.HitButton.Enabled = false;
-            this.HitButton.Location = new System.Drawing.Point(107, 13);
+            this.HitButton.Location = new System.Drawing.Point(107, 3);
             this.HitButton.Name = "HitButton";
             this.HitButton.Size = new System.Drawing.Size(75, 23);
             this.HitButton.TabIndex = 2;
@@ -342,7 +348,7 @@
             // StandButton
             // 
             this.StandButton.Enabled = false;
-            this.StandButton.Location = new System.Drawing.Point(13, 13);
+            this.StandButton.Location = new System.Drawing.Point(13, 3);
             this.StandButton.Name = "StandButton";
             this.StandButton.Size = new System.Drawing.Size(75, 23);
             this.StandButton.TabIndex = 1;
@@ -352,7 +358,7 @@
             // SplitButton
             // 
             this.SplitButton.Enabled = false;
-            this.SplitButton.Location = new System.Drawing.Point(107, 61);
+            this.SplitButton.Location = new System.Drawing.Point(107, 42);
             this.SplitButton.Name = "SplitButton";
             this.SplitButton.Size = new System.Drawing.Size(75, 23);
             this.SplitButton.TabIndex = 0;
@@ -411,17 +417,6 @@
             this.DeckPanel.Size = new System.Drawing.Size(200, 340);
             this.DeckPanel.TabIndex = 0;
             // 
-            // CardBack
-            // 
-            this.CardBack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CardBack.Image = global::AutoJack.Properties.Resources.cardback;
-            this.CardBack.Location = new System.Drawing.Point(0, 31);
-            this.CardBack.Name = "CardBack";
-            this.CardBack.Size = new System.Drawing.Size(198, 307);
-            this.CardBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.CardBack.TabIndex = 1;
-            this.CardBack.TabStop = false;
-            // 
             // CardCount
             // 
             this.CardCount.Dock = System.Windows.Forms.DockStyle.Top;
@@ -462,9 +457,9 @@
             this.PlayerHand2Sum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PlayerHand2Sum.Location = new System.Drawing.Point(769, 9);
             this.PlayerHand2Sum.Name = "PlayerHand2Sum";
-            this.PlayerHand2Sum.Size = new System.Drawing.Size(94, 13);
+            this.PlayerHand2Sum.Size = new System.Drawing.Size(87, 13);
             this.PlayerHand2Sum.TabIndex = 4;
-            this.PlayerHand2Sum.Text = "Hand2 Sum: 21";
+            this.PlayerHand2Sum.Text = "Hand2 Sum: 0";
             // 
             // PlayerHand2Count
             // 
@@ -474,7 +469,7 @@
             this.PlayerHand2Count.Name = "PlayerHand2Count";
             this.PlayerHand2Count.Size = new System.Drawing.Size(96, 13);
             this.PlayerHand2Count.TabIndex = 3;
-            this.PlayerHand2Count.Text = "Hand2 Count: 3";
+            this.PlayerHand2Count.Text = "Hand2 Count: 0";
             // 
             // PlayerHand1Sum
             // 
@@ -504,7 +499,7 @@
             this.PlayerHands.Name = "PlayerHands";
             this.PlayerHands.Size = new System.Drawing.Size(58, 13);
             this.PlayerHands.TabIndex = 0;
-            this.PlayerHands.Text = "Hands: 2";
+            this.PlayerHands.Text = "Hands: 1";
             // 
             // HouseBetPanel
             // 
@@ -618,7 +613,7 @@
             this.HouseHand2Count.Name = "HouseHand2Count";
             this.HouseHand2Count.Size = new System.Drawing.Size(96, 13);
             this.HouseHand2Count.TabIndex = 4;
-            this.HouseHand2Count.Text = "Hand2 Count: 3";
+            this.HouseHand2Count.Text = "Hand2 Count: 0";
             // 
             // HouseHand1Count
             // 
@@ -636,9 +631,9 @@
             this.HouseHand2Sum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HouseHand2Sum.Location = new System.Drawing.Point(769, 8);
             this.HouseHand2Sum.Name = "HouseHand2Sum";
-            this.HouseHand2Sum.Size = new System.Drawing.Size(94, 13);
+            this.HouseHand2Sum.Size = new System.Drawing.Size(87, 13);
             this.HouseHand2Sum.TabIndex = 2;
-            this.HouseHand2Sum.Text = "Hand2 Sum: 18";
+            this.HouseHand2Sum.Text = "Hand2 Sum: 0";
             // 
             // HouseHand1Sum
             // 
@@ -658,23 +653,66 @@
             this.HouseHands.Name = "HouseHands";
             this.HouseHands.Size = new System.Drawing.Size(58, 13);
             this.HouseHands.TabIndex = 0;
-            this.HouseHands.Text = "Hands: 2";
+            this.HouseHands.Text = "Hands: 1";
             // 
-            // HouseHandPanel
+            // HouseHandCards
             // 
-            this.HouseHandPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.HouseHandPanel.Location = new System.Drawing.Point(218, 45);
-            this.HouseHandPanel.Name = "HouseHandPanel";
-            this.HouseHandPanel.Size = new System.Drawing.Size(868, 307);
-            this.HouseHandPanel.TabIndex = 1;
+            this.HouseHandCards.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.HouseHandCards.Location = new System.Drawing.Point(218, 44);
+            this.HouseHandCards.Name = "HouseHandCards";
+            this.HouseHandCards.Size = new System.Drawing.Size(868, 307);
+            this.HouseHandCards.TabIndex = 1;
             // 
-            // UserHandPanel
+            // PlayerHandCards
             // 
-            this.UserHandPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.UserHandPanel.Location = new System.Drawing.Point(218, 351);
-            this.UserHandPanel.Name = "UserHandPanel";
-            this.UserHandPanel.Size = new System.Drawing.Size(868, 307);
-            this.UserHandPanel.TabIndex = 1;
+            this.PlayerHandCards.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PlayerHandCards.Location = new System.Drawing.Point(218, 353);
+            this.PlayerHandCards.Name = "PlayerHandCards";
+            this.PlayerHandCards.Size = new System.Drawing.Size(868, 307);
+            this.PlayerHandCards.TabIndex = 1;
+            // 
+            // CardBack
+            // 
+            this.CardBack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardBack.Image = global::AutoJack.Properties.Resources.cardback;
+            this.CardBack.Location = new System.Drawing.Point(0, 31);
+            this.CardBack.Name = "CardBack";
+            this.CardBack.Size = new System.Drawing.Size(198, 307);
+            this.CardBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.CardBack.TabIndex = 1;
+            this.CardBack.TabStop = false;
+            // 
+            // TurnButton
+            // 
+            this.TurnButton.Enabled = false;
+            this.TurnButton.Location = new System.Drawing.Point(61, 71);
+            this.TurnButton.Name = "TurnButton";
+            this.TurnButton.Size = new System.Drawing.Size(75, 23);
+            this.TurnButton.TabIndex = 4;
+            this.TurnButton.Text = "Turn Over";
+            this.TurnButton.UseVisualStyleBackColor = true;
+            // 
+            // TurnLabelLabel
+            // 
+            this.TurnLabelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TurnLabelLabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.TurnLabelLabel.Location = new System.Drawing.Point(-1, 17);
+            this.TurnLabelLabel.Name = "TurnLabelLabel";
+            this.TurnLabelLabel.Size = new System.Drawing.Size(97, 23);
+            this.TurnLabelLabel.TabIndex = 3;
+            this.TurnLabelLabel.Text = "Turn:";
+            this.TurnLabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TurnLabel
+            // 
+            this.TurnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TurnLabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.TurnLabel.Location = new System.Drawing.Point(81, 10);
+            this.TurnLabel.Name = "TurnLabel";
+            this.TurnLabel.Size = new System.Drawing.Size(114, 36);
+            this.TurnLabel.TabIndex = 4;
+            this.TurnLabel.Text = "Waiting";
+            this.TurnLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GameView
             // 
@@ -683,8 +721,8 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1304, 704);
             this.ControlBox = false;
-            this.Controls.Add(this.UserHandPanel);
-            this.Controls.Add(this.HouseHandPanel);
+            this.Controls.Add(this.PlayerHandCards);
+            this.Controls.Add(this.HouseHandCards);
             this.Controls.Add(this.HouseSumPanel);
             this.Controls.Add(this.HouseBetPanel);
             this.Controls.Add(this.MiddlePanel);
@@ -702,13 +740,13 @@
             this.UserStatPanel.ResumeLayout(false);
             this.ControlPanel.ResumeLayout(false);
             this.DeckPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.CardBack)).EndInit();
             this.MiddlePanel.ResumeLayout(false);
             this.UserSumPanel.ResumeLayout(false);
             this.UserSumPanel.PerformLayout();
             this.HouseBetPanel.ResumeLayout(false);
             this.HouseSumPanel.ResumeLayout(false);
             this.HouseSumPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CardBack)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -726,8 +764,6 @@
         private System.Windows.Forms.Panel UserSumPanel;
         private System.Windows.Forms.Panel HouseBetPanel;
         private System.Windows.Forms.Panel HouseSumPanel;
-        private System.Windows.Forms.Panel HouseHandPanel;
-        private System.Windows.Forms.Panel UserHandPanel;
         private System.Windows.Forms.PictureBox CardBack;
         private System.Windows.Forms.Label CardCount;
         private System.Windows.Forms.Label HouseHand2Sum;
@@ -769,5 +805,10 @@
         private System.Windows.Forms.Button StandButton;
         private System.Windows.Forms.Button SplitButton;
         private System.Windows.Forms.Button QuitButton;
+        private System.Windows.Forms.FlowLayoutPanel HouseHandCards;
+        private System.Windows.Forms.FlowLayoutPanel PlayerHandCards;
+        private System.Windows.Forms.Button TurnButton;
+        private System.Windows.Forms.Label TurnLabel;
+        private System.Windows.Forms.Label TurnLabelLabel;
     }
 }

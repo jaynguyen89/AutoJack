@@ -11,12 +11,14 @@ namespace AutoJack.Model {
     class Card : ICard {
         public Suit Suit { get; set; }
         public Pip Pip { get; set; }
+        public bool Set { get; set; }
 
         public Card() { }
 
         public Card(Suit Suit, Pip Pip) {
             this.Suit = Suit;
             this.Pip = Pip;
+            Set = true;
         }
 
         public int GetCardValue() {

@@ -99,8 +99,8 @@
             this.ExplainLabel.Name = "ExplainLabel";
             this.ExplainLabel.Size = new System.Drawing.Size(280, 44);
             this.ExplainLabel.TabIndex = 6;
-            this.ExplainLabel.Text = "Note: Bet is a positive number and lower than Balance. Bet should not be higher t" +
-    "han 1000 if Balance is negative. Bet should be higher than 10% of Balance.";
+            this.ExplainLabel.Text = "Note: Bet is a positive number, higher than 5% of Balance and lower than Balance." +
+    " Bet should not be higher than 1000 or lower than 50 if Balance is negative.";
             // 
             // CancelButton
             // 

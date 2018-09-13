@@ -44,7 +44,7 @@ namespace AutoJack.View {
                 if (int.TryParse(BetText, out Bet)) {
                     if (CheckBet(Bet)) {
                         BetController.GameController.Game.Player.Bet = Bet;
-                        BetController.NotifyGameController(true);
+                        BetController.NotifyGameControllerAsync(true);
                         this.Close();
                     }
                 }
@@ -54,7 +54,7 @@ namespace AutoJack.View {
         }
 
         private void CancelBetEvent(object sender, EventArgs e) {
-            BetController.NotifyGameController(false);
+            BetController.NotifyGameControllerAsync(false);
             this.Close();
         }
 
@@ -63,16 +63,16 @@ namespace AutoJack.View {
                 MessageBox.Show("Bet must be a positive number.");
             else {
                 int Balance = BetController.GameController.Game.Player.Balance;
-                if (Balance <= 0 && Bet > 1000) {
-                    MessageBox.Show("Negative Balance: Bet should not exceed 1000.");
+                if (Balance <= 0 && (Bet > 1000 || Bet < 50)) {
+                    MessageBox.Show("Negative Balance: Bet should should be in range [50, 1000].");
                     return false;
                 }
                 else if (Balance > 0 && Bet > Balance) {
                     MessageBox.Show("Bet must be lower than Balance.");
                     return false;
                 }
-                else if (Bet < (int)(Balance * 0.1)) {
-                    MessageBox.Show("Bet must be higher than " + (int)(Balance * 0.1) + ".");
+                else if (Bet < (int)(Balance * 0.05)) {
+                    MessageBox.Show("Bet must be higher than " + (int)(Balance * 0.05) + ".");
                     return false;
                 }
                 else

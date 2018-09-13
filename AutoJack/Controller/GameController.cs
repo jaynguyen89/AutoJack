@@ -11,7 +11,7 @@ using AutoJack.common;
 namespace AutoJack.Controller {
 
     public class GameController {
-        GameView GameView;
+        public GameView GameView { get; }
         public Game Game { get; }
         GameCallback Callback = new GameCallback();
 
@@ -43,47 +43,93 @@ namespace AutoJack.Controller {
             Game.ShouldWarn = true;
             Game.Deck = Callback.ShuffleDeck(Game.Deck);
 
-            GameView.ToggleButtonsOnGameBegin();
             GameView.SetLabels(Game);
+            GameView.ToggleButtonsOnGameBegin();
         }
 
         public void TakeBet() {
             BetController BetController = new BetController(this);
             GameView.DisableQuit();
+            GameView.DisableBetButtons();
             BetController.TakeBet();
         }
 
-        public void AutoSetBet() {
+        public async Task AutoSetBetAsync() {
             Random rand = new Random();
             int Bet = 0;
             if (Game.Player.Balance > 0)
-                Bet = rand.Next((int)(Game.Player.Balance * 0.1), (int)(Game.Player.Balance * 0.5));
+                Bet = rand.Next((int)(Game.Player.Balance * 0.05), (int)(Game.Player.Balance * 0.25));
             else
-                Bet = rand.Next(100, 1000);
+                Bet = rand.Next(100, 1001);
 
             Game.Player.Bet = Bet;
             SetMachineBet();
-            ContinueGame(true);
+            await ContinueGameAsync(true);
         }
 
-        public void ContinueGame(bool context) {
+        public async Task ContinueGameAsync(bool context) {
+            GameView.EnableQuit();
+
             if (context) {
+                GameView.DisableBetButtons();
                 SetMachineBet();
                 GameView.SetLabels(Game);
 
                 GameView.EnableSurrender();
-                Callback.DealCards(this.Game);
-            }
+                await Callback.DealCardsSingleHand(this);
 
-            GameView.EnableQuit();
+                GameView.EnableHitAndDoubleButtons();
+                GameView.ToogleGameButtonsState(Game);
+            }
+            else
+                GameView.EnableBetButtons();
         }
 
         private void SetMachineBet() {
             Random rand = new Random();
-            double difference = rand.NextDouble() * 0.6 - 0.3;
+            double difference = rand.NextDouble() * 0.3 - 0.15;
 
             int Bet = (int)(Game.Player.Bet * (1 + difference));
             Game.Machine.Bet = Bet;
+        }
+
+        public void ControlGameLoop(string ClickedButton) {
+            bool HasWinner = false;
+
+            while (!HasWinner) {
+                switch (ClickedButton) {
+                    case "StandButton":
+                        Callback.PassPlayerTurn(this);
+                        break;
+                    case "HitButton":
+                        Callback.AllowDraw1Card(this);
+                        break;
+                    case "DoubleButton":
+                        Callback.DoubleBetThenTurnOver(this);
+                        break;
+                    case "SplitButton":
+                        Callback.SplitPlayerHandThenDraw(this);
+                        break;
+                    case "TurnButton":
+                        Callback.TurnUpPlayerHands(this);
+                        break;
+                    default:
+                        Callback.PlayerLooseImmediately(this);
+                        Game.Winner = nameof(Game.Machine);
+                        break;
+                }
+
+                if (ClickedButton != "SurrenderButton")
+                    Game.Winner = Callback.CheckForWinner(this.Game);
+
+                HasWinner = (Game.Winner == String.Empty ? false : true);
+            }
+
+            WinnerGreetingThenGameEnds();
+        }
+
+        private void WinnerGreetingThenGameEnds() {
+
         }
     }
 }

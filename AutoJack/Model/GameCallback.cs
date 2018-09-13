@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AutoJack.Interface;
+using AutoJack.Controller;
 
 namespace AutoJack.Model {
 
     class GameCallback : IHelper {
-        Card Card = new Card();
         const int BURST = 21;
 
         public List<Card> PrepareDeck() {
@@ -41,8 +41,65 @@ namespace AutoJack.Model {
             return Deck;
         }
 
-        public void DealCards(Game Game) {
-            throw new NotImplementedException();
+        public async Task DealCardsSingleHand(GameController GameController) {
+            Random rand = new Random();
+            bool SwitchTurn = false;
+
+            while (GameController.Game.Player.Hand1.Count != 2 ||
+                   GameController.Game.Machine.Hand1.Count != 2) {
+                Card DrawnCard = GameController.Game.Deck.ElementAt(0);
+                GameController.Game.Deck.RemoveAt(0);
+
+                if (SwitchTurn) {
+                    if (GameController.Game.Machine.Hand1.Count != 0)
+                        DrawnCard.Set = false;
+
+                    GameController.Game.Machine.Hand1.Add(DrawnCard);
+
+                    SwitchTurn = false;
+                    GameController.GameView.RenderSingleHandFor(nameof(GameController.Game.Machine), GameController.Game.Machine.Hand1);
+                }
+                else {
+                    if (GameController.Game.Player.Hand1.Count != 0)
+                        DrawnCard.Set = false;
+
+                    GameController.Game.Player.Hand1.Add(DrawnCard);
+
+                    SwitchTurn = true;
+                    GameController.GameView.RenderSingleHandFor(nameof(GameController.Game.Player), GameController.Game.Player.Hand1);
+                }
+
+                GameController.GameView.SetLabels(GameController.Game);
+                await Task.Delay(1500);
+            }
+        }
+
+        public void PassPlayerTurn(GameController GameController) {
+
+        }
+
+        public void AllowDraw1Card(GameController GameController) {
+
+        }
+
+        public void DoubleBetThenTurnOver(GameController GameController) {
+
+        }
+
+        public void SplitPlayerHandThenDraw(GameController GameController) {
+
+        }
+
+        public void TurnUpPlayerHands(GameController GameController) {
+
+        }
+
+        public void PlayerLooseImmediately(GameController GameController) {
+
+        }
+
+        public string CheckForWinner(Game Game) {
+            return String.Empty;
         }
     }
 }

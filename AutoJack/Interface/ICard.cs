@@ -12,6 +12,7 @@ namespace AutoJack.Interface {
     interface ICard {
         Suit Suit { get; }
         Pip Pip { get; }
+        bool Set { get; set; }
 
         int GetCardValue();
     }

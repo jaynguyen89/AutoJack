@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using System.IO;
 
 using Newtonsoft.Json;
+using AutoJack.common;
 
 namespace AutoJack.Model {
 
     class Engine {
 
         public List<User> GetSavedUsers() {
-            GetJsonPath();
             List<User> Users = new List<User>();
-            using (StreamReader s = new StreamReader(GetJsonPath())) {
+            using (StreamReader s = new StreamReader(Utility.GetBasePath() + @"resources\saves\users.json")) {
                 string json = s.ReadToEnd();
                 Users = JsonConvert.DeserializeObject<List<User>>(json);
             }
@@ -23,7 +23,7 @@ namespace AutoJack.Model {
         }
 
         public void WriteUsersJSON(List<User> Users) {
-            using (StreamWriter s = new StreamWriter(GetJsonPath())) {
+            using (StreamWriter s = new StreamWriter(Utility.GetBasePath() + @"resources\saves\users.json")) {
                 JsonSerializer Serializer = new JsonSerializer();
 
                 Serializer.Serialize(s, Users);
@@ -62,17 +62,6 @@ namespace AutoJack.Model {
                 }
 
             WriteUsersJSON(Users);
-        }
-
-        private string GetJsonPath() {
-            string CurrentPath = Directory.GetCurrentDirectory();
-
-            string[] tokens = CurrentPath.Split('\\');
-            string AppFolder = String.Empty;
-            for (int i = 0; i < tokens.Length - 2; i++)
-                AppFolder += tokens[i] + @"\";
-
-            return AppFolder + @"resources\saves\users.json";
         }
     }
 }

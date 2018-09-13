@@ -87,13 +87,14 @@ namespace AutoJack.View {
         }
 
         private void DoDeleteUser(object sender, EventArgs e) {
-            DialogResult result = MessageBox.Show("This player will be deleted permanently. Continue?", "Delete",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            
 
-            if (result.Equals(DialogResult.OK)) {
-                int SelectedId = GetSelectedUser();
+            int SelectedId = GetSelectedUser();
+            if (SelectedId > 0) {
+                DialogResult result = MessageBox.Show("This player will be deleted permanently. Continue?", "Delete",
+                                      MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
-                if (SelectedId > 0) {
+                if (result.Equals(DialogResult.OK)) {
                     this.Close();
 
                     Engine Engine = new Engine();

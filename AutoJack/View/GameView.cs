@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using AutoJack.Model;
 using AutoJack.Controller;
+using AutoJack.common;
 
 namespace AutoJack.View {
 
@@ -23,12 +24,20 @@ namespace AutoJack.View {
             StartButton.Click += new EventHandler(BeginGameEvent);
             QuitButton.Click += new EventHandler(QuitGameEvent);
             BetButton.Click += new EventHandler(PlaceBetEvent);
-            AutoBetButton.Click += new EventHandler(AutoBetEvent);
+            AutoBetButton.Click += new EventHandler(AutoBetEventAsync);
             this.KeyDown += new KeyEventHandler(KeyCombinationQuit);
+
+            StandButton.Click += new EventHandler(PlayerStandEvent);
+            HitButton.Click += new EventHandler(PlayerHitEvent);
+            DoubleButton.Click += new EventHandler(PlayerDoubleEvent);
+            SplitButton.Click += new EventHandler(PlayerSplitEvent);
+            TurnButton.Click += new EventHandler(PlayerTurnOverEvent);
+            SurrenderButton.Click += new EventHandler(PlayerGiveUpEvent);
         }
 
         public void SetLabels(Game Game) {
             DateLabel.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            TurnLabel.Text = (Game.TurnWho == String.Empty ? "Waiting" : Game.TurnWho);
 
             PlayerName.Text = Game.Player.Name.ToUpper();
             PlayerBet.Text = Game.Player.Bet.ToString();
@@ -62,15 +71,56 @@ namespace AutoJack.View {
             StartButton.Enabled = false;
         }
 
-        public void ToggleButtonsOnBetPlaced() {
-            BetButton.Enabled = false;
-            AutoBetButton.Enabled = false;
+        public void ToogleGameButtonsState(Game Game) {
+            if (Game.Player.Hand2.Count <= 1) {
+                if (Game.GetHandSumFor(Game.Player.Hand1) < 16) {
+                    StandButton.Enabled = false;
+                    TurnButton.Enabled = false;
+                }
+                else if (Game.GetHandSumFor(Game.Player.Hand1) < 21) {
+                    StandButton.Enabled = true;
+                    TurnButton.Enabled = true;
+                }
+                else {
+                    StandButton.Enabled = false;
+                    TurnButton.Enabled = false;
+                }
 
-            StandButton.Enabled = true;
+                SplitButton.Enabled = Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand1));
+            }
+            else {
+                bool shouldEnableStandBtnHand1 = false;
+                bool shouldEnableStandBtnHand2 = false;
+                bool shouldEnableTurnBtnHand1 = false;
+                bool shouldEnableTurnBtnHand2 = false;
+
+                if (Game.GetHandSumFor(Game.Player.Hand1) >= 16 && Game.GetHandSumFor(Game.Player.Hand1) <= 21) {
+                    shouldEnableStandBtnHand1 = true;
+                    shouldEnableTurnBtnHand1 = true;
+                }
+
+                if (Game.GetHandSumFor(Game.Player.Hand2) >= 16 && Game.GetHandSumFor(Game.Player.Hand2) <= 21) {
+                    shouldEnableStandBtnHand2 = true;
+                    shouldEnableTurnBtnHand2 = true;
+                }
+
+                StandButton.Enabled = (shouldEnableStandBtnHand1 || shouldEnableStandBtnHand2);
+                TurnButton.Enabled = (shouldEnableTurnBtnHand1 || shouldEnableTurnBtnHand2);
+
+
+                SplitButton.Enabled = (Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand1)) &&
+                    Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand2)));
+            }
+        }
+
+        public void DisableHitAndDoubleButtons() {
+            HitButton.Enabled = false;
+            DoubleButton.Enabled = false;
+        }
+
+        public void EnableHitAndDoubleButtons() {
             HitButton.Enabled = true;
             DoubleButton.Enabled = true;
-            SplitButton.Enabled = true;
-            SurrenderButton.Enabled = true;
         }
 
         public void DisableQuit() {
@@ -85,16 +135,110 @@ namespace AutoJack.View {
             SurrenderButton.Enabled = true;
         }
 
+        public void DisableBetButtons() {
+            BetButton.Enabled = false;
+            AutoBetButton.Enabled = false;
+        }
+
+        public void EnableBetButtons() {
+            BetButton.Enabled = true;
+            AutoBetButton.Enabled = true;
+        }
+
         private void PlaceBetEvent(object sender, EventArgs e) {
             GameController.TakeBet();
         }
 
-        private void AutoBetEvent(object sender, EventArgs e) {
-            GameController.AutoSetBet();
+        internal void RenderSingleHandFor(string Who, List<Card> Hand) {
+            if (Who == "Player")
+                PlayerHandCards.Controls.Clear();
+            else
+                HouseHandCards.Controls.Clear();
+
+            foreach (Card Card in Hand) {
+                PictureBox CardPhoto = new PictureBox();
+
+                if (Who == "Player") {
+                    Panel HandCard = new Panel();
+
+                    HandCard.SuspendLayout();
+                    PlayerHandCards.Controls.Add(HandCard);
+
+                    HandCard.Location = new Point(3, 3);
+                    HandCard.Size = new Size(200, 299);
+                    HandCard.TabIndex = 0;
+                    HandCard.ResumeLayout();
+
+                    PictureBox CardSet = new PictureBox();
+                    ((ISupportInitialize)CardSet).BeginInit();
+                    CardSet.Image = Card.Set ? Properties.Resources.cardback : Properties.Resources.joker;
+
+                    CardSet.Location = new Point(87, 3);
+                    CardSet.Size = new Size(25, 35);
+                    CardSet.SizeMode = PictureBoxSizeMode.StretchImage;
+                    CardSet.TabIndex = 1;
+                    CardSet.TabStop = false;
+                    ((ISupportInitialize)CardSet).EndInit();
+                    
+                    ((ISupportInitialize)CardPhoto).BeginInit();
+                    CardPhoto.Image = Image.FromFile(Utility.GetBasePath() +
+                        @"resources\deck\" + Card.Pip.ToString() + Card.Suit.ToString() + ".png");
+
+                    CardPhoto.Location = new Point(13, 42);
+                    CardPhoto.Size = new Size(173, 257);
+                    CardPhoto.TabIndex = 0;
+                    CardPhoto.TabStop = false;
+                    ((ISupportInitialize)CardPhoto).EndInit();
+
+                    HandCard.Controls.Add(CardSet);
+                    HandCard.Controls.Add(CardPhoto);
+                }
+                else {
+                    ((ISupportInitialize)CardPhoto).BeginInit();
+                    CardPhoto.Image = !Card.Set ? Image.FromFile(Utility.GetBasePath() +
+                        @"resources\deck\" + Card.Pip.ToString() + Card.Suit.ToString() + ".png") : Properties.Resources.cardback;
+
+                    CardPhoto.Location = new Point(13, 42);
+                    CardPhoto.Size = new Size(173, 257);
+                    CardPhoto.TabIndex = 0;
+                    CardPhoto.TabStop = false;
+                    ((ISupportInitialize)CardPhoto).EndInit();
+
+                    HouseHandCards.Controls.Add(CardPhoto);
+                }
+            }
+        }
+
+        private async void AutoBetEventAsync(object sender, EventArgs e) {
+            await GameController.AutoSetBetAsync();
         }
 
         private void BeginGameEvent(object sender, EventArgs e) {
             GameController.BeginGame();
+        }
+
+        private void PlayerStandEvent(object sender, EventArgs e) {
+            GameController.ControlGameLoop(nameof(StandButton));
+        }
+
+        private void PlayerHitEvent(object sender, EventArgs e) {
+            GameController.ControlGameLoop(nameof(HitButton));
+        }
+
+        private void PlayerDoubleEvent(object sender, EventArgs e) {
+            GameController.ControlGameLoop(nameof(DoubleButton));
+        }
+
+        private void PlayerSplitEvent(object sender, EventArgs e) {
+            GameController.ControlGameLoop(nameof(SplitButton));
+        }
+
+        private void PlayerTurnOverEvent(object sender, EventArgs e) {
+            GameController.ControlGameLoop(nameof(TurnButton));
+        }
+
+        private void PlayerGiveUpEvent(object sender, EventArgs e) {
+            GameController.ControlGameLoop(nameof(SurrenderButton));
         }
 
         private void QuitGameEvent(object sender, EventArgs e) {
