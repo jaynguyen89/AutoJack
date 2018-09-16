@@ -42,7 +42,7 @@ namespace AutoJack.View {
             HitButton.Click += new EventHandler(PlayerHitEvent);
             DoubleButton.Click += new EventHandler(PlayerDoubleEvent);
             SplitButton.Click += new EventHandler(PlayerSplitEvent);
-            TurnButton.Click += new EventHandler(PlayerTurnOverEvent);
+            FlipButton.Click += new EventHandler(PlayerFlipHandEvent);
             SurrenderButton.Click += new EventHandler(PlayerGiveUpEvent);
         }
 
@@ -72,7 +72,7 @@ namespace AutoJack.View {
         }
 
         public void SetLabels(Game Game) {
-            TurnLabel.Text = (Game.TurnWho == String.Empty ? "Waiting" : Game.TurnWho);
+            TurnLabel.Text = (Game.TurnWho == -1 ? "Waiting" : (Game.TurnWho % 2 == 0 ? "Player" : "House"));
 
             PlayerName.Text = Game.Player.Name.ToUpper();
             PlayerBet.Text = Game.Player.Bet.ToString();
@@ -106,9 +106,7 @@ namespace AutoJack.View {
                 ((Game.Machine.Hand1.Count == 0 && Game.Machine.Hand2.Count != 0) ||
                 (Game.Machine.Hand1.Count != 0 && Game.Machine.Hand2.Count == 0) ? "1" : "2") : "0");
             HouseHand1Count.Text = "Hand1 Count: " + (Game.ShouldWarn ? Game.Machine.Hand1.Count.ToString() : "0");
-            HouseHand1Sum.Text = "Hand1 Sum: " + Game.GetHandSumFor(Game.Machine.Hand1).ToString();
             HouseHand2Count.Text = "Hand2 Count: " + (Game.ShouldWarn ? Game.Machine.Hand2.Count.ToString() : "0");
-            HouseHand2Sum.Text = "Hand2 Sum: " + Game.GetHandSumFor(Game.Machine.Hand2).ToString();
         }
 
         public void ToggleButtonsOnGameBegin() {
@@ -122,15 +120,15 @@ namespace AutoJack.View {
             if (Game.Player.Hand2.Count <= 1) {
                 if (Game.GetHandSumFor(Game.Player.Hand1) < 16) {
                     StandButton.Enabled = false;
-                    TurnButton.Enabled = false;
+                    FlipButton.Enabled = false;
                 }
-                else if (Game.GetHandSumFor(Game.Player.Hand1) < 21) {
+                else if (Game.GetHandSumFor(Game.Player.Hand1) <= 21) {
                     StandButton.Enabled = true;
-                    TurnButton.Enabled = true;
+                    FlipButton.Enabled = true;
                 }
                 else {
                     StandButton.Enabled = false;
-                    TurnButton.Enabled = false;
+                    FlipButton.Enabled = false;
                 }
 
                 SplitButton.Enabled = Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand1));
@@ -152,11 +150,15 @@ namespace AutoJack.View {
                 }
 
                 StandButton.Enabled = (shouldEnableStandBtnHand1 || shouldEnableStandBtnHand2);
-                TurnButton.Enabled = (shouldEnableTurnBtnHand1 || shouldEnableTurnBtnHand2);
+                FlipButton.Enabled = (shouldEnableTurnBtnHand1 || shouldEnableTurnBtnHand2);
                 
                 SplitButton.Enabled = false;//(Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand1)) &&
                     //Game.CheckIdenticalHand(nameof(Game.Player), nameof(Game.Player.Hand2)));
             }
+        }
+
+        public void DisplayHouseAction(string action) {
+            HouseActionLabel.Text = action;
         }
 
         public void DisableHitAndDoubleButtons() {
@@ -195,7 +197,14 @@ namespace AutoJack.View {
             GameController.TakeBet();
         }
 
-        internal void RenderSingleHandFor(string Who, List<Card> Hand) {
+        public void SetLogText(string Logs) {
+            string[] tokens = Logs.Split('\n');
+
+            HouseActionLabel.Text = "Last Action: " + tokens[tokens.Length - 1];
+            LogTooltip.SetToolTip(LogLabel, Logs);
+        }
+
+        internal async void RenderSingleHandAsyncFor(string Who, List<Card> Hand, bool IsFlip) {
             if (Who == "Player")
                 PlayerHandCards.Controls.Clear();
             else
@@ -205,19 +214,21 @@ namespace AutoJack.View {
                 PictureBox CardPhoto = new PictureBox();
 
                 if (Who == "Player") {
-                    Panel HandCard = new Panel();HandCard.SuspendLayout();
+                    Panel HandCard = new Panel();
                     PlayerHandCards.Controls.Add(HandCard);
 
-                    RenderCardToPanelForPlayer(Card, CardPhoto, HandCard);
+                    RenderCardToPanelForPlayer(Card, CardPhoto, HandCard, IsFlip);
                 }
                 else {
-                    RenderCardToPanelForHouse(Card, CardPhoto);
+                    RenderCardToPanelForHouse(Card, CardPhoto, IsFlip);
                     HouseHandCards.Controls.Add(CardPhoto);
                 }
+
+                await Task.Delay(1000);
             }
         }
 
-        internal void RenderDoubleHandsFor(string Who, Game Game) {
+        internal async void RenderDoubleHandAsyncFor(string Who, Game Game, bool IsFlip1, bool IsFlip2) {
             FlowLayoutPanel Hand1Panel = new FlowLayoutPanel();
             FlowLayoutPanel Hand2Panel = new FlowLayoutPanel();
 
@@ -229,8 +240,6 @@ namespace AutoJack.View {
             Hand2Panel.Size = new Size(427, 299);
             Hand2Panel.TabIndex = 1;
 
-            PictureBox CardPhoto = new PictureBox();
-
             if (Who == "Player") {
                 PlayerHandCards.Controls.Clear();
 
@@ -239,14 +248,22 @@ namespace AutoJack.View {
                 
                 Panel HandCard = new Panel();
 
-                foreach (Card Card in Game.Player.Hand1) {
+                foreach (Card Card in Game.Player.Hand1.ToList()) {
                     Hand1Panel.Controls.Add(HandCard);
-                    RenderCardToPanelForPlayer(Card, CardPhoto, HandCard);
+
+                    PictureBox CardPhoto = new PictureBox();
+                    RenderCardToPanelForPlayer(Card, CardPhoto, HandCard, IsFlip1);
+
+                    await Task.Delay(1500);
                 }
 
-                foreach (Card Card in Game.Player.Hand2) {
+                foreach (Card Card in Game.Player.Hand2.ToList()) {
                     Hand2Panel.Controls.Add(HandCard);
-                    RenderCardToPanelForPlayer(Card, CardPhoto, HandCard);
+
+                    PictureBox CardPhoto = new PictureBox();
+                    RenderCardToPanelForPlayer(Card, CardPhoto, HandCard, IsFlip2);
+
+                    await Task.Delay(1500);
                 }
             }
             else {
@@ -255,19 +272,27 @@ namespace AutoJack.View {
                 HouseHandCards.Controls.Add(Hand1Panel);
                 HouseHandCards.Controls.Add(Hand2Panel);
 
-                foreach (Card Card in Game.Machine.Hand1) {
-                    RenderCardToPanelForHouse(Card, CardPhoto);
+                foreach (Card Card in Game.Machine.Hand1.ToList()) {
+                    PictureBox CardPhoto = new PictureBox();
+
+                    RenderCardToPanelForHouse(Card, CardPhoto, IsFlip1);
                     Hand1Panel.Controls.Add(CardPhoto);
+
+                    await Task.Delay(1500);
                 }
 
-                foreach (Card Card in Game.Machine.Hand2) {
-                    RenderCardToPanelForHouse(Card, CardPhoto);
+                foreach (Card Card in Game.Machine.Hand2.ToList()) {
+                    PictureBox CardPhoto = new PictureBox();
+
+                    RenderCardToPanelForHouse(Card, CardPhoto, IsFlip2);
                     Hand2Panel.Controls.Add(CardPhoto);
+
+                    await Task.Delay(1500);
                 }
             }
         }
 
-        private void RenderCardToPanelForPlayer(Card Card, PictureBox CardPhoto, Panel HandCard) {
+        private void RenderCardToPanelForPlayer(Card Card, PictureBox CardPhoto, Panel HandCard, bool IsFlipped) {
             HandCard.SuspendLayout();
             HandCard.Location = new Point(3, 3);
             HandCard.Size = new Size(200, 299);
@@ -276,7 +301,7 @@ namespace AutoJack.View {
 
             PictureBox CardSet = new PictureBox();
             ((ISupportInitialize)CardSet).BeginInit();
-            CardSet.Image = Card.Set ? Properties.Resources.cardback : Properties.Resources.joker;
+            CardSet.Image = IsFlipped ? Properties.Resources.joker : (Card.Set ? Properties.Resources.cardback : Properties.Resources.joker);
 
             CardSet.Location = new Point(87, 3);
             CardSet.Size = new Size(25, 35);
@@ -299,14 +324,17 @@ namespace AutoJack.View {
             HandCard.Controls.Add(CardPhoto);
         }
 
-        private void RenderCardToPanelForHouse(Card Card, PictureBox CardPhoto) {
+        private void RenderCardToPanelForHouse(Card Card, PictureBox CardPhoto, bool IsFlipped) {
             ((ISupportInitialize)CardPhoto).BeginInit();
-            CardPhoto.Image = !Card.Set ? Image.FromFile(Utility.GetBasePath() +
-                @"resources\deck\" + Card.Pip.ToString() + Card.Suit.ToString() + ".png") : Properties.Resources.cardback;
-
+            CardPhoto.Image = (IsFlipped ? Image.FromFile(Utility.GetBasePath() +
+                @"resources\deck\" + Card.Pip.ToString() + Card.Suit.ToString() + ".png") :
+                    (!Card.Set ? Image.FromFile(Utility.GetBasePath() +
+                    @"resources\deck\" + Card.Pip.ToString() + Card.Suit.ToString() + ".png") :
+                        Properties.Resources.cardback));
+                
             CardPhoto.Location = new Point(13, 42);
             CardPhoto.Size = new Size(173, 257);
-            CardPhoto.TabIndex = 0;
+            //CardPhoto.TabIndex = 0;
             CardPhoto.TabStop = false;
             ((ISupportInitialize)CardPhoto).EndInit();
         }
@@ -335,8 +363,8 @@ namespace AutoJack.View {
             GameController.ControlButtonsClick(nameof(SplitButton));
         }
 
-        private void PlayerTurnOverEvent(object sender, EventArgs e) {
-            GameController.ControlButtonsClick(nameof(TurnButton));
+        private void PlayerFlipHandEvent(object sender, EventArgs e) {
+            GameController.ControlButtonsClick(nameof(FlipButton));
         }
 
         private void PlayerGiveUpEvent(object sender, EventArgs e) {
@@ -349,11 +377,13 @@ namespace AutoJack.View {
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
                 if (result.Equals(DialogResult.OK)) {
+                    GC.Collect();
                     Timer.Stop();
                     this.Close();
                 }
             }
             else {
+                GC.Collect();
                 Timer.Stop();
                 this.Close();
             }

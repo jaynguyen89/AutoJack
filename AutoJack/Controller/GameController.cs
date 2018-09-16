@@ -13,7 +13,7 @@ namespace AutoJack.Controller {
     public class GameController {
         public GameView GameView { get; }
         public Game Game { get; }
-        GameCallback Callback = new GameCallback();
+        internal GameCallback Callback = new GameCallback();
 
         public GameController(User User) {
             Machine Machine = new Machine();
@@ -35,6 +35,8 @@ namespace AutoJack.Controller {
             GameView.Show();
             GameView.SetLabels(Game);
         }
+
+        ~GameController() { }
 
         public void BeginGame() {
             DeckShuffle ShufflingView = new DeckShuffle();
@@ -76,7 +78,7 @@ namespace AutoJack.Controller {
                 GameView.EnableSurrender();
                 await Callback.DealCardsSingleHand(this);
 
-                Game.TurnWho = nameof(Game.Player);
+                Game.TurnWho++;
                 GameView.SetLabels(Game);
 
                 GameView.EnableHitAndDoubleButtons();
@@ -99,33 +101,24 @@ namespace AutoJack.Controller {
                     Callback.PassPlayerTurn(this);
                     break;
                 case "HitButton":
-                    //Ask for which hand to add card
-                    Callback.AllowDraw1Card("Hand1", this);
+                    Callback.AllowDraw1Card(this);
                     break;
                 case "DoubleButton":
-                    Callback.DoubleBetThenTurnOver(this);
+                    Callback.DoubleBetThenFlipHands(this);
                     break;
                 case "SplitButton":
                     Callback.SplitPlayerHandThenDraw(this);
                     break;
-                case "TurnButton":
-                    Callback.TurnUpPlayerHands(this);
+                case "FlipButton":
+                    Callback.FlipPlayerHands(this);
                     break;
                 default:
-                    Callback.PlayerLooseImmediately(this);
                     Game.Winner = nameof(Game.Machine);
                     break;
             }
 
-            if (ClickedButton != "SurrenderButton")
-                Game.Winner = Callback.CheckForWinner(this.Game);
-
             if (Game.Winner != String.Empty)
-                WinnerGreetingThenGameEnds();
-        }
-
-        private void WinnerGreetingThenGameEnds() {
-            
+                Callback.CalculateBalance(Game);
         }
     }
 }

@@ -113,9 +113,29 @@ namespace AutoJack.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lefthand {
+            get {
+                object obj = ResourceManager.GetObject("lefthand", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap lose {
             get {
                 object obj = ResourceManager.GetObject("lose", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ritehand {
+            get {
+                object obj = ResourceManager.GetObject("ritehand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

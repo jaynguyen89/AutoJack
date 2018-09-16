@@ -10,6 +10,8 @@ namespace AutoJack.Model {
         public int Insurance { get; set; }
         internal List<Card> Hand1 { get; set; }
         internal List<Card> Hand2 { get; set; }
+        public bool Hand1Flipped { get; set; }
+        public bool Hand2Flipped { get; set; }
 
         public Player() { }
 
@@ -39,6 +41,8 @@ namespace AutoJack.Model {
                     Insurance = 0;
                     Hand1 = new List<Card>();
                     Hand2 = new List<Card>();
+                    Hand1Flipped = false;
+                    Hand2Flipped = false;
         }
 
         internal void AddHand1(Card Card) {

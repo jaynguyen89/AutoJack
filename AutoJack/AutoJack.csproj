@@ -54,6 +54,12 @@
     <Compile Include="common\DeckShuffle.Designer.cs">
       <DependentUpon>DeckShuffle.cs</DependentUpon>
     </Compile>
+    <Compile Include="common\SelectHand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="common\SelectHand.Designer.cs">
+      <DependentUpon>SelectHand.cs</DependentUpon>
+    </Compile>
     <Compile Include="common\Utility.cs" />
     <Compile Include="Controller\BetController.cs" />
     <Compile Include="Controller\EngineController.cs" />
@@ -110,6 +116,9 @@
     <EmbeddedResource Include="common\DeckShuffle.resx">
       <DependentUpon>DeckShuffle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="common\SelectHand.resx">
+      <DependentUpon>SelectHand.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -153,10 +162,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="resources\files\" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="resources\files\ritehand.png" />
+    <None Include="resources\files\lefthand.png" />
     <None Include="resources\AppLogo.jpg" />
     <Content Include="resources\deck\AceClubs.png" />
     <None Include="resources\deck\AceClubs1.png" />

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.LeftPanel = new System.Windows.Forms.Panel();
             this.TimingPanel = new System.Windows.Forms.Panel();
             this.TimeLabel = new System.Windows.Forms.Label();
@@ -49,7 +50,7 @@
             this.StartButton = new System.Windows.Forms.Button();
             this.UserStatPanel = new System.Windows.Forms.Panel();
             this.ControlPanel = new System.Windows.Forms.Panel();
-            this.TurnButton = new System.Windows.Forms.Button();
+            this.FlipButton = new System.Windows.Forms.Button();
             this.DoubleButton = new System.Windows.Forms.Button();
             this.HitButton = new System.Windows.Forms.Button();
             this.StandButton = new System.Windows.Forms.Button();
@@ -78,13 +79,14 @@
             this.Rule1Label = new System.Windows.Forms.Label();
             this.HouseLabel = new System.Windows.Forms.Label();
             this.HouseSumPanel = new System.Windows.Forms.Panel();
+            this.HouseActionLabel = new System.Windows.Forms.Label();
             this.HouseHand2Count = new System.Windows.Forms.Label();
             this.HouseHand1Count = new System.Windows.Forms.Label();
-            this.HouseHand2Sum = new System.Windows.Forms.Label();
-            this.HouseHand1Sum = new System.Windows.Forms.Label();
             this.HouseHands = new System.Windows.Forms.Label();
             this.HouseHandCards = new System.Windows.Forms.FlowLayoutPanel();
             this.PlayerHandCards = new System.Windows.Forms.FlowLayoutPanel();
+            this.LogLabel = new System.Windows.Forms.Label();
+            this.LogTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.LeftPanel.SuspendLayout();
             this.TimingPanel.SuspendLayout();
             this.UserBetPanel.SuspendLayout();
@@ -324,7 +326,7 @@
             // ControlPanel
             // 
             this.ControlPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ControlPanel.Controls.Add(this.TurnButton);
+            this.ControlPanel.Controls.Add(this.FlipButton);
             this.ControlPanel.Controls.Add(this.DoubleButton);
             this.ControlPanel.Controls.Add(this.HitButton);
             this.ControlPanel.Controls.Add(this.StandButton);
@@ -334,15 +336,15 @@
             this.ControlPanel.Size = new System.Drawing.Size(200, 100);
             this.ControlPanel.TabIndex = 7;
             // 
-            // TurnButton
+            // FlipButton
             // 
-            this.TurnButton.Enabled = false;
-            this.TurnButton.Location = new System.Drawing.Point(61, 69);
-            this.TurnButton.Name = "TurnButton";
-            this.TurnButton.Size = new System.Drawing.Size(75, 23);
-            this.TurnButton.TabIndex = 4;
-            this.TurnButton.Text = "Turn Over";
-            this.TurnButton.UseVisualStyleBackColor = true;
+            this.FlipButton.Enabled = false;
+            this.FlipButton.Location = new System.Drawing.Point(61, 69);
+            this.FlipButton.Name = "FlipButton";
+            this.FlipButton.Size = new System.Drawing.Size(75, 23);
+            this.FlipButton.TabIndex = 4;
+            this.FlipButton.Text = "Flip Hand";
+            this.FlipButton.UseVisualStyleBackColor = true;
             // 
             // DoubleButton
             // 
@@ -637,21 +639,30 @@
             // HouseSumPanel
             // 
             this.HouseSumPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.HouseSumPanel.Controls.Add(this.LogLabel);
+            this.HouseSumPanel.Controls.Add(this.HouseActionLabel);
             this.HouseSumPanel.Controls.Add(this.HouseHand2Count);
             this.HouseSumPanel.Controls.Add(this.HouseHand1Count);
-            this.HouseSumPanel.Controls.Add(this.HouseHand2Sum);
-            this.HouseSumPanel.Controls.Add(this.HouseHand1Sum);
             this.HouseSumPanel.Controls.Add(this.HouseHands);
             this.HouseSumPanel.Location = new System.Drawing.Point(218, 12);
             this.HouseSumPanel.Name = "HouseSumPanel";
             this.HouseSumPanel.Size = new System.Drawing.Size(868, 30);
             this.HouseSumPanel.TabIndex = 0;
             // 
+            // HouseActionLabel
+            // 
+            this.HouseActionLabel.ForeColor = System.Drawing.Color.DarkRed;
+            this.HouseActionLabel.Location = new System.Drawing.Point(576, 8);
+            this.HouseActionLabel.Name = "HouseActionLabel";
+            this.HouseActionLabel.Size = new System.Drawing.Size(250, 13);
+            this.HouseActionLabel.TabIndex = 5;
+            this.HouseActionLabel.Text = "Last Action: The House passed turn.";
+            // 
             // HouseHand2Count
             // 
             this.HouseHand2Count.AutoSize = true;
             this.HouseHand2Count.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HouseHand2Count.Location = new System.Drawing.Point(573, 8);
+            this.HouseHand2Count.Location = new System.Drawing.Point(353, 8);
             this.HouseHand2Count.Name = "HouseHand2Count";
             this.HouseHand2Count.Size = new System.Drawing.Size(96, 13);
             this.HouseHand2Count.TabIndex = 4;
@@ -666,26 +677,6 @@
             this.HouseHand1Count.Size = new System.Drawing.Size(96, 13);
             this.HouseHand1Count.TabIndex = 3;
             this.HouseHand1Count.Text = "Hand1 Count: 2";
-            // 
-            // HouseHand2Sum
-            // 
-            this.HouseHand2Sum.AutoSize = true;
-            this.HouseHand2Sum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HouseHand2Sum.Location = new System.Drawing.Point(769, 8);
-            this.HouseHand2Sum.Name = "HouseHand2Sum";
-            this.HouseHand2Sum.Size = new System.Drawing.Size(87, 13);
-            this.HouseHand2Sum.TabIndex = 2;
-            this.HouseHand2Sum.Text = "Hand2 Sum: 0";
-            // 
-            // HouseHand1Sum
-            // 
-            this.HouseHand1Sum.AutoSize = true;
-            this.HouseHand1Sum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HouseHand1Sum.Location = new System.Drawing.Point(359, 8);
-            this.HouseHand1Sum.Name = "HouseHand1Sum";
-            this.HouseHand1Sum.Size = new System.Drawing.Size(94, 13);
-            this.HouseHand1Sum.TabIndex = 1;
-            this.HouseHand1Sum.Text = "Hand1 Sum: 19";
             // 
             // HouseHands
             // 
@@ -712,6 +703,30 @@
             this.PlayerHandCards.Name = "PlayerHandCards";
             this.PlayerHandCards.Size = new System.Drawing.Size(868, 307);
             this.PlayerHandCards.TabIndex = 1;
+            // 
+            // LogLabel
+            // 
+            this.LogLabel.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.LogLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LogLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.LogLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogLabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.LogLabel.Location = new System.Drawing.Point(832, 0);
+            this.LogLabel.Name = "LogLabel";
+            this.LogLabel.Size = new System.Drawing.Size(34, 28);
+            this.LogLabel.TabIndex = 6;
+            this.LogLabel.Text = "Logs";
+            this.LogLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LogTooltip
+            // 
+            this.LogTooltip.AutomaticDelay = 100;
+            this.LogTooltip.AutoPopDelay = 10000;
+            this.LogTooltip.ForeColor = System.Drawing.Color.DarkRed;
+            this.LogTooltip.InitialDelay = 100;
+            this.LogTooltip.ReshowDelay = 20;
+            this.LogTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.LogTooltip.ToolTipTitle = "Game Logs";
             // 
             // GameView
             // 
@@ -764,8 +779,6 @@
         private System.Windows.Forms.Panel HouseSumPanel;
         private System.Windows.Forms.PictureBox CardBack;
         private System.Windows.Forms.Label CardCount;
-        private System.Windows.Forms.Label HouseHand2Sum;
-        private System.Windows.Forms.Label HouseHand1Sum;
         private System.Windows.Forms.Label HouseHands;
         private System.Windows.Forms.Label DateLabel;
         private System.Windows.Forms.Label PlayerName;
@@ -803,10 +816,13 @@
         private System.Windows.Forms.Button QuitButton;
         private System.Windows.Forms.FlowLayoutPanel HouseHandCards;
         private System.Windows.Forms.FlowLayoutPanel PlayerHandCards;
-        private System.Windows.Forms.Button TurnButton;
+        private System.Windows.Forms.Button FlipButton;
         private System.Windows.Forms.Label TurnLabel;
         private System.Windows.Forms.Label TurnLabelLabel;
         private System.Windows.Forms.Label TimeLabel;
         private System.Windows.Forms.Label Rule3Label;
+        private System.Windows.Forms.Label HouseActionLabel;
+        private System.Windows.Forms.Label LogLabel;
+        private System.Windows.Forms.ToolTip LogTooltip;
     }
 }

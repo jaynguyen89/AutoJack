@@ -9,7 +9,7 @@ namespace AutoJack.Model {
     public class Game {
         const int DECKSIZE = 52;
         public bool ShouldWarn { get; set; }
-        public string TurnWho { get; set; }
+        public int TurnWho { get; set; }
 
         public Player Player { get; set; }
         public Machine Machine { get; set; }
@@ -17,11 +17,13 @@ namespace AutoJack.Model {
         internal List<Card> Deck { get; set; }
         public string Winner { get; set; }
 
+        public string Logs { get; set; }
+
         public Game(Player Player, Machine Machine) {
             this.Player = Player;
             this.Machine = Machine;
             ShouldWarn = false;
-            TurnWho = String.Empty;
+            TurnWho = -1;
             Winner = String.Empty;
         }
 

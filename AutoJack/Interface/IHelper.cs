@@ -14,16 +14,12 @@ namespace AutoJack.Interface {
 
         void PassPlayerTurn(GameController GameController);
 
-        void AllowDraw1Card(string Hand, GameController GameController);
+        void AllowDraw1Card(GameController GameController);
 
-        void DoubleBetThenTurnOver(GameController GameController);
+        void DoubleBetThenFlipHands(GameController GameController);
 
         void SplitPlayerHandThenDraw(GameController GameController);
 
-        void TurnUpPlayerHands(GameController GameController);
-
-        void PlayerLooseImmediately(GameController GameController);
-
-        string CheckForWinner(Game Game);
+        void FlipPlayerHands(GameController GameController);
     }
 }

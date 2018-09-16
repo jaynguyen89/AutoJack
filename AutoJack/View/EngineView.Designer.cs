@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EngineView));
             this.ExitButton = new System.Windows.Forms.Button();
             this.SelectUser = new System.Windows.Forms.Button();
             this.AppLogo = new System.Windows.Forms.PictureBox();
@@ -69,11 +70,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(944, 501);
-            this.ControlBox = false;
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.SelectUser);
             this.Controls.Add(this.AppLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EngineView";
             this.Text = "AutoJack: Home";
             ((System.ComponentModel.ISupportInitialize)(this.AppLogo)).EndInit();
