@@ -79,13 +79,13 @@
             this.Rule1Label = new System.Windows.Forms.Label();
             this.HouseLabel = new System.Windows.Forms.Label();
             this.HouseSumPanel = new System.Windows.Forms.Panel();
+            this.LogLabel = new System.Windows.Forms.Label();
             this.HouseActionLabel = new System.Windows.Forms.Label();
             this.HouseHand2Count = new System.Windows.Forms.Label();
             this.HouseHand1Count = new System.Windows.Forms.Label();
             this.HouseHands = new System.Windows.Forms.Label();
             this.HouseHandCards = new System.Windows.Forms.FlowLayoutPanel();
             this.PlayerHandCards = new System.Windows.Forms.FlowLayoutPanel();
-            this.LogLabel = new System.Windows.Forms.Label();
             this.LogTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.LeftPanel.SuspendLayout();
             this.TimingPanel.SuspendLayout();
@@ -649,6 +649,20 @@
             this.HouseSumPanel.Size = new System.Drawing.Size(868, 30);
             this.HouseSumPanel.TabIndex = 0;
             // 
+            // LogLabel
+            // 
+            this.LogLabel.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.LogLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LogLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.LogLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogLabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.LogLabel.Location = new System.Drawing.Point(832, 0);
+            this.LogLabel.Name = "LogLabel";
+            this.LogLabel.Size = new System.Drawing.Size(34, 28);
+            this.LogLabel.TabIndex = 6;
+            this.LogLabel.Text = "Logs";
+            this.LogLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // HouseActionLabel
             // 
             this.HouseActionLabel.ForeColor = System.Drawing.Color.DarkRed;
@@ -656,7 +670,7 @@
             this.HouseActionLabel.Name = "HouseActionLabel";
             this.HouseActionLabel.Size = new System.Drawing.Size(250, 13);
             this.HouseActionLabel.TabIndex = 5;
-            this.HouseActionLabel.Text = "Last Action: The House passed turn.";
+            this.HouseActionLabel.Text = "Last Action: Game not started yet.";
             // 
             // HouseHand2Count
             // 
@@ -703,20 +717,6 @@
             this.PlayerHandCards.Name = "PlayerHandCards";
             this.PlayerHandCards.Size = new System.Drawing.Size(868, 307);
             this.PlayerHandCards.TabIndex = 1;
-            // 
-            // LogLabel
-            // 
-            this.LogLabel.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.LogLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LogLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.LogLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LogLabel.ForeColor = System.Drawing.Color.DarkGreen;
-            this.LogLabel.Location = new System.Drawing.Point(832, 0);
-            this.LogLabel.Name = "LogLabel";
-            this.LogLabel.Size = new System.Drawing.Size(34, 28);
-            this.LogLabel.TabIndex = 6;
-            this.LogLabel.Text = "Logs";
-            this.LogLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LogTooltip
             // 

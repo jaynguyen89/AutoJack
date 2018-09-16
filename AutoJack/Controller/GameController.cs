@@ -31,9 +31,16 @@ namespace AutoJack.Controller {
             GameView = new GameView(this);
         }
 
+        public void UpdateLogs(string newLog) {
+            Game.Logs += newLog;
+            GameView.SetLogText(Game.Logs);
+        }
+
         public void StartGame() {
             GameView.Show();
             GameView.SetLabels(Game);
+
+            UpdateLogs("Game started;");
         }
 
         ~GameController() { }
@@ -47,6 +54,8 @@ namespace AutoJack.Controller {
 
             GameView.SetLabels(Game);
             GameView.ToggleButtonsOnGameBegin();
+
+            UpdateLogs("Deck shuffled. Wait for bet;");
         }
 
         public void TakeBet() {
@@ -54,6 +63,8 @@ namespace AutoJack.Controller {
             GameView.DisableQuit();
             GameView.DisableBetButtons();
             BetController.TakeBet();
+
+            UpdateLogs("Player set bet;");
         }
 
         public async Task AutoSetBetAsync() {
@@ -65,6 +76,8 @@ namespace AutoJack.Controller {
                 Bet = rand.Next(100, 1001);
 
             Game.Player.Bet = Bet;
+
+            UpdateLogs("Player set bet auto;");
             await ContinueGameAsync(true);
         }
 
@@ -83,6 +96,8 @@ namespace AutoJack.Controller {
 
                 GameView.EnableHitAndDoubleButtons();
                 GameView.ToogleGameButtonsState(Game);
+
+                UpdateLogs("Deal cards 1 hand. Turn: Player;");
             }
             else
                 GameView.EnableBetButtons();
@@ -93,23 +108,30 @@ namespace AutoJack.Controller {
 
             int Bet = (int)(Game.Player.Bet * (1 + difference));
             Game.Machine.Bet = Bet;
+
+            UpdateLogs("House set bet.;");
         }
 
         public void ControlButtonsClick(string ClickedButton) {
             switch (ClickedButton) {
                 case "StandButton":
+                    UpdateLogs("Player stand. Turn: House;");
                     Callback.PassPlayerTurn(this);
                     break;
                 case "HitButton":
+                    UpdateLogs("Player hit card;");
                     Callback.AllowDraw1Card(this);
                     break;
                 case "DoubleButton":
+                    UpdateLogs("Player double bet;");
                     Callback.DoubleBetThenFlipHands(this);
                     break;
                 case "SplitButton":
+                    UpdateLogs("Player split hand;");
                     Callback.SplitPlayerHandThenDraw(this);
                     break;
                 case "FlipButton":
+                    UpdateLogs("Player flip hand(s);");
                     Callback.FlipPlayerHands(this);
                     break;
                 default:

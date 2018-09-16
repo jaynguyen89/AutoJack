@@ -101,11 +101,13 @@ namespace AutoJack.Model {
 
         public void DrawToSelectedHand(string Hand, GameController GameController) {
             if (Hand == "Hand1") {
+                GameController.UpdateLogs("Hit card Hand1;");
                 Draw1CardFor(nameof(GameController.Game.Player), "Hand1", true, GameController);
                 GameController.GameView.RenderSingleHandAsyncFor(nameof(GameController.Game.Player),
                     GameController.Game.Player.Hand1, GameController.Game.Player.Hand1Flipped);
             }
             else {
+                GameController.UpdateLogs("Hit card Hand2;");
                 Draw1CardFor(nameof(GameController.Game.Player), "Hand2", true, GameController);
                 GameController.GameView.RenderDoubleHandAsyncFor(nameof(GameController.Game.Player), GameController.Game,
                     GameController.Game.Player.Hand1Flipped, GameController.Game.Player.Hand2Flipped);
@@ -125,10 +127,14 @@ namespace AutoJack.Model {
                     GameController.Game.Player.Hand1Flipped);
                 GameController.GameView.SetLabels(GameController.Game);
 
-                if (GameController.Game.GetHandSumFor(GameController.Game.Player.Hand1) > 21)
+                if (GameController.Game.GetHandSumFor(GameController.Game.Player.Hand1) > 21) {
+                    GameController.UpdateLogs("Player burst. Game-over;");
                     LooseBurstHand(GameController, nameof(GameController.Game.Player), nameof(GameController.Game.Player.Hand1));
-                else
+                }
+                else {
+                    GameController.UpdateLogs("Flip player hand;");
                     FlipPlayerHands(GameController);
+                }
             }
             else {
                 Draw1CardFor(nameof(GameController.Game.Player), "Hand1", true, GameController);
@@ -138,14 +144,20 @@ namespace AutoJack.Model {
                     GameController.Game.Player.Hand1Flipped, GameController.Game.Player.Hand2Flipped);
                 GameController.GameView.SetLabels(GameController.Game);
 
-                if (GameController.Game.GetHandSumFor(GameController.Game.Player.Hand1) > 21)
+                if (GameController.Game.GetHandSumFor(GameController.Game.Player.Hand1) > 21) {
+                    GameController.UpdateLogs("Player burst Hand1;");
                     LooseBurstHand(GameController, nameof(GameController.Game.Player), nameof(GameController.Game.Player.Hand1));
+                }
 
-                if (GameController.Game.GetHandSumFor(GameController.Game.Player.Hand2) > 21)
+                if (GameController.Game.GetHandSumFor(GameController.Game.Player.Hand2) > 21) {
+                    GameController.UpdateLogs("Player burst Hand2;");
                     LooseBurstHand(GameController, nameof(GameController.Game.Player), nameof(GameController.Game.Player.Hand2));
+                }
 
-                if (!GameController.Game.Player.Hand1Flipped || !GameController.Game.Player.Hand2Flipped)
+                if (!GameController.Game.Player.Hand1Flipped || !GameController.Game.Player.Hand2Flipped) {
+                    GameController.UpdateLogs("Flip player hands;");
                     FlipPlayerHands(GameController);
+                }
             }
         }
 
@@ -165,8 +177,6 @@ namespace AutoJack.Model {
         }
 
         public void FlipPlayerHands(GameController GameController) {
-            //SimulateMachineRoundAsync(GameController);
-
             GameController.Game.Player.Hand1Flipped = true;
 
             if (GameController.Game.Player.Hand2.Count != 0) {
@@ -299,6 +309,7 @@ namespace AutoJack.Model {
                                 nameof(GameController.Game.Machine.Hand1));
 
                 if (canSplit) {
+                    GameController.UpdateLogs("House split hand;");
                     Card SplittedCard = GameController.Game.Machine.Hand1.ElementAt(1);
 
                     GameController.Game.Machine.Hand1.RemoveAt(1);
@@ -311,11 +322,14 @@ namespace AutoJack.Model {
                         GameController.Game.Player.Hand1Flipped, GameController.Game.Player.Hand2Flipped);
                     GameController.GameView.SetLabels(GameController.Game);
                 }
-                else
+                else {
+                    GameController.UpdateLogs("House run 1 hand;");
                     RunGame1Hand(GameController, nameof(GameController.Game.Machine.Hand1), false);
+                }
             }
 
             if (GameController.Game.Machine.Hand2.Count != 0) {
+                GameController.UpdateLogs("House run 2 hands;");
                 RunGame1Hand(GameController, nameof(GameController.Game.Machine.Hand1), true);
                 RunGame1Hand(GameController, nameof(GameController.Game.Machine.Hand2), true);
             }
@@ -335,12 +349,15 @@ namespace AutoJack.Model {
         //RenderContext: false -- 1 hand, true -- 2 hands
         private void SimulateMachine1Hand(GameController GameController, string Hand, bool RenderContext) {
             while (GameController.Game.GetHandSumFor(Hand == "Hand1" ? GameController.Game.Machine.Hand1 : GameController.Game.Machine.Hand2) < 11) {
+                GameController.UpdateLogs("House hit card;");
                 Draw1CardFor(nameof(GameController.Game.Machine), Hand, true, GameController);
                 RenderMachine1HandAsync(GameController, Hand, RenderContext);
             }
 
-            if (GameController.Game.GetHandSumFor(Hand == "Hand1" ? GameController.Game.Machine.Hand1 : GameController.Game.Machine.Hand2) == 20)
+            if (GameController.Game.GetHandSumFor(Hand == "Hand1" ? GameController.Game.Machine.Hand1 : GameController.Game.Machine.Hand2) == 20) {
+                GameController.UpdateLogs("House flip hand;");
                 SimulateMachineFlipHand(GameController, Hand, RenderContext);
+            }
 
             if (GameController.Game.GetHandSumFor(Hand == "Hand1" ? GameController.Game.Machine.Hand1 : GameController.Game.Machine.Hand2) >= 11 &&
                 GameController.Game.GetHandSumFor(Hand == "Hand1" ? GameController.Game.Machine.Hand1 : GameController.Game.Machine.Hand2) <= 16) {
@@ -348,13 +365,16 @@ namespace AutoJack.Model {
                 double doubleProp = Utility.RandDoubleInRange(0.0, 0.6);
 
                 if (hitProp >= doubleProp) {
+                    GameController.UpdateLogs("House hit card;");
                     Draw1CardFor(nameof(GameController.Game.Machine), Hand, true, GameController);
                     RenderMachine1HandAsync(GameController, Hand, RenderContext);
 
                     CheckMachineBurst(GameController, Hand, RenderContext);
                 }
-                else
+                else {
+                    GameController.UpdateLogs("House double bet;");
                     SimulateMachineDoubleBetAsync(GameController, Hand, RenderContext);
+                }
             }
 
             if (GameController.Game.GetHandSumFor(Hand == "Hand1" ? GameController.Game.Machine.Hand1 : GameController.Game.Machine.Hand2) >= 17 &&
@@ -365,17 +385,23 @@ namespace AutoJack.Model {
                 double flipProp = Utility.RandDoubleInRange(0.0, 0.75);
 
                 double max = Utility.Max(new double[] { standProp, hitProp, doubleProp, flipProp });
-                if (max == standProp)
+                if (max == standProp) {
+                    GameController.UpdateLogs("House stand. Turn: Player;");
                     return;
+                }
                 else if (max == hitProp) {
+                    GameController.UpdateLogs("House hit card;");
                     Draw1CardFor(nameof(GameController.Game.Machine), Hand, true, GameController);
                     RenderMachine1HandAsync(GameController, Hand, RenderContext);
 
                     CheckMachineBurst(GameController, Hand, RenderContext);
                 }
-                else if (max == doubleProp)
+                else if (max == doubleProp) {
+                    GameController.UpdateLogs("House double bet;");
                     SimulateMachineDoubleBetAsync(GameController, Hand, RenderContext);
+                }
                 else {
+                    GameController.UpdateLogs("House flip hand(s);");
                     GameController.Game.Machine.Hand1Flipped = (Hand == "Hand1");
                     GameController.Game.Machine.Hand2Flipped = (Hand == "Hand2");
 
@@ -389,11 +415,14 @@ namespace AutoJack.Model {
                 GameController.Game.Machine.Hand1Flipped = (Hand == "Hand1");
                 GameController.Game.Machine.Hand2Flipped = (Hand == "Hand2");
 
+                GameController.UpdateLogs("House get Jack;");
                 SimulateMachineFlipHand(GameController, Hand, RenderContext);
             }
 
-            if (GameController.Game.GetHandSumFor(Hand == "Hand1" ? GameController.Game.Machine.Hand1 : GameController.Game.Machine.Hand2) > 21)
+            if (GameController.Game.GetHandSumFor(Hand == "Hand1" ? GameController.Game.Machine.Hand1 : GameController.Game.Machine.Hand2) > 21) {
+                GameController.UpdateLogs("House burst hand;");
                 LooseBurstHand(GameController, nameof(GameController.Game.Machine), Hand);
+            }
         }
 
         private async void RenderMachine1HandAsync(GameController GameController, string Hand, bool RenderContext) {

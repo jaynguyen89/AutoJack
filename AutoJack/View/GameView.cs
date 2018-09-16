@@ -198,10 +198,15 @@ namespace AutoJack.View {
         }
 
         public void SetLogText(string Logs) {
-            string[] tokens = Logs.Split('\n');
+            string[] tokens = Logs.Split(';');
 
-            HouseActionLabel.Text = "Last Action: " + tokens[tokens.Length - 1];
-            LogTooltip.SetToolTip(LogLabel, Logs);
+            HouseActionLabel.Text = "Last Action: " + tokens[tokens.Length - 2];
+            string tooltip = string.Empty;
+
+            for (int i = 0; i < tokens.Length - 1; i++)
+                tooltip += (i + 1).ToString() + ". " + tokens[i] + ";\n";
+           
+            LogTooltip.SetToolTip(LogLabel, tooltip);
         }
 
         internal async void RenderSingleHandAsyncFor(string Who, List<Card> Hand, bool IsFlip) {
