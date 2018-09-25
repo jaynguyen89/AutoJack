@@ -157,10 +157,6 @@ namespace AutoJack.View {
             }
         }
 
-        public void DisplayHouseAction(string action) {
-            HouseActionLabel.Text = action;
-        }
-
         public void DisableHitAndDoubleButtons() {
             HitButton.Enabled = false;
             DoubleButton.Enabled = false;

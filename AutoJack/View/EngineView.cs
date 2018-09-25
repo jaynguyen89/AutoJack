@@ -21,12 +21,12 @@ namespace AutoJack.View {
             ExitButton.Click += new EventHandler(QuitApp);
         }
 
-        private void SelectUserEvent(object sender, System.EventArgs e) {
+        private void SelectUserEvent(object sender, EventArgs e) {
             EngineController EngineController = new EngineController();
             EngineController.GetSavedUsers();
         }
 
-        private void QuitApp(object sender, System.EventArgs e) {
+        private void QuitApp(object sender, EventArgs e) {
             this.Close();
         }
     }
